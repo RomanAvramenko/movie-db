@@ -1,0 +1,36 @@
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    padding-top: 2em;
+
+    .logo {
+        font-size: 30px;
+        color: #ffffff;
+    }
+
+    .nav__btn {
+        display: flex;
+        flex-direction: row;
+        border: none;
+        background-color: transparent;
+        color: #ffffff;
+
+        &_color {
+            background-color: #ff0079;
+            border-radius: 2px;
+        }
+
+        &:first-child {
+            padding: 0;
+        }
+
+        .fas {
+            height: 18px;
+            font-size: 18px;
+        }
+
+    }
+}

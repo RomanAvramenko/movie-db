@@ -1,0 +1,38 @@
+.widget {
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(73, 76, 98, 0.2);
+}
+
+.widget-title {
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+}
+
+.title {
+    font-size: 10px;
+    opacity: 0.5;
+}
+
+.widget-rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 5px;
+}
+
+.rating {
+    color: #ffffff;
+    width: 25px;
+    height: 20px;
+    border-radius: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.far {
+    color: #ff0079;
+    font-size: 20px;
+}
