@@ -14,19 +14,22 @@
     .nav__btn {
         display: flex;
         flex-direction: row;
-        border: none;
-        background-color: transparent;
-        color: #ffffff;
+        justify-content: space-around;
 
-        &_color {
-            background-color: #ff0079;
-            border-radius: 2px;
+        &__item {
+            border: none;
+            background-color: transparent;
+            color: #ffffff;
+            margin-left: 2em;
+            border-radius: 0.3em;
+            border: 2px solid rgba($color:#ffffff, $alpha: 0);
+            &:hover {
+                border: 2px solid #ffffff;
+            }
+            &-color {
+                background-color: #ff0079;
+            }
         }
-
-        &:first-child {
-            padding: 0;
-        }
-
         .fas {
             height: 18px;
             font-size: 18px;

@@ -7,9 +7,9 @@ const NavBar = () => {
         <div className="nav-bar">
             <div className="logo">THEMOVIEBOX</div>
             <div className="nav__btn">
-                <button className="nav__btn"><i className="fas fa-search"></i></button>
-                <button className="nav__btn">LOG IN</button>
-                <button className="nav__btn nav__btn_color">SIGN UP</button>
+                <button className="nav__btn__item"><i className="fas fa-search"></i></button>
+                <button className="nav__btn__item">LOG IN</button>
+                <button className="nav__btn__item nav__btn__item-color">SIGN UP</button>
             </div>
         </div>
     )

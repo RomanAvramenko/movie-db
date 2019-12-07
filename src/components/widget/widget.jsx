@@ -5,11 +5,11 @@ import "./widget.scss";
 const Widget = () => {
     return (
         <div className="widget">
-            <span className="widget-title">
+            <span className="widget__title">
                 <p>Rating</p>
                 <p className="title">based on 3.546 reviews</p>
             </span>
-            <span className="widget-rating">
+            <span className="widget__rating">
                 <i className="far fa-star"></i>
                 <i className="far fa-star"></i>
                 <i className="far fa-star"></i>
