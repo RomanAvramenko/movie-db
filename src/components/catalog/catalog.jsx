@@ -23,11 +23,9 @@ const Catalog = () => {
                 </ul>
             </div>
             <div className="catalog__content row">
-                <div className="col-3 col-md-6">
+                <div className="col-3 col-md-3">
                     <div className="movie">
-                        <div className="movie__pic">
-                            <img src="./images/bitmap.jpg" alt="" />
-                        </div>
+                        <div className="movie__pic"><img src={require('./images/bitmap.jpg')} alt=""/></div>
                         <div className="movie__discription">
                             <div className="movie__desc">
                                 <div className="movie__title">Logan</div>
@@ -37,11 +35,9 @@ const Catalog = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-3 col-md-6">
+                <div className="col-3 col-md-3">
                     <div className="movie">
-                        <div className="movie__pic">
-                            <img src="./images/JohnWick.png" alt="" />
-                        </div>
+                        <div className="movie__pic"><img src={require('./images/JohnWick.png')} alt=""/></div>
                         <div className="movie__discription">
                             <div className="movie__desc">
                                 <div className="movie__title">John Wick: Chapter 2</div>
@@ -51,11 +47,9 @@ const Catalog = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-3 col-md-6">
+                <div className="col-3 col-md-3">
                     <div className="movie">
-                        <div className="movie__pic">
-                            <img src="./images/FanBeast.png" alt="" />
-                        </div>
+                        <div className="movie__pic"><img src={require('./images/FanBeast.png')} alt=""/></div>
                         <div className="movie__discription">
                             <div className="movie__desc">
                                 <div className="movie__title">Fantastic beast an..</div>
@@ -65,11 +59,9 @@ const Catalog = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-3 col-md-6">
+                <div className="col-3 col-md-3">
                     <div className="movie">
-                        <div className="movie__pic">
-                            <img src="./images/Beauty.png" alt="" />
-                        </div>
+                        <div className="movie__pic"><img src={require('./images/Beauty.png')} alt=""/></div>
                         <div className="movie__discription">
                             <div className="movie__desc">
                                 <div className="movie__title">Beauty and the Beast</div>
@@ -79,10 +71,7 @@ const Catalog = () => {
                         </div>
                     </div>
                 </div>
-                <div className="content__load">
-                    <Loading />
-                    <div className="load-text">LOADING</div>
-                </div>
+                <Loading />
             </div>
             <div className="catalog__footer">
                 <div className="logo footer-logo">THEMOVIEBOX</div>
