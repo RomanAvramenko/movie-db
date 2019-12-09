@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './catalog.scss';
+import Loading from '../loading';
 
 const Catalog = () => {
     return (
@@ -79,14 +80,7 @@ const Catalog = () => {
                     </div>
                 </div>
                 <div className="content__load">
-                    <span className="load-animation">
-                        <div className="piece piece__1"></div>
-                        <div className="piece piece__2"></div>
-                        <div className="piece piece__3"></div>
-                        <div className="piece piece__2"></div>
-                        <div className="piece piece__3"></div>
-                        <div className="piece piece__2"></div>
-                    </span>
+                    <Loading />
                     <div className="load-text">LOADING</div>
                 </div>
             </div>
