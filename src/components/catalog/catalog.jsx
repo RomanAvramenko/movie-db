@@ -25,31 +25,21 @@ const Catalog = () => {
             <div className="catalog__content row">
                 <div className="col-3 col-md-3">
                     <div className="movie">
-                        <div className="movie__pic"><img src={require('./images/bitmap.jpg')} alt=""/></div>
+                        <div className="movie__pic">
+                            <img src="https://m.media-amazon.com/images/M/MV5BYzc5MTU4N2EtYTkyMi00NjdhLTg3NWEtMTY4OTEyMzJhZTAzXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg" alt="" />
+                        </div>
                         <div className="movie__discription">
                             <div className="movie__desc">
                                 <div className="movie__title">Logan</div>
                                 <div className="movie__genres">Action, Adventure, Fantasy</div>
                             </div>
-                            <div className="movie__ratio">4.0</div>
                         </div>
+                        <div className="movie__ratio">IMDB: 7.6</div>
                     </div>
                 </div>
                 <div className="col-3 col-md-3">
                     <div className="movie">
-                        <div className="movie__pic"><img src={require('./images/JohnWick.png')} alt=""/></div>
-                        <div className="movie__discription">
-                            <div className="movie__desc">
-                                <div className="movie__title">John Wick: Chapter 2</div>
-                                <div className="movie__genres">Action, Thriller</div>
-                            </div>
-                            <div className="movie__ratio">4.8</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-3 col-md-3">
-                    <div className="movie">
-                        <div className="movie__pic"><img src={require('./images/FanBeast.png')} alt=""/></div>
+                        <div className="movie__pic"><img src='https://m.media-amazon.com/images/M/MV5BMjMxOTM1OTI4MV5BMl5BanBnXkFtZTgwODE5OTYxMDI@._V1_SX300.jpg' alt="" /></div>
                         <div className="movie__discription">
                             <div className="movie__desc">
                                 <div className="movie__title">Fantastic beast an..</div>
@@ -61,11 +51,23 @@ const Catalog = () => {
                 </div>
                 <div className="col-3 col-md-3">
                     <div className="movie">
-                        <div className="movie__pic"><img src={require('./images/Beauty.png')} alt=""/></div>
+                        <div className="movie__pic"><img src="https://m.media-amazon.com/images/M/MV5BMTUwNjUxMTM4NV5BMl5BanBnXkFtZTgwODExMDQzMTI@._V1_SX300.jpg" alt="" /></div>
                         <div className="movie__discription">
                             <div className="movie__desc">
                                 <div className="movie__title">Beauty and the Beast</div>
                                 <div className="movie__genres">Musical, Drama, Fantasy</div>
+                            </div>
+                            <div className="movie__ratio">4.4</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-3 col-md-3">
+                    <div className="movie">
+                        <div className="movie__pic"><img src="https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg" alt="" /></div>
+                        <div className="movie__discription">
+                            <div className="movie__desc">
+                                <div className="movie__title">Guardians of the Galaxy Vol. 2</div>
+                                <div className="movie__genres">Action, Adventure, Comedy, Sci-Fi</div>
                             </div>
                             <div className="movie__ratio">4.4</div>
                         </div>

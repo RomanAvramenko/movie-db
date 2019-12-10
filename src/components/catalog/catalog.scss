@@ -87,11 +87,11 @@
 
 
 .movie {
-    padding: 15px 15px;
+    position: relative;
 
     &__pic {
         >img {
-            height: 18em;
+            height: 21em;
             width: 15em;
         }
     }
@@ -120,9 +120,13 @@
     }
 
     &__ratio {
+        position: absolute;
+        left: 0;
+        top: 0;
         display: flex;
-        width: 39px;
-        height: 29px;
+        width: 5em;
+        height: 2em;
+        background-color: rgba($color: #F8F8F8, $alpha: 0.6);
         border: 1px solid #ff0079;
         border-radius: 3px;
         color: #ff0079;

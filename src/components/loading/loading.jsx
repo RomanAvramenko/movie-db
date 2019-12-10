@@ -5,8 +5,8 @@ import "./loading.scss";
 const Loading = () => {
     return (
         <div className="content__load">
-            <div class="loadingio-spinner-pulse-ev73jk8wcgi">
-                <div class="ldio-3hbtsrdoynl">
+            <div className="loadingio-spinner-pulse-ev73jk8wcgi">
+                <div className="ldio-3hbtsrdoynl">
                     <div></div>
                     <div></div>
                     <div></div>
