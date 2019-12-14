@@ -1,0 +1,30 @@
+.footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 3em auto;
+        padding: 0 20px;
+        margin-bottom: 100px;
+    }
+
+.footer-logo {
+    color: #494c62;
+}
+
+.footer-menu {
+    color: #80818a;
+    text-decoration: none;
+
+    &>ul {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+
+        &>li {
+            margin: auto 10px;
+        }
+    }
+}

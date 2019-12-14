@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import './catalog.scss';
 import Loading from '../loading';
+import Footer from '../footer';
 
 export default class Catalog extends React.Component {
     state = {
@@ -57,34 +58,22 @@ export default class Catalog extends React.Component {
                 <div className="catalog__content row">
                     {this.state.response.results.map(item => {
                         return (
-                            <div className="col-3 col-md-3" key={item.id}>
-                                <div className="movie">
-                                    <div className="movie__pic">
-                                        <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" />
-                                    </div>
-                                    <div className="movie__discription">
-                                        <div className="movie__desc">
-                                            <div className="movie__title">{item.title}</div>
-                                            <div className="movie__genres">Action, Adventure, Fantasy</div>
-                                        </div>
-                                    </div>
-                                    <div className="movie__ratio">Ratio: {item.vote_average}</div>
+                            <div className="movie" key={item.id}>
+                                <div className="movie__pic">
+                                    <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" />
                                 </div>
+                                <div className="movie__discription">
+                                    <div className="movie__desc">
+                                        <div className="movie__title">{item.title}</div>
+                                        <div className="movie__genres">Action, Adventure, Fantasy</div>
+                                    </div>
+                                </div>
+                                <div className="movie__ratio">Ratio: {item.vote_average}</div>
                             </div>
                         )
                     })}
                 </div>
-                <div className="catalog__footer">
-                    <div className="logo footer-logo">THEMOVIEBOX</div>
-                    <div className="footer-menu">
-                        <ul>
-                            <li>About</li>
-                            <li>Movies</li>
-                            <li>Rating</li>
-                            <li>Contact</li>
-                        </ul>
-                    </div>
-                </div>
+                <Footer />
             </section>
         );
     }

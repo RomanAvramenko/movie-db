@@ -9,7 +9,10 @@
 
     .logo {
         font-size: 30px;
-        color: #ffffff;
+        a {
+            text-decoration: none;
+            color: #ffffff;
+        }
     }
 
     .nav__btn {
@@ -24,13 +27,16 @@
             margin-left: 2em;
             border-radius: 0.3em;
             border: 2px solid rgba($color:#ffffff, $alpha: 0);
+
             &:hover {
                 border: 2px solid #ffffff;
             }
+
             &-color {
                 background-color: #ff0079;
             }
         }
+
         .fas {
             height: 18px;
             font-size: 18px;
