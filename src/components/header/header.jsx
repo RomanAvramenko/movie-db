@@ -18,9 +18,9 @@ const Header = () => {
                             </div>
                         </div>
                         <div className="header-content__btn">
-                            <button className="content__btn_color">WATCH MOVIE</button>
-                            <button className="content__btn_bordered">VIEW INFO</button>
-                            <button className="content__btn">+ ADD TO WISHLIST</button>
+                            <button className="content__btn content__btn_color">WATCH MOVIE</button>
+                            <button className="content__btn">VIEW INFO</button>
+                            <button className="content__btn content__btn_unborder">+ ADD TO WISHLIST</button>
                         </div>
                     </div>
                     <Widget />
