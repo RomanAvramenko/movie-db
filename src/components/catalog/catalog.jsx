@@ -4,6 +4,7 @@ import axios from 'axios';
 import './catalog.scss';
 import Loading from '../loading';
 import Footer from '../footer';
+import { TileItem } from '../tile-item/tile-item';
 
 export default class Catalog extends React.Component {
     state = {
@@ -27,7 +28,7 @@ export default class Catalog extends React.Component {
     _transformData = (result) => {
         return {
             page: result.data.page,
-            results: result.data.results,
+            results: result.data.results
         }
     }
 
@@ -55,24 +56,7 @@ export default class Catalog extends React.Component {
                         </li>
                     </ul>
                 </div>
-                <div className="catalog__content row">
-                    {this.state.response.results.map(item => {
-                        return (
-                            <div className="movie" key={item.id}>
-                                <div className="movie__pic">
-                                    <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" />
-                                </div>
-                                <div className="movie__discription">
-                                    <div className="movie__desc">
-                                        <div className="movie__title">{item.title}</div>
-                                        <div className="movie__genres">Action, Adventure, Fantasy</div>
-                                    </div>
-                                </div>
-                                <div className="movie__ratio">Ratio: {item.vote_average}</div>
-                            </div>
-                        )
-                    })}
-                </div>
+                <TileItem results={this.state.response.results}/>
                 <Footer />
             </section>
         );
