@@ -3,7 +3,6 @@ import React from 'react'
 import './tile-item.scss'
 
 export const TileItem = ({ results }) => {
-    console.log(results);
     return (
         <div className="tile">
             {results.map(item => {

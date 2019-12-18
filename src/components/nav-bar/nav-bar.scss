@@ -1,4 +1,4 @@
-.nav-bar {
+.menu-box {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -8,39 +8,112 @@
     margin: 0 auto;
 
     .logo {
-        font-size: 30px;
+        font-size: 2em;
+
         a {
             text-decoration: none;
             color: #ffffff;
         }
     }
+}
 
-    .nav__btn {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+.menu-toggle {
+    color: #ffffff;
+    border: 0;
+    background-color: transparent;
+    font-size: 3em;
+    width: 1em;
+    height: 1em;
+    line-height: 0.4;
+    text-indent: 5em;
+    white-space: nowrap;
+    overflow: hidden;
+}
 
-        &__item {
-            border: none;
-            background-color: transparent;
-            color: #ffffff;
-            margin-left: 2em;
-            border-radius: 0.3em;
-            border: 2px solid rgba($color:#ffffff, $alpha: 0);
+.menu-toggle::after {
+    position: absolute;
+    top: 0.9em;
+    display: block;
+    content: '\2261';
+    text-indent: 0;
+}
 
-            &:hover {
-                border: 2px solid #ffffff;
-            }
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0;
+}
 
-            &-color {
-                background-color: #ff0079;
-            }
-        }
+.menu-dropdown.is-open .menu-dropdown {
+    display: block;
+}
 
-        .fas {
-            height: 18px;
-            font-size: 18px;
-        }
-
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;
     }
+
+    .menu-dropdown {
+        display: block;
+        position: static;
+    }
+}
+
+.nav__menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    &__item {
+        border: none;
+        background-color: transparent;
+        color: #ffffff;
+        padding: 0.5em;
+        margin-left: 2em;
+        border-radius: 0.3em;
+        border: 2px solid rgba($color:#ffffff, $alpha: 0);
+
+        &:hover {
+            border: 2px solid #ffffff;
+        }
+
+        &-color {
+            background-color: #ff0079;
+        }
+    }
+
+    .fas {
+        height: 18px;
+        font-size: 18px;
+    }
+
+}
+
+@media (min-width: 769px) {
+    .nav__menu {
+        display: flex;
+        border: 0;
+        padding: 0 1em;
+
+        >li {
+            flex: 1;
+
+            >a {
+                padding: 0.3em;
+                text-align: center;
+            }
+        }
+
+        >li+li {
+            border: 0;
+        }
+    }
+
+
+
+
+
+
 }
