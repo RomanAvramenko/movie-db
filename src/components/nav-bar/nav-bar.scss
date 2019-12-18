@@ -73,7 +73,7 @@
         padding: 0.5em;
         margin-left: 2em;
         border-radius: 0.3em;
-        border: 2px solid rgba($color:#ffffff, $alpha: 0);
+        border: 2px solid rgba(0, 0, 0, 0);
 
         &:hover {
             border: 2px solid #ffffff;
@@ -91,7 +91,7 @@
 
 }
 
-@media (min-width: 769px) {
+@media (max-width: 769px) {
     .nav__menu {
         display: flex;
         border: 0;
