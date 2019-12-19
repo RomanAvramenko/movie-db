@@ -30,6 +30,16 @@
         color: #80818a;
         padding: 0 10px;
         position: relative;
+        &:hover {
+            cursor: pointer;
+        }
+        &:active {
+            outline: none;
+        }
+
+        &:focus {
+            outline: none;
+        }
     }
 
     &__btn_active {

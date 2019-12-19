@@ -77,6 +77,8 @@
 
         &:hover {
             border: 2px solid #ffffff;
+            cursor: pointer;
+            box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
         }
 
         &-color {

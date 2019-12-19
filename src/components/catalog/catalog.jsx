@@ -45,17 +45,12 @@ export default class Catalog extends React.Component {
     }
 
     render() {
-        if (this.state.response.results === undefined) {
-            return (
-                <Loading />
-            );
-        }
         return (
             <section className="catalog">
                 <div className="catalog__header">
                     <ul className="catalog__menu menu">
                         <li className="menu__item">
-                            <button className="menu__btn menu__btn_active" onClick={this.changeSearchHandler.bind(this, '/popular')}>Poular</button>
+                            <button className="menu__btn" onClick={this.changeSearchHandler.bind(this, '/popular')}>Poular</button>
                         </li>
                         <li className="menu__item">
                             <button className="menu__btn" onClick={this.changeSearchHandler.bind(this, '/top_rated')}>Top Rated</button>
@@ -65,7 +60,7 @@ export default class Catalog extends React.Component {
                         </li>
                     </ul>
                 </div>
-                <TileItem results={this.state.response.results} />
+                {this.state.response.results ? <TileItem results={this.state.response.results} /> : <Loading />}
                 <Footer />
             </section>
         );

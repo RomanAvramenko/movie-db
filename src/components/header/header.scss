@@ -1,7 +1,7 @@
 .page__header {
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 0 50%;
+    background-position: 50% 0;
     margin: 0 auto;
     width: 100%;
     height: 90vh;
@@ -69,15 +69,26 @@
     &_unborder {
         border-color: transparent;
     }
+
+    &:hover {
+        border-color: #ffffff;
+        cursor: pointer;
+        box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
+    }
 }
 
 @media (max-width: 769px) {
+    .page__header {
+        background-position: 50% 50%;
+    }
+
     .header-content {
         display: flex;
         flex-direction: column;
 
         &__title {
             padding: 0;
+            margin: auto;
         }
 
         &__btn {

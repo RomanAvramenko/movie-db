@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 import "./nav-bar.scss";
 
@@ -11,7 +12,7 @@ const NavBar = () => {
 
     return (
         <nav className="menu-box">
-            <div className="logo"><a href="/">THEMOVIEBOX</a></div>
+            <div className="logo"><Link to="/">THEMOVIEBOX</Link></div>
             <button className="menu-toggle" id="toggle-menu" onClick={toggle}>toggle menu</button>
             <div className="menu-dropdown is-open">
                 <ul className="nav__menu">
