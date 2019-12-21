@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import NavBar from "../nav-bar";
 import Widget from "../widget"
+import { genres } from '../../genres'
+
 import "./header.scss";
 
 export default class Header extends Component {
@@ -44,7 +46,7 @@ export default class Header extends Component {
                     <div className="header-content__main">
                         <div className="header-content__title">
                             <div className="content__desc">
-                                <div className="content__desc_genre">Fantasy Animation Family</div>
+                                <div className="content__desc_genre">{item.genre_ids.map(i => genres[i]).join(' ')}</div>
                             </div>
                         </div>
                         <div className="header-content__btn">
