@@ -1,13 +1,13 @@
 .react-tabs {
     width: 100%;
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 20px;
+    margin: 0 auto;
 
     &__tab-list {
         display: flex;
         justify-content: flex-start;
-        height: 70px;
+        height: 2em;
+        margin: 2em auto;
     }
 
     &__tab {
@@ -32,22 +32,7 @@
                 left: 0;
                 background-color: #ff0079;
                 height: 2px;
-            }
-        }
-
-        &:focus {
-            box-shadow: 0 0 5px hsl(208, 99%, 50%);
-            border-color: hsl(208, 99%, 50%);
-            outline: none;
-
-            &:after {
-                content: "";
-                position: absolute;
-                height: 5px;
-                left: -4px;
-                right: -4px;
-                bottom: -5px;
-                background: #fff;
+                transition: left .3s ease-in-out;
             }
         }
     }

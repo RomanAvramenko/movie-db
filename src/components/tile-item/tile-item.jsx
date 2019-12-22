@@ -10,7 +10,10 @@ export const TileItem = ({ results }) => {
                 return (
                     <div className="tile-item" key={item.id}>
                         <div className="tile-item__pic">
-                            <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" />
+                            <img
+                                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                                alt={`./images/alt.jpg`}
+                            />
                         </div>
                         <div className="tile-item__discription">
                             <div className="tile-item__desc">

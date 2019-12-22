@@ -66,7 +66,6 @@ export default class Catalog extends React.Component {
                         {result}
                     </TabPanel>
                 </Tabs>
-                {/* {this.state.response.results ? <TileItem results={this.state.response.results} /> : <Loading />} */}
             </section>
         );
     }
