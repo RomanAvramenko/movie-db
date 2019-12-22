@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import './catalog.scss';
 import Loading from '../loading';
-import Footer from '../footer';
 import { TileItem } from '../tile-item/tile-item';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import '../styles/reactTabs.scss';
 
 export default class Catalog extends React.Component {
     state = {
@@ -45,23 +46,27 @@ export default class Catalog extends React.Component {
     }
 
     render() {
+        const result = this.state.response.results ? <TileItem results={this.state.response.results} /> : <Loading />;
         return (
             <section className="catalog">
-                <div className="catalog__header">
-                    <ul className="catalog__menu menu">
-                        <li className="menu__item">
-                            <button className="menu__btn" onClick={this.changeSearchHandler.bind(this, '/popular')}>Poular</button>
-                        </li>
-                        <li className="menu__item">
-                            <button className="menu__btn" onClick={this.changeSearchHandler.bind(this, '/top_rated')}>Top Rated</button>
-                        </li>
-                        <li className="menu__item">
-                            <button className="menu__btn" onClick={this.changeSearchHandler.bind(this, '/upcoming')}>New Arrivals</button>
-                        </li>
-                    </ul>
-                </div>
-                {this.state.response.results ? <TileItem results={this.state.response.results} /> : <Loading />}
-                <Footer />
+                <Tabs>
+                    <TabList>
+                        <Tab onClick={this.changeSearchHandler.bind(this, '/popular')}>Poular</Tab>
+                        <Tab onClick={this.changeSearchHandler.bind(this, '/top_rated')}>Top Rated</Tab>
+                        <Tab onClick={this.changeSearchHandler.bind(this, '/upcoming')}>New Arrivals</Tab>
+                    </TabList>
+
+                    <TabPanel>
+                        {result}
+                    </TabPanel>
+                    <TabPanel>
+                        {result}
+                    </TabPanel>
+                    <TabPanel>
+                        {result}
+                    </TabPanel>
+                </Tabs>
+                {/* {this.state.response.results ? <TileItem results={this.state.response.results} /> : <Loading />} */}
             </section>
         );
     }
