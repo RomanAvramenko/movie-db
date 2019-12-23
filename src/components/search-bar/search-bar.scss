@@ -1,0 +1,73 @@
+label {
+    position: relative;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 12px;
+    transition: all .5s ease;
+    border-radius: 0.5em;
+    border: 2px solid rgba(0, 0, 0, 0);
+
+    &::after {
+        content: '';
+        display: block;
+        height: 2px;
+        width: 80%;
+        background-color: #ff0079;
+        transition: all 1s ease 0.5s;
+    }
+
+    &:hover {
+        border: 2px solid #ffffff;
+        cursor: pointer;
+        box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
+    }
+
+    input {
+        transition: width 1s ease, opacity 0.5s ease 0.5s;
+        opacity: 1;
+        width: 180px;
+        height: 25px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: #ffffff;
+        font-size: 1em;
+    }
+
+    ::placeholder {
+        color: #ffffff;
+    }
+
+    i {
+        position: absolute;
+        top: 11px;
+        right: 11px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    &.close {
+        border-radius: 30px;
+        padding: 5px 5px;
+        transition: all 1s ease;
+        background-color: transparent;
+
+        &::after {
+            width: 0%;
+            transition: all 0.3s ease;
+        }
+
+        i {
+            pointer-events: none;
+        }
+
+        input {
+            width: 28px;
+            height: 25px;
+            opacity: 0;
+            cursor: pointer;
+            transition: opacity 0.5s ease, width 1s ease;
+            -webkit-appearance: none
+        }
+    }
+}
