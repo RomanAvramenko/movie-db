@@ -1,6 +1,6 @@
 import React from 'react';
 
-import "./widget.scss";
+import "./Widget.scss";
 
 const Widget = ({ ratio, votes }) => {
     return (

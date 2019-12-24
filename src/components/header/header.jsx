@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import NavBar from "../nav-bar";
-import Widget from "../widget"
+import NavBar from "../NavBar/NavBar";
+import Widget from "../Widget/Widget"
 import { genres } from '../../genres'
 
-import "./header.scss";
+import "./Header.scss";
 
 export default class Header extends Component {
 

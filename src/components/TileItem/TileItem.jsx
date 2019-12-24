@@ -1,7 +1,7 @@
 import React from 'react'
 import { genres } from '../../genres'
 
-import './tile-item.scss'
+import './TileItem.scss'
 
 export const TileItem = ({ results }) => {
     return (

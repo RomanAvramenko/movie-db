@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import './catalog.scss';
-import Loading from '../loading';
-import { TileItem } from '../tile-item/tile-item';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
+import Loading from '../Loading/Loading';
+import { TileItem } from '../TileItem/TileItem';
+
+import './Catalog.scss';
 import '../styles/reactTabs.scss';
 
 export default class Catalog extends React.Component {

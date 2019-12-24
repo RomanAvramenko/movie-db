@@ -1,11 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import React from './node_modules/react';
+import { BrowserRouter as Router} from './node_modules/react-router-dom'
 
 
-import Header from '../header';
-import Catalog from '../catalog';
-import './app.css';
-import Footer from '../footer';
+import Header from '../Header/Header';
+import Catalog from '../Catalog/Catalog';
+import './App.css';
+import Footer from '../Footer/Footer';
 
 export const App = () => {
   return (
