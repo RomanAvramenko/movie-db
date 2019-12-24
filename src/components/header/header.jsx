@@ -39,25 +39,27 @@ export default class Header extends Component {
         const item = this.state.data.results[Math.floor(Math.random() * 20)];
         const bgImage = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${item.backdrop_path}` }
         return (
-            <header className="page__header" style={bgImage} >
+            <React.Fragment>
                 <NavBar />
-                <div className="header-content">
-                    <h1 className="content__title">{item.title}</h1>
-                    <div className="header-content__main">
-                        <div className="header-content__title">
-                            <div className="content__desc">
-                                <div className="content__desc_genre">{item.genre_ids.map(i => genres[i]).join(' ')}</div>
+                <header className="page__header" style={bgImage} >
+                    <div className="header-content">
+                        <h1 className="content__title">{item.title}</h1>
+                        <div className="header-content__main">
+                            <div className="header-content__title">
+                                <div className="content__desc">
+                                    <div className="content__desc_genre">{item.genre_ids.map(i => genres[i]).join(' ')}</div>
+                                </div>
+                            </div>
+                            <div className="header-content__btn">
+                                <button className="content__btn content__btn_color">WATCH TRAILER</button>
+                                <button className="content__btn">VIEW INFO</button>
+                                <button className="content__btn content__btn_unborder">+ ADD TO WISHLIST</button>
                             </div>
                         </div>
-                        <div className="header-content__btn">
-                            <button className="content__btn content__btn_color">WATCH MOVIE</button>
-                            <button className="content__btn">VIEW INFO</button>
-                            <button className="content__btn content__btn_unborder">+ ADD TO WISHLIST</button>
-                        </div>
+                        <Widget ratio={item.vote_average} votes={item.vote_count} />
                     </div>
-                    <Widget ratio={item.vote_average} votes={item.vote_count}/>
-                </div>
-            </header >
+                </header >
+            </React.Fragment>
         )
     }
 }
