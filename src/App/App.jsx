@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import './App.css';
 import { MainPage } from '../pages/MainPage/MainPage'
 import { InfoPage } from '../pages/InfoPage/InfoPage'
@@ -9,7 +9,9 @@ export const App = () => {
     <div className="App">
       <Router>
         <Switch>
-          <MainPage />
+          <Route path="/" exact component={MainPage} />
+          <Route path="/info" component={InfoPage} />
+          <Redirect to={'/'} />
         </Switch>
       </Router>
     </div>

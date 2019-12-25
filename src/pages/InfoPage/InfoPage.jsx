@@ -1,12 +1,14 @@
 import React from 'react'
 
-import Header from '../../components/Header/Header';
+import NavBar from "../../components/NavBar/NavBar";
 import Footer from '../../components/Footer/Footer';
+import Detailed from '../../components/Detailed/Detailed';
 
-export const MainPage = () => {
+export const InfoPage = () => {
     return (
         <React.Fragment>
-            <Header />
+            <NavBar />
+            <Detailed />
             <Footer />
         </React.Fragment>
     )

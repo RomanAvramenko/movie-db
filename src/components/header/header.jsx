@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import NavBar from "../NavBar/NavBar";
 import Widget from "../Widget/Widget"
 import { genres } from '../../genres'
 
 import "./Header.scss";
+import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
 
@@ -36,11 +36,11 @@ export default class Header extends Component {
         if (this.state.data.results === undefined) {
             return null
         }
+        console.log(this.state.data.results);
         const item = this.state.data.results[Math.floor(Math.random() * 20)];
         const bgImage = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${item.backdrop_path}` }
         return (
             <React.Fragment>
-                <NavBar />
                 <header className="page__header" style={bgImage} >
                     <div className="header-content">
                         <h1 className="content__title">{item.title}</h1>
@@ -52,14 +52,20 @@ export default class Header extends Component {
                             </div>
                             <div className="header-content__btn">
                                 <button className="content__btn content__btn_color">WATCH TRAILER</button>
-                                <button className="content__btn">VIEW INFO</button>
+                                <button className="content__btn">
+                                    <Link to={{
+                                        pathname: "/info",
+                                        state: { item: item }
+                                    }}>VIEW INFO
+                                    </Link>
+                                </button>
                                 <button className="content__btn content__btn_unborder">+ ADD TO WISHLIST</button>
                             </div>
                         </div>
                         <Widget ratio={item.vote_average} votes={item.vote_count} />
                     </div>
                 </header >
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }

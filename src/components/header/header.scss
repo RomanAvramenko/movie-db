@@ -75,6 +75,10 @@
         cursor: pointer;
         box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
     }
+    & a {
+        color: #ffffff;
+        text-decoration: none;
+    }
 }
 
 @media (max-width: 769px) {
