@@ -32,14 +32,20 @@ export default class Detailed extends React.Component {
         if (this.state.response === null) {
             return null
         } else {
-            const { title, tagline, poster_path } = this.state.response.data;
-            const bgImage = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` }
+            const { title, overview, poster_path, runtime, genres, production_companies, backdrop_path } = this.state.response.data;
+            const poster = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` }
+            const backdrop = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
             return (
-                <section className='detailed'>
+                <section className='detailed'  style={backdrop}>
                     <div className='detailed__wrapper'>
                         <h1 className='title'>{title}</h1>
-                        <p className='tag'>{tagline}</p>
-                        <div className='poster' style={bgImage}></div>
+                        <div className='poster' style={poster}></div>
+                        <div className='description'>
+                            <p><strong>Plot Summary: </strong>{overview}</p>
+                            <p><strong>Duration: </strong>{runtime} minutes</p>
+                            <p><strong>Genres: </strong>{genres.map(i => i.name).join(' ')}</p>
+                            <p><strong>Production Co: </strong>{production_companies.map(i => i.name).join(' ')}</p>
+                        </div>
                     </div>
                 </section>
             )
