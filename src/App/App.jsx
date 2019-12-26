@@ -10,7 +10,7 @@ export const App = () => {
       <Router>
         <Switch>
           <Route path="/" exact component={MainPage} />
-          <Route path="/info" component={InfoPage} />
+          <Route path="/details" component={InfoPage} />
           <Redirect to={'/'} />
         </Switch>
       </Router>

@@ -4,7 +4,7 @@ import "./Footer.scss";
 
 const Footer = () => {
     return (
-        <div className="footer">
+        <footer className="footer">
             <div className="logo footer-logo">THEMOVIEBOX</div>
             <div className="footer-menu">
                 <ul>
@@ -14,7 +14,7 @@ const Footer = () => {
                     <li>Contact</li>
                 </ul>
             </div>
-        </div>
+        </footer>
     )
 }
 
