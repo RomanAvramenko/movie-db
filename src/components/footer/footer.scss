@@ -14,7 +14,9 @@
 }
 
 .footer-logo {
-    color: #494c62;
+    & a {
+        color: #494c62;
+    }
 }
 
 .footer-menu {

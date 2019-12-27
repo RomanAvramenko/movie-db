@@ -3,11 +3,13 @@ import axios from 'axios';
 
 
 import './Detailed.scss'
+import { Modal } from '../Modal/Modal';
 
 export default class Detailed extends React.Component {
 
     state = {
-        response: null
+        response: null,
+        show: false
     }
 
     componentDidMount() {
@@ -24,24 +26,39 @@ export default class Detailed extends React.Component {
             .get(url)
             .then(result => { this.setState({ response: result }) })
             .catch(e => { console.log(e.config) });
-        console.log(this.state.response.data);
-
+        console.log(this.state.response);
     }
+
+    showModal = () => {
+        this.setState({ show: true });
+    };
+
+    hideModal = () => {
+        this.setState({ show: false });
+    };
 
     render() {
         if (this.state.response === null) {
             return null
         } else {
             const { title, overview, poster_path, runtime,
-                genres, production_companies,
+                genres, production_companies, vote_average,
                 backdrop_path, production_countries
             } = this.state.response.data;
             const poster = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` }
             const backdrop = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
             return (
-                <section className='detailed' style={backdrop}>
-                    <div className='detailed__wrapper'>
-                        <h1 className='title'>{title}</h1>
+                <section className='detail' style={backdrop}>
+                    <Modal
+                        show={this.state.show}
+                        handleClose={this.hideModal}
+                        props={title}
+                    ></Modal>
+                    <div className='detail__wrapper'>
+                        <h1 className='detail__wrapper__title'>{title}</h1>
+                        <span className='detail__wrapper__rating'>
+                            <i className="far fa-star detail__wrapper__rating-big"></i>&nbsp;<strong className='detail__wrapper__rating-big'>{vote_average}</strong> / 10
+                        </span>
                         <div className='poster' style={poster}></div>
                         <div className='description'>
                             <ul>
@@ -80,6 +97,7 @@ export default class Detailed extends React.Component {
                                     </span>
                                 </li>
                             </ul>
+                            <div className='description__btn' onClick={this.showModal}>Watch Trailer</div>
                         </div>
                     </div>
                 </section>
