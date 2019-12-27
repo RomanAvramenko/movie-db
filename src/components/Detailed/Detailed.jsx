@@ -32,19 +32,54 @@ export default class Detailed extends React.Component {
         if (this.state.response === null) {
             return null
         } else {
-            const { title, overview, poster_path, runtime, genres, production_companies, backdrop_path } = this.state.response.data;
+            const { title, overview, poster_path, runtime,
+                genres, production_companies,
+                backdrop_path, production_countries
+            } = this.state.response.data;
             const poster = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` }
             const backdrop = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
             return (
-                <section className='detailed'  style={backdrop}>
+                <section className='detailed' style={backdrop}>
                     <div className='detailed__wrapper'>
                         <h1 className='title'>{title}</h1>
                         <div className='poster' style={poster}></div>
                         <div className='description'>
-                            <p><strong>Plot Summary: </strong>{overview}</p>
-                            <p><strong>Duration: </strong>{runtime} minutes</p>
-                            <p><strong>Genres: </strong>{genres.map(i => i.name).join(' ')}</p>
-                            <p><strong>Production Co: </strong>{production_companies.map(i => i.name).join(' ')}</p>
+                            <ul>
+                                <li>
+                                    <p>
+                                        <strong>Plot Summary: </strong>
+                                        {overview}
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <strong>Duration: </strong>
+                                        {Math.floor(runtime / 60)} hours {runtime % 60} minutes
+                                        </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <strong>Genres: </strong>
+                                        {genres.map(i => i.name).join(' ')}
+                                    </p>
+                                </li>
+                                <li>
+                                    <span>
+                                        <strong>Production Co: </strong>
+                                        <ul>
+                                            {production_companies.map(i => <li key={i.id}>{i.name}</li>)}
+                                        </ul>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        <strong>Production Country:</strong>
+                                        <ul>
+                                            {production_countries.map((i, index) => <li key={index}>{i.name}</li>)}
+                                        </ul>
+                                    </span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </section>
