@@ -1,10 +1,11 @@
 import React from 'react'
+import './Modal.scss'
 
 export const Modal = ({ props, show, handleClose }) => {
-    const showHideClassName = show ? "display-block" : "display-none";
+    const showHideClassName = show ? "modal display-block" : "display-none";
     return (
         <div className={showHideClassName}>
-            <section className="modal-main">>
+            <section className="modal-main">
                 <iframe
                     title={props.name}
                     width="560"
@@ -14,7 +15,7 @@ export const Modal = ({ props, show, handleClose }) => {
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen>
                 </iframe>
-                <button onClick={handleClose}><i className="fas fa-times"></i></button>
+                <button onClick={handleClose} className='modal__btn'><i className="fas fa-times"></i></button>
             </section>
 
         </div>

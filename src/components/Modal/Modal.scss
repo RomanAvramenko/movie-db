@@ -10,8 +10,8 @@
 
 .modal-main {
     position: absolute;
-    background: white;
-    width: 80%;
+    background: inherit;
+    width: auto;
     height: auto;
     top: 50%;
     left: 50%;
@@ -24,4 +24,24 @@
 
 .display-none {
     display: none;
+}
+
+.modal__btn {
+    position: absolute;
+    top: -2em;
+    background-color: #ff0079;
+    height: 2em;
+    width: 2em;
+    padding: .2em;
+    color: #ffffff;
+    border-radius: 0.3em;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: all .5s ease;
+
+    &:hover {
+        border: 2px solid #ffffff;
+        cursor: pointer;
+        box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 }
