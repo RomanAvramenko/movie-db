@@ -1,14 +1,12 @@
 import React from 'react'
 import axios from 'axios';
-
-
 import './Detailed.scss'
 import { Modal } from '../Modal/Modal';
-
 export default class Detailed extends React.Component {
 
     state = {
         response: null,
+        trailerRes: [],
         show: false
     }
 
@@ -22,11 +20,21 @@ export default class Detailed extends React.Component {
         const API_KEY = 'api_key=82d1a8c492becf617a26326954e61f9a';
         const BASE_URL = 'https://api.themoviedb.org/3/movie';
         const url = `${BASE_URL}/${id}?${API_KEY}&language=en-US&page=1`;
+        const urlVideo = `${BASE_URL}/${id}/videos?${API_KEY}`;
         await axios
-            .get(url)
-            .then(result => { this.setState({ response: result }) })
+            .all([
+                axios.get(url),
+                axios.get(urlVideo)
+            ])
+            .then(
+                axios.spread((result, resVideo) => {
+                    this.setState({
+                        response: result,
+                        trailerRes: resVideo.data.results[0].key
+                    })
+                })
+            )
             .catch(e => { console.log(e.config) });
-        console.log(this.state.response);
     }
 
     showModal = () => {
@@ -53,6 +61,7 @@ export default class Detailed extends React.Component {
                         show={this.state.show}
                         handleClose={this.hideModal}
                         props={title}
+                        trailerKey={this.state.trailerRes}
                     ></Modal>
                     <div className='detail__wrapper'>
                         <h1 className='detail__wrapper__title'>{title}</h1>
