@@ -57,12 +57,15 @@ export default class Detailed extends React.Component {
             const backdrop = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
             return (
                 <section className='detail' style={backdrop}>
-                    <Modal
-                        show={this.state.show}
-                        handleClose={this.hideModal}
-                        props={title}
-                        trailerKey={this.state.trailerRes}
-                    ></Modal>
+                    {this.state.show
+                        ? <Modal
+                            show={this.state.show}
+                            handleClose={this.hideModal}
+                            props={title}
+                            trailerKey={this.state.trailerRes}
+                        ></Modal>
+                        : null
+                    }
                     <div className='detail__wrapper'>
                         <h1 className='detail__wrapper__title'>{title}</h1>
                         <span className='detail__wrapper__rating'>
