@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import './App.css';
 import { MainPage } from '../pages/MainPage/MainPage'
 import { InfoPage } from '../pages/InfoPage/InfoPage'
+import { SearchResultPage } from '../pages/SearchResultPage/SearchResultPage';
 
 export const App = () => {
   return (
@@ -11,6 +12,7 @@ export const App = () => {
         <Switch>
           <Route path="/" exact component={MainPage} />
           <Route path="/details" component={InfoPage} />
+          <Route path="/search-result" component={SearchResultPage} />
           <Redirect to={'/'} />
         </Switch>
       </Router>
