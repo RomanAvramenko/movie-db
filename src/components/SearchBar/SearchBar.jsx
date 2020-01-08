@@ -1,8 +1,7 @@
 import React from 'react'
 import axios from 'axios';
-
 import "./SearchBar.scss"
-
+import { Redirect } from 'react-router-dom';
 export class SearchBar extends React.Component {
 
     API_KEY = 'api_key=82d1a8c492becf617a26326954e61f9a';
@@ -10,29 +9,21 @@ export class SearchBar extends React.Component {
 
     state = {
         isOpen: "close",
-        searchResponse: []
+        searchResponse: [],
+        currentItem: null,
     }
 
-    componentDidMount() {
-        this.getData()
-    }
-
-    getData = async () => {
-        const url = `${this.BASE_URL}?${this.API_KEY}&language=en-US&query=avengers&page=1&include_adult=false`;
+    getData = async (name) => {
+        const url = `${this.BASE_URL}?${this.API_KEY}&language=en-US&query=${name}&page=1&include_adult=false`;
         await axios
             .get(url)
             .then(result => {
                 this.setState({
-                    searchResponse: this.transformData(result),
+                    searchResponse: result.data.results
                 })
+                console.log(this.state.searchResponse.length);
             })
             .catch(e => { console.log(e.config) });
-    }
-
-    transformData = (result) => {
-        return {
-            results: result.data.results
-        }
     }
 
     inputHandler = e => {
@@ -43,8 +34,14 @@ export class SearchBar extends React.Component {
         this.setState({
             currentItem
         });
-        e.preventDefault();
-    };
+    }
+
+    searchHandler = e => {
+        const { text } = this.state.currentItem
+        this.getData(text)
+        e.target.reset()
+        e.preventDefault()
+    }
 
     onClickHandler = () => {
         if (this.state.isOpen !== "open") {
@@ -61,16 +58,26 @@ export class SearchBar extends React.Component {
     }
 
     render() {
+        const { isOpen, searchResponse } = this.state;
         return (
-            <label htmlFor="search" className={this.state.isOpen} onClick={this.onClickHandler} onBlur={this.onBlurHandler}>
-                <input
-                    type="text"
-                    placeholder="Search"
-                    value={this.currentItem}
-                    onChange={this.inputHandler}
-                />
-                <i className="fas fa-search" ></i>
-            </label>
+            <React.Fragment>
+                <form onSubmit={this.searchHandler}>
+                    <label htmlFor="search" className={isOpen} onClick={this.onClickHandler} onBlur={this.onBlurHandler}>
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            value={this.currentItem}
+                            onChange={this.inputHandler}
+                        />
+                        <i className="fas fa-search" ></i>
+                    </label>
+                </form>
+                {searchResponse.length > 0 &&
+                <Redirect to={{
+                    pathname: "/search",
+                    state: { searchResponse }
+                }} />}
+            </React.Fragment>
         )
     }
 }

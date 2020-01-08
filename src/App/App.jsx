@@ -12,7 +12,7 @@ export const App = () => {
         <Switch>
           <Route path="/" exact component={MainPage} />
           <Route path="/details" component={InfoPage} />
-          <Route path="/search-result" component={SearchResultPage} />
+          <Route path="/search" component={SearchResultPage} />
           <Redirect to={'/'} />
         </Switch>
       </Router>

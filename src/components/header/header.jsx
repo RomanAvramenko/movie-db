@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Modal } from '../Modal/Modal'
+//import { Modal } from '../Modal/Modal'
 import Widget from "../Widget/Widget"
 import { genres } from '../../genres'
 
@@ -60,7 +60,7 @@ export default class Header extends Component {
         const bgImage = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
         return (
             <React.Fragment>
-                {this.state.show
+                {/* {this.state.show
                     ? <Modal
                         show={this.state.show}
                         handleClose={this.hideModal}
@@ -68,7 +68,7 @@ export default class Header extends Component {
                         trailerKey={this.state.trailerRes}
                     ></Modal>
                     : null
-                }
+                } */}
                 <header className="page__header" style={bgImage} >
                     <div className="header-content">
                         <h1 className="content__title">{title}</h1>
