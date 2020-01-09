@@ -88,3 +88,21 @@
         }
     }
 }
+
+.cast {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cast__figure {
+    margin: 0;
+    width: 5em;
+}
+
+.cast__img {
+    height: 7em;
+}
+
+.cast__description {
+    font-size: .8em;
+}
