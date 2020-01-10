@@ -28,7 +28,7 @@ export const SearchList = (props) => {
               <div className="search__item">
                 <h1 className="search__title">{title}</h1>
                 <span className="search__rating">
-                  <i className="far fa-star search__rating-big"></i>
+                  <i className="fas fa-star search__rating-big"></i>
                   &nbsp;
                 <strong className="search__rating-big">{vote_average}</strong> / 10
               </span>

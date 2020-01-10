@@ -77,7 +77,7 @@ export default class Detailed extends React.Component {
           <div className='detail__wrapper'>
             <h1 className='detail__wrapper__title'>{title}</h1>
             <span className='detail__wrapper__rating'>
-              <i className="far fa-star detail__wrapper__rating-big"></i>&nbsp;
+              <i className="fas fa-star detail__wrapper__rating-big"></i>&nbsp;
               <strong className='detail__wrapper__rating-big'>{vote_average}</strong> / 10
             </span>
             <div className='poster' style={poster}></div>

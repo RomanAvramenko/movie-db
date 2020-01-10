@@ -61,14 +61,14 @@ export default class Header extends Component {
 		return (
 			<React.Fragment>
 				{/* {this.state.show
-                    ? <Modal
-                        show={this.state.show}
-                        handleClose={this.hideModal}
-                        props={title}
-                        trailerKey={this.state.trailerRes}
-                    ></Modal>
-                    : null
-                } */}
+					? <Modal
+						show={this.state.show}
+						handleClose={this.hideModal}
+						props={title}
+						trailerKey={this.state.trailerRes}
+					></Modal>
+					: null
+				} */}
 				<header className="page__header" style={bgImage} >
 					<div className="header-content">
 						<h1 className="content__title">{title}</h1>
@@ -87,7 +87,8 @@ export default class Header extends Component {
 									<Link to={{
 										pathname: "/details",
 										state: { id }
-									}}>VIEW INFO
+									}}>
+										VIEW INFO
                   </Link>
 								</button>
 								<button className="content__btn content__btn_unborder">+ ADD TO WISHLIST</button>
