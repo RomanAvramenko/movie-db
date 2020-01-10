@@ -8,6 +8,7 @@ export default class Detailed extends React.Component {
     response: null,
     trailerResp: [],
     creditsResp: [],
+    crewResp: [],
     show: false
   }
 
@@ -18,12 +19,11 @@ export default class Detailed extends React.Component {
 
   getData = async () => {
     const { id } = this.props.id.location.state
-    console.log(id);
     const API_KEY = 'api_key=82d1a8c492becf617a26326954e61f9a';
     const BASE_URL = 'https://api.themoviedb.org/3/movie';
     const url = `${BASE_URL}/${id}?${API_KEY}&language=en-US&page=1`;
     const urlVideo = `${BASE_URL}/${id}/videos?${API_KEY}`;
-    const urlCredits = `${BASE_URL}/${id}/credits?${API_KEY}`
+    const urlCredits = `${BASE_URL}/${id}/credits?${API_KEY}`;
     await axios
       .all([
         axios.get(url),
@@ -32,12 +32,14 @@ export default class Detailed extends React.Component {
       ])
       .then(
         axios.spread((result, responseCast, resVideo) => {
+          console.log(result);
+
           this.setState({
-            response: result,
+            response: result.data,
             creditsResp: responseCast.data.cast,
+            crewResp: responseCast.data.crew.find(i => { return i.job === "Director" }),
             trailerResp: resVideo.data.results[0].key
           })
-          console.log(this.state);
         })
       )
       .catch(e => { console.log(e.config) });
@@ -57,8 +59,8 @@ export default class Detailed extends React.Component {
     } else {
       const { title, overview, poster_path, runtime,
         genres, production_companies, vote_average,
-        backdrop_path, production_countries
-      } = this.state.response.data;
+        backdrop_path, production_countries, release_date
+      } = this.state.response;
       const poster = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` }
       const backdrop = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
       return (
@@ -94,6 +96,12 @@ export default class Detailed extends React.Component {
                   </p>
                 </li>
                 <li>
+                      <p>
+                        <strong>Year: </strong>
+                        {release_date.slice(0, 4)}
+                      </p>
+                    </li>
+                <li>
                   <p>
                     <strong>Genres: </strong>
                     {genres.map(i => i.name).join(' ')}
@@ -116,9 +124,15 @@ export default class Detailed extends React.Component {
                   </span>
                 </li>
                 <li>
+                  <span>
+                    <strong>Directed by: </strong>
+                    {this.state.crewResp.name}
+                  </span>
+                </li>
+                <li>
                   <strong>Cast:</strong>
                   <ul className="cast">
-                    {this.state.creditsResp.slice(0, 7).map((actor) => {
+                    {this.state.creditsResp.slice(0, 8).map((actor) => {
                       const picUrl = `https://image.tmdb.org/t/p/w1280${actor.profile_path}`;
                       return (
                         <li key={actor.id}>

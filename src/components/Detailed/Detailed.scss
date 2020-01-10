@@ -91,18 +91,19 @@
 
 .cast {
     display: flex;
-    justify-content: space-around;
-}
+    justify-content: flex-start;
 
-.cast__figure {
-    margin: 0;
-    width: 5em;
-}
+    &__figure {
+        margin: 0;
+        width: 5em;
+        margin-right: 1em;
+    }
 
-.cast__img {
-    height: 7em;
-}
+    &__img {
+        height: 7em;
+    }
 
-.cast__description {
-    font-size: .8em;
+    &__description {
+        font-size: .8em;
+    }
 }

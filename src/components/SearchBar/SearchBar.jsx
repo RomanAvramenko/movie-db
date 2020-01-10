@@ -21,7 +21,6 @@ export class SearchBar extends React.Component {
         this.setState({
           searchResponse: result.data.results
         })
-        console.log(this.state.searchResponse.length);
       })
       .catch(e => { console.log(e.config) });
   }

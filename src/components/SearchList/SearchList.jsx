@@ -1,46 +1,65 @@
 import React from 'react'
+import { genres } from '../../genres'
+
+import './SearchList.scss'
+import placeholder from '../../assets/images/placeholder.jpg'
+import { Link } from 'react-router-dom'
 
 export const SearchList = (props) => {
-	return (
-		<React.Fragment>
-			{props.results.map(item => {
-				const { title, overview, poster_path,
-					genre_ids, vote_average,
-					id, release_date
-				} = item;
-				const poster = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` }
-				return (
-					<div key={id}>
-						<h1 >{title}</h1>
-						<span>
-							<i></i>&nbsp;<strong>{vote_average}</strong> / 10
-                        </span>
-						<div style={poster}></div>
-						<div>
-							<ul>
-								<li>
-									<p>
-										<strong>Plot Summary: </strong>
-										{overview}
-									</p>
-								</li>
-								<li>
-									<p>
-										<strong>Year: </strong>
-										{release_date}
-									</p>
-								</li>
-								<li>
-									<p>
-										<strong>Genres: </strong>
-										{genre_ids.map(i => i.name).join(' ')}
-									</p>
-								</li>
-							</ul>
-						</div>
-					</div>
-				)
-			})}
-		</React.Fragment>
-	)
+  return (
+    <div className="search" >
+      <div className="search__wrapper">
+        {props.results.map(item => {
+          const { title, overview, poster_path,
+            genre_ids, vote_average,
+            id, release_date
+          } = item;
+          let poster = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` };
+          if (poster_path === null) {
+            poster = { backgroundImage: `url(${placeholder})` }
+          }
+          return (
+            <Link to={{
+              pathname: "/details",
+              state: { id }
+            }}
+              key={id}
+            >
+              <div className="search__item">
+                <h1 className="search__title">{title}</h1>
+                <span className="search__rating">
+                  <i className="far fa-star search__rating-big"></i>
+                  &nbsp;
+                <strong className="search__rating-big">{vote_average}</strong> / 10
+              </span>
+                <div className="search__img" style={poster}></div>
+                <div className="search__description">
+                  <ul>
+                    <li>
+                      <p>
+                        <strong>Plot Summary: </strong>
+                        {overview}
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <strong>Year: </strong>
+                        {release_date.slice(0, 4)}
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <strong>Genres: </strong>
+                        {genre_ids.map(i => genres[i]).join(' ')}
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </Link>
+          )
+        })}
+      </div>
+    </div>
+  )
 }
