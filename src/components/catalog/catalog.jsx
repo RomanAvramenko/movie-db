@@ -24,13 +24,12 @@ export default class Catalog extends React.Component {
     }
 
     request = () => {
-        const API_KEY = 'api_key=82d1a8c492becf617a26326954e61f9a';
+        const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
         const BASE_URL = 'https://api.themoviedb.org/3/movie';
         const url = `${BASE_URL}${this.state.searchVars}?${API_KEY}&language=en-US&page=${this.state.currentPage}`;
         axios
             .get(url)
             .then(result => {
-                console.log(result);
                 this.setState({ response: this._transformData(result) })
             })
             .catch(e => { console.log(e.config); });

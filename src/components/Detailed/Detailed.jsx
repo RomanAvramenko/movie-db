@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import './Detailed.scss'
 import { Modal } from '../Modal/Modal';
+import placeholder from '../../assets/images/placeholder.jpg'
 export default class Detailed extends React.Component {
 
   state = {
@@ -14,12 +15,11 @@ export default class Detailed extends React.Component {
 
   componentDidMount() {
     this.getData()
-
   }
 
   getData = async () => {
     const { id } = this.props.id.location.state
-    const API_KEY = 'api_key=82d1a8c492becf617a26326954e61f9a';
+    const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     const BASE_URL = 'https://api.themoviedb.org/3/movie';
     const url = `${BASE_URL}/${id}?${API_KEY}&language=en-US&page=1`;
     const urlVideo = `${BASE_URL}/${id}/videos?${API_KEY}`;
@@ -32,8 +32,7 @@ export default class Detailed extends React.Component {
       ])
       .then(
         axios.spread((result, responseCast, resVideo) => {
-          console.log(result);
-
+          console.log(result.data);
           this.setState({
             response: result.data,
             creditsResp: responseCast.data.cast,
@@ -43,6 +42,7 @@ export default class Detailed extends React.Component {
         })
       )
       .catch(e => { console.log(e.config) });
+    console.log(this.state);
   }
 
   showModal = () => {
@@ -96,11 +96,11 @@ export default class Detailed extends React.Component {
                   </p>
                 </li>
                 <li>
-                      <p>
-                        <strong>Year: </strong>
-                        {release_date.slice(0, 4)}
-                      </p>
-                    </li>
+                  <p>
+                    <strong>Year: </strong>
+                    {release_date.slice(0, 4)}
+                  </p>
+                </li>
                 <li>
                   <p>
                     <strong>Genres: </strong>
@@ -111,7 +111,7 @@ export default class Detailed extends React.Component {
                   <span>
                     <strong>Production Co: </strong>
                     <ul>
-                      {production_companies.map(i => <li key={i.id}>{i.name}</li>)}
+                      {production_companies.slice(0, 4).map(i => <li key={i.id}>{i.name}</li>)}
                     </ul>
                   </span>
                 </li>
@@ -133,7 +133,7 @@ export default class Detailed extends React.Component {
                   <strong>Cast:</strong>
                   <ul className="cast">
                     {this.state.creditsResp.slice(0, 8).map((actor) => {
-                      const picUrl = `https://image.tmdb.org/t/p/w1280${actor.profile_path}`;
+                      const picUrl = actor.profile_path === null ? placeholder : `https://image.tmdb.org/t/p/w500${actor.profile_path}`;
                       return (
                         <li key={actor.id}>
                           <figure className="cast__figure">

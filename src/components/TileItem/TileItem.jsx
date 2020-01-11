@@ -29,7 +29,7 @@ export const TileItem = ({ results }) => {
 									<div className="tile-item__genres">{genre_ids.map(i => genres[i]).join(' ')}</div>
 								</div>
 							</div>
-							<div className="tile-item__ratio">Ratio: {vote_average}</div>
+							<div className="tile-item__ratio"><i className="fas fa-star"></i>&nbsp;{vote_average}</div>
 						</div>
 					</Link>
 				)

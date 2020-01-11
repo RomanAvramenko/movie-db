@@ -4,7 +4,7 @@ import "./SearchBar.scss"
 import { Redirect } from 'react-router-dom';
 export class SearchBar extends React.Component {
 
-  API_KEY = 'api_key=82d1a8c492becf617a26326954e61f9a';
+  API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
   BASE_URL = 'https://api.themoviedb.org/3/search/movie';
 
   state = {
