@@ -9,7 +9,6 @@ export default class Detailed extends React.Component {
     response: null,
     trailerResp: [],
     creditsResp: [],
-    crewResp: [],
     show: false
   }
 
@@ -32,17 +31,14 @@ export default class Detailed extends React.Component {
       ])
       .then(
         axios.spread((result, responseCast, resVideo) => {
-          console.log(result.data);
           this.setState({
             response: result.data,
-            creditsResp: responseCast.data.cast,
-            crewResp: responseCast.data.crew.find(i => { return i.job === "Director" }),
-            trailerResp: resVideo.data.results[0].key
+            creditsResp: responseCast.data,
+            trailerResp: resVideo.data
           })
         })
       )
       .catch(e => { console.log(e.config) });
-    console.log(this.state);
   }
 
   showModal = () => {
@@ -61,8 +57,16 @@ export default class Detailed extends React.Component {
         genres, production_companies, vote_average,
         backdrop_path, production_countries, release_date
       } = this.state.response;
-      const poster = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` }
-      const backdrop = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
+      const { crew, cast } = this.state.creditsResp
+      const director = crew.find(i => i.job === "Director") === undefined
+        ? ''
+        : crew.find(i => i.job === "Director").name
+      const poster = poster_path === null
+        ? { backgroundImage: `url(${placeholder})` }
+        : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` }
+      const backdrop = backdrop_path === null
+        ? { backgroundColor: 'rgba(0, 0, 0, 0.4)' }
+        : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
       return (
         <section className='detail' style={backdrop}>
           {this.state.show
@@ -70,7 +74,7 @@ export default class Detailed extends React.Component {
               show={this.state.show}
               handleClose={this.hideModal}
               props={title}
-              trailerKey={this.state.trailerResp}
+              trailerKey={this.state.trailerResp.results[0].key}
             ></Modal>
             : null
           }
@@ -126,13 +130,13 @@ export default class Detailed extends React.Component {
                 <li>
                   <span>
                     <strong>Directed by: </strong>
-                    {this.state.crewResp.name}
+                    {director}
                   </span>
                 </li>
                 <li>
                   <strong>Cast:</strong>
                   <ul className="cast">
-                    {this.state.creditsResp.slice(0, 8).map((actor) => {
+                    {cast.slice(0, 8).map((actor) => {
                       const picUrl = actor.profile_path === null ? placeholder : `https://image.tmdb.org/t/p/w500${actor.profile_path}`;
                       return (
                         <li key={actor.id}>
@@ -146,7 +150,11 @@ export default class Detailed extends React.Component {
                   </ul>
                 </li>
               </ul>
-              <div className='description__btn' onClick={this.showModal}>Watch Trailer</div>
+              {
+                this.state.trailerResp.results.length === 0
+                  ? null
+                  : <div className='description__btn' onClick={this.showModal}>Watch Trailer</div>
+              }
             </div>
           </div>
         </section>

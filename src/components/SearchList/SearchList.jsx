@@ -14,10 +14,9 @@ export const SearchList = (props) => {
             genre_ids, vote_average,
             id, release_date
           } = item;
-          let poster = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` };
-          if (poster_path === null) {
-            poster = { backgroundImage: `url(${placeholder})` }
-          }
+          let poster = poster_path === null
+            ? { backgroundImage: `url(${placeholder})` }
+            : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` };
           return (
             <Link to={{
               pathname: "/details",
