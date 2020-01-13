@@ -1,6 +1,5 @@
 import React from 'react'
 import { genres } from '../../genres'
-
 import './SearchList.scss'
 import placeholder from '../../assets/images/placeholder.jpg'
 import { Link } from 'react-router-dom'

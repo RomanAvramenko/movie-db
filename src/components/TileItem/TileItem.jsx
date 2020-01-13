@@ -1,6 +1,6 @@
 import React from 'react'
 import { genres } from '../../genres'
-
+import placeholder from '../../assets/images/placeholder.jpg'
 import './TileItem.scss'
 import { Link } from 'react-router-dom'
 
@@ -8,7 +8,10 @@ export const TileItem = ({ results }) => {
 	return (
 		<div className="tile">
 			{results.map(item => {
-				const { id, poster_path, title, genre_ids, vote_average } = item
+				const { id, poster_path, title, genre_ids, vote_average } = item;
+				let poster = poster_path === null
+					? { backgroundImage: `url(${placeholder})` }
+					: { backgroundImage: `url(https://image.tmdb.org/t/p/w500${poster_path}` };
 				return (
 					<Link to={{
 						pathname: "/details",
@@ -18,10 +21,7 @@ export const TileItem = ({ results }) => {
 					>
 						<div className="tile-item">
 							<div className="tile-item__pic">
-								<img
-									src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-									alt={`./images/alt.jpg`}
-								/>
+								<div style={poster}></div>
 							</div>
 							<div className="tile-item__discription">
 								<div className="tile-item__desc">

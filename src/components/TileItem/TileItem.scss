@@ -15,9 +15,10 @@
     cursor: pointer;
 
     &__pic {
-        >img {
+        >div {
             height: 21em;
             width: 15em;
+            background-size: cover;
         }
     }
 
