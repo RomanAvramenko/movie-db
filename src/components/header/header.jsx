@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-//import { Modal } from '../Modal/Modal'
+import { Modal } from '../Modal/Modal'
 import Widget from "../Widget/Widget"
 import { genres } from '../../genres'
 
@@ -14,7 +14,7 @@ export default class Header extends Component {
 
 	state = {
 		data: {},
-		currentMovieIndex: Math.floor(Math.random() * 20),
+		currentMovieIndex: 1,
 		trailerRes: [],
 		show: false
 	}
@@ -31,6 +31,8 @@ export default class Header extends Component {
 				this.setState({
 					data: this.transformData(result),
 				})
+				const idVideo = this.state.data.results[this.state.currentMovieIndex].id;
+				this.getVideo(idVideo);
 			})
 			.catch(e => { console.log(e.config) });
 	}
@@ -39,6 +41,18 @@ export default class Header extends Component {
 		return {
 			results: result.data.results
 		}
+	}
+
+	getVideo = async (id) => {
+		const urlVideo = `${this.BASE_URL}/${id}/videos?${this.API_KEY}`;
+		await axios
+			.get(urlVideo)
+			.then(result => {
+				this.setState({
+					trailerRes: result.data
+				})
+			})
+			.catch(e => { console.log(e.config) })
 	}
 
 	showModal = () => {
@@ -60,15 +74,15 @@ export default class Header extends Component {
 		const bgImage = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
 		return (
 			<React.Fragment>
-				{/* {this.state.show
+				{this.state.show
 					? <Modal
 						show={this.state.show}
 						handleClose={this.hideModal}
 						props={title}
-						trailerKey={this.state.trailerRes}
+						trailerKey={this.state.trailerRes.results[0].key}
 					></Modal>
 					: null
-				} */}
+				}
 				<header className="page__header" style={bgImage} >
 					<div className="header-content">
 						<h1 className="content__title">{title}</h1>
