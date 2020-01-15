@@ -64,9 +64,9 @@ export default class Header extends Component {
 	};
 
 	render() {
-		if (this.state.data.results === undefined) {
+		if (!this.state.data.results) {
 			return null
-		}
+    }
 		const {
 			backdrop_path, title, genre_ids,
 			vote_count, vote_average, id
@@ -99,7 +99,8 @@ export default class Header extends Component {
 								>WATCH TRAILER</button>
 								<button className="content__btn">
 									<Link to={{
-										pathname: "/details",
+                    pathname: "/details",
+                    search: `?id=${id}`,
 										state: { id }
 									}}>
 										VIEW INFO

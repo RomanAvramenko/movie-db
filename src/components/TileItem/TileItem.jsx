@@ -8,13 +8,14 @@ export const TileItem = ({ results }) => {
 	return (
 		<div className="tile">
 			{results.map(item => {
-				const { id, poster_path, title, genre_ids, vote_average } = item;
+				const { id, poster_path, title, genre_ids, vote_average, release_date } = item;
 				let poster = poster_path === null
 					? { backgroundImage: `url(${placeholder})` }
 					: { backgroundImage: `url(https://image.tmdb.org/t/p/w500${poster_path}` };
 				return (
 					<Link to={{
-						pathname: "/details",
+            pathname: '/details',
+            search: `?id=${id}`,
 						state: { id }
 					}}
 						key={id}
@@ -30,6 +31,7 @@ export const TileItem = ({ results }) => {
 								</div>
 							</div>
 							<div className="tile-item__ratio"><i className="fas fa-star"></i>&nbsp;{vote_average}</div>
+							<div className="tile-item__year">{release_date.slice(0, 4)}</div>
 						</div>
 					</Link>
 				)

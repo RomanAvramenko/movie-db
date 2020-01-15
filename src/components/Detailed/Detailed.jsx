@@ -57,16 +57,35 @@ export default class Detailed extends React.Component {
         genres, production_companies, vote_average,
         backdrop_path, production_countries, release_date
       } = this.state.response;
+
       const { crew, cast } = this.state.creditsResp
+
       const director = crew.find(i => i.job === "Director") === undefined
         ? ''
         : crew.find(i => i.job === "Director").name
+
       const poster = poster_path === null
         ? { backgroundImage: `url(${placeholder})` }
-        : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` }
+        : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path})` }
+
       const backdrop = backdrop_path === null
         ? { backgroundColor: 'rgba(0, 0, 0, 0.4)' }
-        : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
+        : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path})` }
+
+      const actors = cast.slice(0, 8).map((actor) => {
+        const picUrl = actor.profile_path === null
+          ? { backgroundImage: `url(${placeholder})` }
+          : { backgroundImage: `url(https://image.tmdb.org/t/p/w500${actor.profile_path})` };
+        return (
+          <li key={actor.id}>
+            <figure className="cast__figure">
+              <div className="cast__img" style={picUrl}></div>
+              <figcaption className="cast__description">{actor.name}</figcaption>
+            </figure>
+          </li>
+        )
+      })
+
       return (
         <section className='detail' style={backdrop}>
           {this.state.show
@@ -88,65 +107,37 @@ export default class Detailed extends React.Component {
             <div className='description'>
               <ul>
                 <li>
-                  <p>
-                    <strong>Plot Summary: </strong>
-                    {overview}
-                  </p>
+                  <strong>Plot Summary: </strong>
+                  {overview}
                 </li>
                 <li>
-                  <p>
-                    <strong>Duration: </strong>
-                    {Math.floor(runtime / 60)} hours {runtime % 60} minutes
-                  </p>
+                  <strong>Duration: </strong>
+                  {Math.floor(runtime / 60)} hours {runtime % 60} minutes
                 </li>
                 <li>
-                  <p>
-                    <strong>Year: </strong>
-                    {release_date.slice(0, 4)}
-                  </p>
+                  <strong>Year: </strong>
+                  {release_date.slice(0, 4)}
                 </li>
                 <li>
-                  <p>
-                    <strong>Genres: </strong>
-                    {genres.map(i => i.name).join(' ')}
-                  </p>
+                  <strong>Genres: </strong>
+                  {genres.map(i => i.name).join(' ')}
                 </li>
                 <li>
-                  <span>
-                    <strong>Production Co: </strong>
-                    <ul>
-                      {production_companies.slice(0, 4).map(i => <li key={i.id}>{i.name}</li>)}
-                    </ul>
-                  </span>
+                  <strong>Production Co: </strong>
+                    {production_companies.slice(0, 4).map(i => i.name).join(', ')}
                 </li>
                 <li>
-                  <span>
-                    <strong>Production Country:</strong>
-                    <ul>
-                      {production_countries.map((i, index) => <li key={index}>{i.name}</li>)}
-                    </ul>
-                  </span>
+                  <strong>Production Country:</strong>
+                    {production_countries.map(i => i.name).join(', ')}
                 </li>
                 <li>
-                  <span>
-                    <strong>Directed by: </strong>
-                    {director}
-                  </span>
+                  <strong>Directed by: </strong>
+                  {director}
                 </li>
                 <li>
                   <strong>Cast:</strong>
                   <ul className="cast">
-                    {cast.slice(0, 8).map((actor) => {
-                      const picUrl = actor.profile_path === null ? placeholder : `https://image.tmdb.org/t/p/w500${actor.profile_path}`;
-                      return (
-                        <li key={actor.id}>
-                          <figure className="cast__figure">
-                            <img src={picUrl} alt={actor.name} className="cast__img" />
-                            <figcaption className="cast__description">{actor.name}</figcaption>
-                          </figure>
-                        </li>
-                      )
-                    })}
+                    {actors}
                   </ul>
                 </li>
               </ul>
@@ -162,3 +153,25 @@ export default class Detailed extends React.Component {
     }
   }
 }
+/*
+<span
+class="imdbRatingPlugin"
+data-user="ur111640590"
+data-title="tt2527338"
+data-style="p1">
+  <a href="https://www.imdb.com/title/tt2527338/?ref_=plg_rt_1">
+    <img src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png"
+    alt=" Star Wars: The Rise Of Skywalker
+(2019) on IMDb" />
+  </a>
+</span>
+(function(d,s,id){
+  let js,stags=d.getElementsByTagName(s)[0];
+  if(d.getElementById(id)){
+    return;
+  }
+  js = d.createElement(s);
+    js.id=id;
+    js.src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/js/rating.js";
+    stags.parentNode.insertBefore(js,stags);
+  })(document,"script","imdb-rating-api"); */

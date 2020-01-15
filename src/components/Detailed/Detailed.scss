@@ -12,7 +12,7 @@
         top: 80px;
         max-width: 1200px;
         width: 100%;
-        margin: 3em auto;
+        margin: 2em auto;
         color: #ffffff;
         z-index: 0;
         display: grid;
@@ -106,6 +106,7 @@
 
     &__img {
         height: 7em;
+        background-size: cover;
     }
 
     &__description {

@@ -19,6 +19,7 @@ export const SearchList = (props) => {
           return (
             <Link to={{
               pathname: "/details",
+              search: `?id=${id}`,
               state: { id }
             }}
               key={id}

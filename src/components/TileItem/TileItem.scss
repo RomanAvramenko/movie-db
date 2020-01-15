@@ -19,6 +19,7 @@
             height: 21em;
             width: 15em;
             background-size: cover;
+            border-radius: .5em
         }
     }
 
@@ -48,6 +49,23 @@
     &__ratio {
         position: absolute;
         left: 0;
+        top: 0;
+        display: flex;
+        width: 3.5em;
+        height: 2em;
+        background-color: #F8F8F8;
+        border: 1px solid #ff0079;
+        border-radius: 3px;
+        color: #ff0079;
+        font-size: 14px;
+        font-weight: 600;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__year {
+        position: absolute;
+        right: 0;
         top: 0;
         display: flex;
         width: 3.5em;

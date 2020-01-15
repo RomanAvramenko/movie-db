@@ -28,6 +28,13 @@
     &__title {
         padding: 20px 0;
     }
+
+    &__btn {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 1em;
+        height: 45px;
+    }
 }
 
 .content__title {
@@ -47,13 +54,6 @@
 
 .content__desc_genre {
     word-spacing: 1em;
-}
-
-.header-content__btn {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 1em;
-    height: 45px;
 }
 
 .content__btn {
@@ -78,6 +78,7 @@
         box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
         background-color: rgba(0, 0, 0, 0.5);
     }
+
     & a {
         color: #ffffff;
         text-decoration: none;
