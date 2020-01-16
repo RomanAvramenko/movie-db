@@ -5,12 +5,14 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 2em;
 }
 
 
 .tile-item {
     position: relative;
     justify-self: center;
+    margin: 0 auto;
     width: 15em;
     cursor: pointer;
 
@@ -98,10 +100,13 @@
         width: 10em;
 
         &__pic {
-            >img {
-                height: 15em;
+            >div {
+                height: 16em;
                 width: 10em;
             }
+        }
+        &__desc {
+            font-size: .8em;
         }
     }
 }

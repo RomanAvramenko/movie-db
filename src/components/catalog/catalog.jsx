@@ -16,19 +16,9 @@ export default class Catalog extends React.Component {
     hasMore: true
   }
 
-  componentDidMount() {
-    this.request();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.searchVars !== prevState.searchVars) {
-      this.request();
-    }
-  }
-
   request = (page) => {
     const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-    const BASE_URL = 'https://api.themoviedb.org/3/movie';
+    const BASE_URL = 'http://api.themoviedb.org/3/movie';
     const url = `${BASE_URL}${this.state.searchVars}?${API_KEY}&language=en-US&page=${page}`;
     axios
       .get(url)
@@ -48,7 +38,8 @@ export default class Catalog extends React.Component {
   changeSearchHandler = (newSearch) => {
     this.setState({
       response: [],
-      searchVars: newSearch
+      searchVars: newSearch,
+      currentPage: 0
     })
   }
 
@@ -64,7 +55,7 @@ export default class Catalog extends React.Component {
             <Tab onClick={this.changeSearchHandler.bind(this, '/upcoming')}>New Arrivals</Tab>
           </TabList>
           <InfiniteScroll
-            pageStart={1}
+            pageStart={this.state.currentPage}
             loadMore={this.request}
             hasMore={this.state.hasMore}
             loader={loader}

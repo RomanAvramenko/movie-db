@@ -9,110 +9,106 @@ import "./Header.scss";
 
 export default class Header extends Component {
 
-	API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-	BASE_URL = 'https://api.themoviedb.org/3/movie';
+  API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
+  BASE_URL = 'https://api.themoviedb.org/3/movie';
 
-	state = {
-		data: {},
-		currentMovieIndex: 1,
-		trailerRes: [],
-		show: false
-	}
+  state = {
+    data: {},
+    currentMovieIndex: 1,
+    trailerRes: [],
+    show: false
+  }
 
-	componentDidMount() {
-		this.getData()
-	}
+  componentDidMount() {
+    this.getData()
+  }
 
-	getData = async () => {
-		const url = `${this.BASE_URL}/popular?${this.API_KEY}&language=en-US&page=1`;
-		await axios
-			.get(url)
-			.then(result => {
-				this.setState({
-					data: this.transformData(result),
-				})
-				const idVideo = this.state.data.results[this.state.currentMovieIndex].id;
-				this.getVideo(idVideo);
-			})
-			.catch(e => { console.log(e.config) });
-	}
+  getData = async () => {
+    const url = `${this.BASE_URL}/popular?${this.API_KEY}&language=en-US&page=1`;
+    await axios
+      .get(url)
+      .then(result => {
+        this.setState({
+          data: this.transformData(result),
+        })
+        const idVideo = this.state.data.results[this.state.currentMovieIndex].id;
+        this.getVideo(idVideo);
+      })
+      .catch(e => { console.log(e.config) });
+  }
 
-	transformData = (result) => {
-		return {
-			results: result.data.results
-		}
-	}
-
-	getVideo = async (id) => {
-		const urlVideo = `${this.BASE_URL}/${id}/videos?${this.API_KEY}`;
-		await axios
-			.get(urlVideo)
-			.then(result => {
-				this.setState({
-					trailerRes: result.data
-				})
-			})
-			.catch(e => { console.log(e.config) })
-	}
-
-	showModal = () => {
-		this.setState({ show: true });
-	};
-
-	hideModal = () => {
-		this.setState({ show: false });
-	};
-
-	render() {
-		if (!this.state.data.results) {
-			return null
+  transformData = (result) => {
+    return {
+      results: result.data.results
     }
-		const {
-			backdrop_path, title, genre_ids,
-			vote_count, vote_average, id
-		} = this.state.data.results[this.state.currentMovieIndex];
-		const bgImage = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
-		return (
-			<React.Fragment>
-				{this.state.show
-					? <Modal
-						show={this.state.show}
-						handleClose={this.hideModal}
-						props={title}
-						trailerKey={this.state.trailerRes.results[0].key}
-					></Modal>
-					: null
-				}
-				<header className="page__header" style={bgImage} >
-					<div className="header-content">
-						<h1 className="content__title">{title}</h1>
-						<div className="header-content__main">
-							<div className="header-content__title">
-								<div className="content__desc">
-									<div className="content__desc_genre">{genre_ids.map(i => genres[i]).join(' ')}</div>
-								</div>
-							</div>
-							<div className="header-content__btn">
-								<button
-									className="content__btn content__btn_color"
-									onClick={this.showModal}
-								>WATCH TRAILER</button>
-								<button className="content__btn">
-									<Link to={{
-                    pathname: "/details",
-                    search: `?id=${id}`,
-										state: { id }
-									}}>
-										VIEW INFO
+  }
+
+  getVideo = async (id) => {
+    const urlVideo = `${this.BASE_URL}/${id}/videos?${this.API_KEY}`;
+    await axios
+      .get(urlVideo)
+      .then(result => {
+        this.setState({
+          trailerRes: result.data
+        })
+      })
+      .catch(e => { console.log(e.config) })
+  }
+
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+
+  render() {
+    if (!this.state.data.results) {
+      return null
+    }
+    const {
+      backdrop_path, title, genre_ids,
+      vote_count, vote_average, id
+    } = this.state.data.results[this.state.currentMovieIndex];
+    const bgImage = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
+    return (
+      <React.Fragment>
+        {this.state.show
+          ? <Modal
+            show={this.state.show}
+            handleClose={this.hideModal}
+            props={title}
+            trailerKey={this.state.trailerRes.results[0].key}
+          ></Modal>
+          : null
+        }
+        <header className="page__header" style={bgImage} >
+          <div className="header-content">
+            <h1 className="content__title">{title}</h1>
+            <div className="header-content__main">
+              <div className="header-content__title">
+                <div className="content__desc">
+                  <div className="content__desc_genre">{genre_ids.map(i => genres[i]).join(' ')}</div>
+                </div>
+              </div>
+              <div className="header-content__btn">
+                <button
+                  className="content__btn content__btn_color"
+                  onClick={this.showModal}
+                >WATCH TRAILER</button>
+                <button className="content__btn">
+                  <Link to={`/details?id=${id}`}>
+                    VIEW INFO
                   </Link>
-								</button>
-								<button className="content__btn content__btn_unborder">+ ADD TO WISHLIST</button>
-							</div>
-						</div>
-						<Widget ratio={vote_average} votes={vote_count} />
-					</div>
-				</header >
-			</React.Fragment >
-		)
-	}
+                </button>
+                <button className="content__btn content__btn_unborder">+ ADD TO WISHLIST</button>
+              </div>
+            </div>
+            <Widget ratio={vote_average} votes={vote_count} />
+          </div>
+        </header >
+      </React.Fragment >
+    )
+  }
 }

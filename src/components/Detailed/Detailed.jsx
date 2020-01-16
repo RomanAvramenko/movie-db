@@ -17,7 +17,7 @@ export default class Detailed extends React.Component {
   }
 
   getData = async () => {
-    const { id } = this.props.id.location.state
+    const id = this.props.id.location.search.slice(4)
     const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     const BASE_URL = 'https://api.themoviedb.org/3/movie';
     const url = `${BASE_URL}/${id}?${API_KEY}&language=en-US&page=1`;

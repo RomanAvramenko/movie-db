@@ -17,11 +17,7 @@ export const SearchList = (props) => {
             ? { backgroundImage: `url(${placeholder})` }
             : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` };
           return (
-            <Link to={{
-              pathname: "/details",
-              search: `?id=${id}`,
-              state: { id }
-            }}
+            <Link to={`/details?id=${id}`}
               key={id}
             >
               <div className="search__item">
@@ -35,22 +31,16 @@ export const SearchList = (props) => {
                 <div className="search__description">
                   <ul>
                     <li>
-                      <p>
-                        <strong>Plot Summary: </strong>
-                        {overview}
-                      </p>
+                      <strong>Plot Summary: </strong>
+                      {overview}
                     </li>
                     <li>
-                      <p>
-                        <strong>Year: </strong>
-                        {release_date.slice(0, 4)}
-                      </p>
+                      <strong>Year: </strong>
+                      {release_date.slice(0, 4)}
                     </li>
                     <li>
-                      <p>
-                        <strong>Genres: </strong>
-                        {genre_ids.map(i => genres[i]).join(' ')}
-                      </p>
+                      <strong>Genres: </strong>
+                      {genre_ids.map(i => genres[i]).join(' ')}
                     </li>
                   </ul>
                 </div>

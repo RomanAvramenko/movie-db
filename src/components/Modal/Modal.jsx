@@ -5,8 +5,6 @@ import './Modal.scss'
 export const Modal = ({ show, handleClose, trailerKey }) => {
     const showHideClassName = show ? "modal display-block" : "display-none";
     const opts = {
-        height: '500',
-        width: '800',
         playerVars: {
             autoplay: 1,
             origin:"http://http://localhost:3000/"
