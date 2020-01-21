@@ -11,7 +11,7 @@ export default class Catalog extends React.Component {
   state = {
     response: [],
     searchVars: '/popular',
-    currentPage: 0,
+    currentPage: 1,
     totalPages: null,
     hasMore: true
   }
@@ -19,7 +19,7 @@ export default class Catalog extends React.Component {
   request = (page) => {
     const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     const BASE_URL = 'http://api.themoviedb.org/3/movie';
-    const url = `${BASE_URL}${this.state.searchVars}?${API_KEY}&language=en-US&page=${page}`;
+    const url = `${BASE_URL}${this.state.searchVars}?${API_KEY}&language=en-US&page=${this.state.currentPage}`;
     axios
       .get(url)
       .then(result => {
@@ -31,6 +31,7 @@ export default class Catalog extends React.Component {
           currentPage: page,
           totalPages: result.data.total_pages
         })
+        console.log(this.state);
       })
       .catch(e => { console.log(e.config); });
   }
@@ -39,7 +40,7 @@ export default class Catalog extends React.Component {
     this.setState({
       response: [],
       searchVars: newSearch,
-      currentPage: 0
+      currentPage: 1
     })
   }
 
@@ -53,6 +54,7 @@ export default class Catalog extends React.Component {
             <Tab onClick={this.changeSearchHandler.bind(this, '/popular')}>Poular</Tab>
             <Tab onClick={this.changeSearchHandler.bind(this, '/top_rated')}>Top Rated</Tab>
             <Tab onClick={this.changeSearchHandler.bind(this, '/upcoming')}>New Arrivals</Tab>
+            <Tab onClick={this.changeSearchHandler.bind(this, '/now_playing')}>Now In Cinema</Tab>
           </TabList>
           <InfiniteScroll
             pageStart={this.state.currentPage}
@@ -60,6 +62,9 @@ export default class Catalog extends React.Component {
             hasMore={this.state.hasMore}
             loader={loader}
           >
+            <TabPanel>
+              {result}
+            </TabPanel>
             <TabPanel>
               {result}
             </TabPanel>

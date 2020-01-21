@@ -36,6 +36,7 @@ export default class Detailed extends React.Component {
             creditsResp: responseCast.data,
             trailerResp: resVideo.data
           })
+          console.log(this.state);
         })
       )
       .catch(e => { console.log(e.config) });
@@ -55,7 +56,7 @@ export default class Detailed extends React.Component {
     } else {
       const { title, overview, poster_path, runtime,
         genres, production_companies, vote_average,
-        backdrop_path, production_countries, release_date
+        backdrop_path, production_countries, release_date, imdb_id
       } = this.state.response;
 
       const { crew, cast } = this.state.creditsResp
@@ -124,11 +125,11 @@ export default class Detailed extends React.Component {
                 </li>
                 <li>
                   <strong>Production Co: </strong>
-                    {production_companies.slice(0, 4).map(i => i.name).join(', ')}
+                  {production_companies.slice(0, 4).map(i => i.name).join(', ')}
                 </li>
                 <li>
                   <strong>Production Country:</strong>
-                    {production_countries.map(i => i.name).join(', ')}
+                  {production_countries.map(i => i.name).join(', ')}
                 </li>
                 <li>
                   <strong>Directed by: </strong>
@@ -141,6 +142,17 @@ export default class Detailed extends React.Component {
                   </ul>
                 </li>
               </ul>
+              <span
+                className="imdbRatingPlugin"
+                data-user="ur111640590"
+                data-title="tt2527338"
+                data-style="p1">
+                <a href={`https://www.imdb.com/title/${imdb_id}/?ref_=plg_rt_1`}>
+                  <img
+                    src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png"
+                    alt="" />
+                </a>
+              </span>
               {
                 this.state.trailerResp.results.length === 0
                   ? null
@@ -153,25 +165,3 @@ export default class Detailed extends React.Component {
     }
   }
 }
-/*
-<span
-class="imdbRatingPlugin"
-data-user="ur111640590"
-data-title="tt2527338"
-data-style="p1">
-  <a href="https://www.imdb.com/title/tt2527338/?ref_=plg_rt_1">
-    <img src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png"
-    alt=" Star Wars: The Rise Of Skywalker
-(2019) on IMDb" />
-  </a>
-</span>
-(function(d,s,id){
-  let js,stags=d.getElementsByTagName(s)[0];
-  if(d.getElementById(id)){
-    return;
-  }
-  js = d.createElement(s);
-    js.id=id;
-    js.src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/js/rating.js";
-    stags.parentNode.insertBefore(js,stags);
-  })(document,"script","imdb-rating-api"); */
