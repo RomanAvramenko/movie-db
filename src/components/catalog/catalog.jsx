@@ -6,6 +6,7 @@ import { TileItem } from '../TileItem/TileItem';
 import InfiniteScroll from 'react-infinite-scroller';
 import './Catalog.scss';
 import '../styles/reactTabs.scss';
+import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
 
 export default class Catalog extends React.Component {
   state = {
@@ -31,7 +32,6 @@ export default class Catalog extends React.Component {
           currentPage: page,
           totalPages: result.data.total_pages
         })
-        console.log(this.state);
       })
       .catch(e => { console.log(e.config); });
   }
@@ -49,6 +49,7 @@ export default class Catalog extends React.Component {
     const result = this.state.response ? <TileItem results={this.state.response} /> : loader;
     return (
       <section className="catalog">
+        <ScrollToTop />
         <Tabs>
           <TabList>
             <Tab onClick={this.changeSearchHandler.bind(this, '/popular')}>Poular</Tab>

@@ -3,10 +3,12 @@ import { genres } from '../../genres'
 import './SearchList.scss'
 import placeholder from '../../assets/images/placeholder.jpg'
 import { Link } from 'react-router-dom'
+import {ScrollToTop} from '../ScrollToTop/ScrollToTop'
 
 export const SearchList = (props) => {
   return (
     <div className="search" >
+      <ScrollToTop/>
       <div className="search__wrapper">
         {props.results.map(item => {
           const { title, overview, poster_path,

@@ -36,7 +36,6 @@ export default class Detailed extends React.Component {
             creditsResp: responseCast.data,
             trailerResp: resVideo.data
           })
-          console.log(this.state);
         })
       )
       .catch(e => { console.log(e.config) });
@@ -142,11 +141,7 @@ export default class Detailed extends React.Component {
                   </ul>
                 </li>
               </ul>
-              <span
-                className="imdbRatingPlugin"
-                data-user="ur111640590"
-                data-title="tt2527338"
-                data-style="p1">
+              <span className="imdbRatingPlugin">
                 <a href={`https://www.imdb.com/title/${imdb_id}/?ref_=plg_rt_1`}>
                   <img
                     src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png"

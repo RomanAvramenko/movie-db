@@ -1,0 +1,24 @@
+.scroll-to-top {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    width: 3em;
+    height: 3em;
+    background-color: #ff0079;
+    border: 2px solid #ffffff;
+    border-radius: 0.3em;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: all .5s ease;
+    z-index: 1000;
+
+    &:hover {
+        border-color: #ffffff;
+        cursor: pointer;
+        box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    & .fa-angle-up {
+        color: #ffffff;
+    }
+}
