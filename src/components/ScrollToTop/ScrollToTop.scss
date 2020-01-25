@@ -1,5 +1,6 @@
 .scroll-to-top {
     position: fixed;
+    opacity: 0;
     bottom: 1em;
     right: 1em;
     width: 3em;
@@ -8,6 +9,7 @@
     border: 2px solid #ffffff;
     border-radius: 0.3em;
     border: 2px solid rgba(0, 0, 0, 0);
+    transition: opacity 1s ease;
     transition: all .5s ease;
     z-index: 1000;
 

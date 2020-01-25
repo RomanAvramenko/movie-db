@@ -5,9 +5,10 @@ export const ScrollToTop = () => {
   const trackScrolling = (e) => {
     const { innerHeight, scrollY } = e.path[1]
     if (scrollY >= innerHeight) {
-      document.querySelector('.scroll-to-top').style.display = 'block'
+      document.querySelector('.scroll-to-top').style.opacity = 1
     } else {
-      document.querySelector('.scroll-to-top').style.display = 'none' }
+      document.querySelector('.scroll-to-top').style.opacity = 0
+    }
   }
   useEffect(() => {
     document.addEventListener('scroll', trackScrolling);
@@ -21,6 +22,8 @@ export const ScrollToTop = () => {
   return (
     <button
       className="scroll-to-top"
-      onClick={handleScroll}
-    ><i className="fas fa-angle-up"></i></button>)
+      onClick={handleScroll}>
+      <i className="fas fa-angle-up"></i>
+    </button>
+  )
 }

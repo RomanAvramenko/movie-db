@@ -2,7 +2,7 @@
     position: relative;
     margin: 0 auto;
     width: 100%;
-    background: rgba(50, 50, 50, .4);
+    background: rgba(50, 50, 50, .2);
     display: flex;
 
     &__wrapper {
@@ -29,13 +29,13 @@
     &__title {
         grid-area: title;
         margin: 0.5rem;
-        color: #ffffff;
+        color: #494c62;
     }
 
     &__rating {
         grid-area: rating;
         place-self: center;
-        color: #ffffff;
+        color: #494c62;
 
         &-big {
             font-size: 1.5em;
@@ -54,7 +54,7 @@
     &__description {
         grid-area: description;
         margin: 0.5rem;
-        color: #ffffff;
+        color: #494c62;
         line-height: 1.5;
     }
     .fa-star{
