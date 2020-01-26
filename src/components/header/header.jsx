@@ -104,7 +104,7 @@ export default class Header extends Component {
         <header className="hero__wrapper" style={bgImage} >
           <div className="hero__content">
             <h1 className="hero__content__title">{title}</h1>
-            <div className="hero__content__desc_genre">{genre_ids.map(i => genres[i]).join(' ')}</div>
+            <div className="hero__content__genres">{genre_ids.map(i => genres[i]).join(' ')}</div>
             <div className="hero__content__btns">
               <button
                 className="hero__content__btn hero__content__btn_color"

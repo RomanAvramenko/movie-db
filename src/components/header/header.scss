@@ -15,9 +15,9 @@
     &__content {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-areas: 
-        "title title genres genres"
-        "title title buttons buttons"
+        grid-template-areas:
+            "title title genres genres"
+            "title title buttons buttons"
         ;
         height: 10em;
         max-width: 1200px;
@@ -41,88 +41,96 @@
             height: 45px;
         }
 
-        &__desc {
+        &__genres {
             grid-area: genres;
             display: flex;
             flex-direction: row;
             color: #ffffff;
             font-size: 15px;
             padding: 10px 0;
+            color: #ffffff;
+            word-spacing: 1em;
+        }
 
-            &_genre {
+        &__btn {
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            background-color: transparent;
+            border-radius: 0.3em;
+            border: 2px solid rgba(0, 0, 0, 0);
+            transition: all .5s ease;
+
+            &_color {
+                background-color: #ff0079;
+            }
+
+            &_unborder {
+                border-color: transparent;
+            }
+
+            &:hover {
+                border-color: #ffffff;
+                cursor: pointer;
+                box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+
+            & a {
                 color: #ffffff;
-                word-spacing: 1em;
+                text-decoration: none;
             }
         }
     }
 }
 
 
-.hero__content__btn {
-    border: 2px solid #ffffff;
-    color: #ffffff;
-    background-color: transparent;
-    border-radius: 0.3em;
-    border: 2px solid rgba(0, 0, 0, 0);
-    transition: all .5s ease;
-
-    &_color {
-        background-color: #ff0079;
-    }
-
-    &_unborder {
-        border-color: transparent;
-    }
-
-    &:hover {
-        border-color: #ffffff;
-        cursor: pointer;
-        box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
-        background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    & a {
-        color: #ffffff;
-        text-decoration: none;
-    }
-}
 
 
-/* 
+
+
 @media (max-width: 769px) {
     .page__header {
         background-position: 50% 50%;
     }
 
-    .header-content {
-        display: flex;
-        flex-direction: column;
+    .hero__content {
+        display: grid;
+        height: 15em;
+        grid-template-columns: 1fr;
+        grid-template-rows: 8em 2em 4em;
+        grid-template-areas:
+            "title"
+            "genres"
+            "buttons"
+        ;
 
         &__title {
+            grid-area: title;
             padding: 0;
-            margin: auto;
+        }
+
+        &__btns {
+            grid-area: buttons;
+            margin: 0 auto;
+        }
+
+        &__genres {
+            grid-area: genres;
+            justify-self: center;
+            padding: 0;
         }
 
         &__btn {
-            margin: 0 auto;
+            padding: 0;
+            font-size: 0.8em;
+
+            &_color {
+                padding: 0.5em;
+            }
+
+            &_bordered {
+                padding: 0.5em;
+            }
         }
     }
-
-    .content__desc {
-        margin: 1em;
-        padding: 0;
-    }
-
-    .content__btn {
-        padding: 0;
-        font-size: 0.8em;
-
-        &_color {
-            padding: 0.5em;
-        }
-
-        &_bordered {
-            padding: 0.5em;
-        }
-    }
-} */
+}
