@@ -17,11 +17,11 @@ export default class Catalog extends React.Component {
     hasMore: true
   }
 
-  request = (page) => {
+  request = async (page) => {
     const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     const BASE_URL = 'http://api.themoviedb.org/3/movie';
     const url = `${BASE_URL}${this.state.searchVars}?${API_KEY}&language=en-US&page=${this.state.currentPage}`;
-    axios
+    await axios
       .get(url)
       .then(result => {
         if (this.state.currentPage === this.state.totalPages - 1) {
@@ -37,6 +37,7 @@ export default class Catalog extends React.Component {
   }
 
   changeSearchHandler = (newSearch) => {
+    window.scrollTo(0, 0)
     this.setState({
       response: [],
       searchVars: newSearch,

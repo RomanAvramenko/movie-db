@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Modal } from '../Modal/Modal'
-import Widget from "../Widget/Widget"
 import { genres } from '../../genres'
 
 import "./Header.scss";
@@ -21,6 +20,26 @@ export default class Header extends Component {
 
   componentDidMount() {
     this.getData()
+    this.intervalId = setInterval(this.timer, 7000);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.currentMovieIndex !== this.state.currentMovieIndex) {
+      this.getData()
+    }
+    if (this.state.show === true) {
+      clearInterval(this.intervalId);
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
+  timer = () => {
+    this.setState({
+      currentMovieIndex: Math.floor(Math.random() * 10)
+    })
   }
 
   getData = async () => {
@@ -29,7 +48,7 @@ export default class Header extends Component {
       .get(url)
       .then(result => {
         this.setState({
-          data: this.transformData(result),
+          data: this.transformData(result)
         })
         const idVideo = this.state.data.results[this.state.currentMovieIndex].id;
         this.getVideo(idVideo);
@@ -105,7 +124,12 @@ export default class Header extends Component {
                 <button className="content__btn content__btn_unborder">+ ADD TO WISHLIST</button>
               </div>
             </div>
-            <Widget ratio={vote_average} votes={vote_count} />
+            <div className="hero__rating">
+                <p>Rating</p>
+                <p className="title">based on {vote_count} reviews</p>
+                <i className="fas fa-star"></i>
+                <div className="rating">{vote_average}</div>
+            </div>
           </div>
         </header >
       </React.Fragment >

@@ -15,14 +15,10 @@ export const ScrollToTop = () => {
     return (() => document.removeEventListener('scroll', trackScrolling))
   }, [])
 
-  const handleScroll = () => {
-    document.documentElement.scrollTop = 0;
-  }
-
   return (
     <button
       className="scroll-to-top"
-      onClick={handleScroll}>
+      onClick={()=>window.scrollTo(0, 0)}>
       <i className="fas fa-angle-up"></i>
     </button>
   )
