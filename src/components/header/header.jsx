@@ -87,12 +87,11 @@ export default class Header extends Component {
       return null
     }
     const {
-      backdrop_path, title, genre_ids,
-      vote_count, vote_average, id
+      backdrop_path, title, genre_ids, id
     } = this.state.data.results[this.state.currentMovieIndex];
     const bgImage = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
     return (
-      <React.Fragment>
+      <>
         {this.state.show
           ? <Modal
             show={this.state.show}
@@ -102,37 +101,25 @@ export default class Header extends Component {
           ></Modal>
           : null
         }
-        <header className="page__header" style={bgImage} >
-          <div className="header-content">
-            <h1 className="content__title">{title}</h1>
-            <div className="header-content__main">
-              <div className="header-content__title">
-                <div className="content__desc">
-                  <div className="content__desc_genre">{genre_ids.map(i => genres[i]).join(' ')}</div>
-                </div>
-              </div>
-              <div className="header-content__btn">
-                <button
-                  className="content__btn content__btn_color"
-                  onClick={this.showModal}
-                >WATCH TRAILER</button>
-                <button className="content__btn">
-                  <Link to={`/details?id=${id}`}>
-                    VIEW INFO
+        <header className="hero__wrapper" style={bgImage} >
+          <div className="hero__content">
+            <h1 className="hero__content__title">{title}</h1>
+            <div className="hero__content__desc_genre">{genre_ids.map(i => genres[i]).join(' ')}</div>
+            <div className="hero__content__btns">
+              <button
+                className="hero__content__btn hero__content__btn_color"
+                onClick={this.showModal}
+              >WATCH TRAILER</button>
+              <button className="hero__content__btn">
+                <Link to={`/details?id=${id}`}>
+                  VIEW INFO
                   </Link>
-                </button>
-                <button className="content__btn content__btn_unborder">+ ADD TO WISHLIST</button>
-              </div>
-            </div>
-            <div className="hero__rating">
-                <p>Rating</p>
-                <p className="title">based on {vote_count} reviews</p>
-                <i className="fas fa-star"></i>
-                <div className="rating">{vote_average}</div>
+              </button>
+              <button className="hero__content__btn hero__content__btn_unborder">+ ADD TO WISHLIST</button>
             </div>
           </div>
         </header >
-      </React.Fragment >
+      </>
     )
   }
 }

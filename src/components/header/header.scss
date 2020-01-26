@@ -1,62 +1,64 @@
-.page__header {
-    position: relative;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 0;
-    margin: 0 auto;
-    width: 100%;
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.header-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    padding-bottom: 3em;
-
-    &__main {
+.hero {
+    &__wrapper {
+        position: relative;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        margin: 0 auto;
+        width: 100%;
+        height: 90vh;
         display: flex;
         flex-direction: column;
+        justify-content: flex-end;
     }
 
-    &__title {
-        padding: 20px 0;
-    }
-
-    &__btn {
+    &__content {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-column-gap: 1em;
-        height: 45px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+        "title title genres genres"
+        "title title buttons buttons"
+        ;
+        height: 10em;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        padding-bottom: 3em;
+
+        &__title {
+            grid-area: title;
+            color: #ffffff;
+            font-size: 45px;
+            font-weight: lighter;
+            text-align: center;
+        }
+
+        &__btns {
+            grid-area: buttons;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-column-gap: 1em;
+            height: 45px;
+        }
+
+        &__desc {
+            grid-area: genres;
+            display: flex;
+            flex-direction: row;
+            color: #ffffff;
+            font-size: 15px;
+            padding: 10px 0;
+
+            &_genre {
+                color: #ffffff;
+                word-spacing: 1em;
+            }
+        }
     }
 }
 
-.content__title {
-    color: #ffffff;
-    font-size: 45px;
-    font-weight: lighter;
-    text-align: center;
-}
 
-.content__desc {
-    display: flex;
-    flex-direction: row;
-    color: #ffffff;
-    font-size: 15px;
-    padding: 10px 0;
-}
-
-.content__desc_genre {
-    word-spacing: 1em;
-}
-
-.content__btn {
+.hero__content__btn {
     border: 2px solid #ffffff;
     color: #ffffff;
     background-color: transparent;
@@ -85,6 +87,8 @@
     }
 }
 
+
+/* 
 @media (max-width: 769px) {
     .page__header {
         background-position: 50% 50%;
@@ -121,4 +125,4 @@
             padding: 0.5em;
         }
     }
-}
+} */
