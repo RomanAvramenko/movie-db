@@ -148,20 +148,21 @@
 @media (max-width: 769px) {
     .nav__menu {
         position: absolute;
+        top: 2em;
+        right: 2em;
         display: block;
         height: 11em;
         width: 15em;
         border-radius: 0.5em;
-        background: inherit;
         list-style-type: none;
-        transform-origin: 0% 0%;
-        transform: translate(200%, 0);
-        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 
         &.checked {
-            transform: translate(-100%, 0);
             background-color: rgba(0, 0, 0, 0.5);
-
+            opacity: 1;
+            visibility: visible;
         }
 
         &__item {

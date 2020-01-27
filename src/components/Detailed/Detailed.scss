@@ -1,11 +1,13 @@
-.detail {
-    position: relative;
-    margin: auto;
-    width: 100%;
-    height: 90vh;
-    background-size: cover;
+    .detail {
+      position: relative;
+      margin: auto;
+      min-height: 100%;
+      margin-bottom: 50px;
+      width: 100%;
+      height: 90vh;
+      background-size: cover;
 
-    &__wrapper {
+      &__wrapper {
         position: absolute;
         left: 0;
         right: 0;
@@ -21,95 +23,129 @@
         grid-template-columns: 1fr 2fr 0.5fr;
         grid-template-rows: 4em 3fr;
         grid-template-areas:
-            "title title rating"
-            "poster description description"
+          "title title rating"
+          "poster description description"
         ;
 
         &__title {
-            grid-area: title;
-            align-self: center;
-            justify-self: center;
-            font-size: 3em;
-            text-transform: uppercase;
-            font-weight: 300;
+          grid-area: title;
+          align-self: center;
+          justify-self: center;
+          font-size: 3em;
+          text-transform: uppercase;
+          font-weight: 300;
         }
 
         &__rating {
-            grid-area: rating;
-            align-self: center;
-            justify-self: center;
+          grid-area: rating;
+          align-self: center;
+          justify-self: center;
 
-            &-big {
-                font-size: 2em;
-            }
+          &-big {
+            font-size: 2em;
+          }
 
-            .fas {
-                color: #ff0079;
-                font-size: 1.8em;
-            }
+          .fas {
+            color: #ff0079;
+            font-size: 1.8em;
+          }
         }
 
         & .poster {
-            grid-area: poster;
-            margin: 1em;
-            height: 36em;
-            width: 24em;
-            background-size: cover;
-            border-radius: 0.3em;
-
+          grid-area: poster;
+          margin: 1em;
+          height: 36em;
+          width: 24em;
+          background-size: cover;
+          border-radius: 0.3em;
         }
 
         & .description {
-            grid-area: description;
-            margin: 1em;
-            line-height: 1.3;
-            word-spacing: 3px;
+          grid-area: description;
+          margin: 1em;
+          line-height: 1.3;
+          word-spacing: 3px;
+          display: grid;
+          grid-template-rows: 1fr 4em;
+
+          &__btn {
             display: grid;
-            grid-template-rows: 1fr 4em;
+            justify-self: flex-end;
+            align-self: flex-end;
+            background-color: #ff0079;
+            padding: 0.6em;
+            color: #ffffff;
+            border-radius: 0.3em;
+            border: 2px solid rgba(0, 0, 0, 0);
+            transition: all .5s ease;
+            text-transform: uppercase;
 
-            &__btn {
-                display: grid;
-                justify-self: flex-end;
-                align-self: flex-end;
-                background-color: #ff0079;
-                padding: 0.6em;
-                color: #ffffff;
-                border-radius: 0.3em;
-                border: 2px solid rgba(0, 0, 0, 0);
-                transition: all .5s ease;
-                text-transform: uppercase;
-
-                &:hover {
-                    border: 2px solid #ffffff;
-                    cursor: pointer;
-                    box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
-                    background-color: rgba(0, 0, 0, 0.5);
-                }
+            &:hover {
+              border: 2px solid #ffffff;
+              cursor: pointer;
+              box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
+              background-color: rgba(0, 0, 0, 0.5);
             }
+          }
+
+          .cast {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+
+            &__figure {
+              margin: 0;
+              width: 5em;
+              margin-right: 1em;
+            }
+
+            &__img {
+              height: 7.5em;
+              background-size: cover;
+            }
+
+            &__description {
+              font-size: .8em;
+            }
+          }
         }
 
         & .description>ul>li {
-            margin-bottom: 1em;
+          margin-bottom: 1em;
         }
-    }
-}
-
-.cast {
-    display: flex;
-    justify-content: flex-start;
-
-    &__figure {
-        margin: 0;
-        width: 5em;
-        margin-right: 1em;
+      }
     }
 
-    &__img {
-        height: 7.5em;
-        background-size: cover;
-    }
+    @media (max-width: 769px) {
+      .detail {
+        height: 100vh;
 
-    &__description {
-        font-size: .8em;
+        &__wrapper {
+          grid-template-columns: 1fr 0.5fr;
+          grid-template-rows: auto;
+          grid-template-areas:
+            "title"
+            "poster"
+            "description"
+          ;
+
+          &__title {
+            grid-area: title;
+          }
+
+          &__rating {
+            grid-area: rating;
+          }
+
+          & .poster {
+            grid-area: poster;
+            justify-self: center;
+          }
+
+          & .description {
+            grid-area: description;
+          }
+        }
+      }
+
     }
-}

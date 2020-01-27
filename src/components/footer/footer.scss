@@ -1,7 +1,5 @@
 .footer {
-    position: absolute;
-    left: 0;
-    right: 0;
+    height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -9,6 +7,7 @@
     width: 100%;
     max-width: 1200px;
     margin: 2em auto;
+    margin-bottom: -50px;
     padding: 0 20px;
 }
 
