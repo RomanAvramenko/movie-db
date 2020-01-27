@@ -105,8 +105,16 @@
                 width: 10em;
             }
         }
+
         &__desc {
             font-size: .8em;
+        }
+
+        &__retio {
+
+            & i.fas.fa-star {
+                color: #ff0079;
+            }
         }
     }
 }

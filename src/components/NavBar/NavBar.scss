@@ -1,17 +1,19 @@
-.menu-box {
-    position: absolute;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 1200px;
-    width: 100%;
-    padding-top: 2em;
-    margin: 0 auto;
-    z-index: 90;
+.menu {
+    &__wrapper {
+        position: absolute;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 1200px;
+        width: 100%;
+        padding-top: 2em;
+        margin: 0 auto;
+        z-index: 90;
+    }
 
-    .logo {
+    &__logo {
         font-size: 2em;
 
         a {
@@ -19,56 +21,104 @@
             color: #ffffff;
         }
     }
-}
 
-.menu-toggle {
-    color: #ffffff;
-    border: 0;
-    background-color: transparent;
-    font-size: 3em;
-    width: 1em;
-    height: 1em;
-    line-height: 0.4;
-    text-indent: 5em;
-    white-space: nowrap;
-    overflow: hidden;
-}
+    &__toggle {
 
-.menu-toggle::after {
-    position: absolute;
-    top: 0.9em;
-    display: block;
-    content: '\2261';
-    text-indent: 0;
-}
+        &>input {
+            display: none;
+        }
 
-.menu-dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    left: 0;
-    margin: 0;
-}
+    }
 
-.menu-dropdown.is-open .menu-dropdown {
-    display: block;
-}
-
-@media (min-width: 769px) {
-    .menu-toggle {
+    &__button {
         display: none;
     }
+}
 
-    .menu-dropdown {
-        display: block;
-        position: static;
+@media (max-width: 769px) {
+    .menu {
+        &__toggle {
+            position: absolute;
+            display: block;
+            top: 2em;
+            right: 2em;
+            z-index: 1;
+            user-select: none;
+        }
+
+        &__button {
+            display: block;
+            border: none;
+            background-color: inherit;
+            padding: 0;
+            width: 2.5em;
+            height: 2em;
+            cursor: pointer;
+            opacity: 1;
+            z-index: 9999;
+            outline: none;
+
+            & span {
+                display: block;
+                width: 2.5em;
+                height: 4px;
+                margin-bottom: 5px;
+                position: relative;
+                background: #ff0079;
+                border-radius: 3px;
+                z-index: 1000;
+                transform-origin: 4px 0px;
+                transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+                    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+                    opacity 0.55s ease;
+            }
+
+            & span:first-child {
+                transform-origin: 0% 0%;
+            }
+
+            & span:nth-last-child(2) {
+                transform-origin: 0% 100%;
+            }
+        }
+    }
+
+    button.menu__button.checked>span {
+        opacity: 1;
+        transform: rotate(45deg) translate(0, -1px);
+        background: #ff0079;
+    }
+
+    button.menu__button.checked>span:nth-last-child(2) {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+    }
+
+    button.menu__button.checked>span:nth-last-child(1) {
+        transform: rotate(-45deg) translate(-4px, -1px);
     }
 }
 
+
 .nav__menu {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        "search search login signin"
+    ;
+
+    &__search {
+        grid-area: search;
+        justify-self: self-end;
+    }
+
+    &__login {
+        grid-area: login;
+    }
+
+    &__signin {
+        grid-area: signin;
+    }
 
     &__item {
         display: flex;
@@ -97,16 +147,42 @@
 
 @media (max-width: 769px) {
     .nav__menu {
-        display: flex;
-        border: 0;
-        padding: 0 1em;
+        position: absolute;
+        display: block;
+        height: 11em;
+        width: 15em;
+        border-radius: 0.5em;
+        background: inherit;
+        list-style-type: none;
+        transform-origin: 0% 0%;
+        transform: translate(200%, 0);
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 
-        >li {
-            flex: 1;
+        &.checked {
+            transform: translate(-100%, 0);
+            background-color: rgba(0, 0, 0, 0.5);
+
         }
 
-        >li+li {
-            border: 0;
+        &__item {
+            padding: 10px 0;
+            font-size: 1em;
+            margin: 0.5em;
+        }
+
+        &__search {
+            margin: 0.5em;
+            text-align: center;
+        }
+
+        &__login {
+            text-align: center;
+            padding-left: 4.5em;
+        }
+
+        &__signin {
+            text-align: center;
+            padding-left: 4em;
         }
     }
 }

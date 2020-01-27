@@ -3,18 +3,19 @@ import { genres } from '../../genres'
 import './SearchList.scss'
 import placeholder from '../../assets/images/placeholder.jpg'
 import { Link } from 'react-router-dom'
-import {ScrollToTop} from '../ScrollToTop/ScrollToTop'
+import { ScrollToTop } from '../ScrollToTop/ScrollToTop'
 
 export const SearchList = (props) => {
   return (
     <div className="search" >
-      <ScrollToTop/>
+      <ScrollToTop />
       <div className="search__wrapper">
         {props.results.map(item => {
           const { title, overview, poster_path,
             genre_ids, vote_average,
             id, release_date
           } = item;
+          console.log(item)
           let poster = poster_path === null
             ? { backgroundImage: `url(${placeholder})` }
             : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` };
@@ -38,7 +39,7 @@ export const SearchList = (props) => {
                     </li>
                     <li>
                       <strong>Year: </strong>
-                      {release_date.slice(0, 4)}
+                      {release_date ? release_date.slice(0, 4) : null}
                     </li>
                     <li>
                       <strong>Genres: </strong>

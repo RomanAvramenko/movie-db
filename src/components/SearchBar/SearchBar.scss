@@ -70,3 +70,29 @@ label {
         }
     }
 }
+
+@media (max-width: 769px) {
+    label {
+        width: 100%;
+        border-radius: 0.5em;
+        border: 2px solid rgba(0, 0, 0, 0);
+
+        &.close {
+            opacity: 1;
+        }
+
+        & input {
+            width: 180px;
+            height: 25px;
+            opacity: 1;
+        }
+
+        &i.fas.fa-search {
+            position: absolute;
+            top: 11px;
+            right: 11px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+    }
+}
