@@ -141,13 +141,6 @@ export default class Detailed extends React.Component {
                   </ul>
                 </li>
               </ul>
-              <span className="imdbRatingPlugin">
-                <a href={`https://www.imdb.com/title/${imdb_id}/?ref_=plg_rt_1`}>
-                  <img
-                    src="https://ia.media-imdb.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png"
-                    alt="" />
-                </a>
-              </span>
               {
                 this.state.trailerResp.results.length === 0
                   ? null
