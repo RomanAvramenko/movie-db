@@ -33,7 +33,7 @@ export const SearchList = (props) => {
                 <div className="search__img" style={poster}></div>
                 <div className="search__description">
                   <ul>
-                    <li>
+                    <li className="search__description__plot">
                       <strong>Plot Summary: </strong>
                       {overview}
                     </li>

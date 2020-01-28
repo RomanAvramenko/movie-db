@@ -17,7 +17,7 @@
     &__item {
         margin-top: 1em;
         display: grid;
-        grid-template-columns: 1fr 5fr 0.5fr;
+        grid-template-columns: 1fr 3fr 1fr;
         grid-template-rows: 3em 14em;
         grid-column-gap: 1em;
         grid-template-areas:
@@ -57,7 +57,45 @@
         color: #494c62;
         line-height: 1.5;
     }
-    .fa-star{
+
+    .fa-star {
         color: #ff0079;
+    }
+}
+
+@media (max-width: 769px) {
+    .search {
+        &__img {
+            height: 12em;
+            width: 8em;
+        }
+
+        &__item {
+            grid-column-gap: 0;
+
+        }
+
+        &__title {
+            font-size: 1.2em;
+        }
+
+        &__description {
+            line-height: 1.1;
+
+            &__plot {
+                display: -webkit-box;
+                -webkit-line-clamp: 6;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+
+        &__rating {
+            font-size: 1em;
+
+            &-big {
+                font-size: 1em;
+            }
+        }
     }
 }
