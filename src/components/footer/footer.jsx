@@ -9,10 +9,8 @@ const Footer = () => {
             <div className="logo footer-logo"><Link to='/'>THEMOVIEBOX</Link></div>
             <div className="footer-menu">
                 <ul>
-                    <li>About</li>
-                    <li>Movies</li>
-                    <li>Rating</li>
-                    <li>Contact</li>
+                    <li>About Author</li>
+                    <li>Contacts</li>
                 </ul>
             </div>
         </footer>

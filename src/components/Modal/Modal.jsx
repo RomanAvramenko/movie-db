@@ -1,26 +1,24 @@
 import React from 'react'
-import YouTube from 'react-youtube'
 import './Modal.scss'
 
 export const Modal = ({ show, handleClose, trailerKey }) => {
-    const showHideClassName = show ? "modal display-block" : "display-none";
-    const opts = {
-        playerVars: {
-            autoplay: 1,
-            origin:"http://http://localhost:3000/"
-        }
-    };
+  const showHideClassName = show ? "modal display-block" : "display-none";
 
-    return (
-        <div className={showHideClassName}>
-            <section className="modal-main">
-                <YouTube
-                    videoId={trailerKey}
-                    opts={opts}
-                />
-                <button onClick={handleClose} className='modal__btn'><i className="fas fa-times"></i></button>
-            </section>
+  return (
+    <div className={showHideClassName}>
+      <section className="modal-main">
+        <iframe
+          className="video"
+          title="trailer"
+          width="560"
+          height="315"
+          src={`//www.youtube.com/embed/${trailerKey}?autoplay=1`}
+          frameBorder="0"
+          allowFullScreen>
+        </iframe>
+        <button onClick={handleClose} className='modal__btn'><i className="fas fa-times"></i></button>
+      </section>
 
-        </div>
-    )
+    </div>
+  )
 }

@@ -55,7 +55,7 @@ export default class Detailed extends React.Component {
     } else {
       const { title, overview, poster_path, runtime,
         genres, production_companies, vote_average,
-        backdrop_path, production_countries, release_date, imdb_id
+        backdrop_path, production_countries, release_date
       } = this.state.response;
 
       const { crew, cast } = this.state.creditsResp

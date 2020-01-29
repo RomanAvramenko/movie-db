@@ -235,7 +235,7 @@
   .detail {
     background-size: cover;
     position: relative;
-    height: 150vh;
+    height: 135vh;
 
     &__wrapper {
       position: absolute;
@@ -346,6 +346,7 @@
           &__description {
             font-size: .7em;
           }
+
           & .cast>li {
             width: 3em;
           }
@@ -354,4 +355,10 @@
     }
   }
 
+}
+
+@media (max-width: 769px) and (orientation: landscape) {
+  .detail {
+    height: 225vh;
+  }
 }
