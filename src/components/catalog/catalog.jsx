@@ -19,7 +19,7 @@ export default class Catalog extends React.Component {
 
   request = async (page) => {
     const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-    const BASE_URL = 'http://api.themoviedb.org/3/movie';
+    const BASE_URL = 'https://api.themoviedb.org/3/movie';
     const url = `${BASE_URL}${this.state.searchVars}?${API_KEY}&language=en-US&page=${this.state.currentPage}`;
     await axios
       .get(url)
