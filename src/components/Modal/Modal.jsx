@@ -18,7 +18,6 @@ export const Modal = ({ show, handleClose, trailerKey }) => {
         </iframe>
         <button onClick={handleClose} className='modal__btn'><i className="fas fa-times"></i></button>
       </section>
-
     </div>
   )
 }

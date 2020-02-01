@@ -38,7 +38,7 @@ export default class Header extends Component {
 
   timer = () => {
     this.setState({
-      currentMovieIndex: Math.floor(Math.random() * 10)
+      currentMovieIndex: Math.floor(Math.random() * 19)
     })
   }
 
@@ -89,7 +89,9 @@ export default class Header extends Component {
     const {
       backdrop_path, title, genre_ids, id
     } = this.state.data.results[this.state.currentMovieIndex];
-    const bgImage = { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
+    const bgImage = backdrop_path === null
+      ? { backgroundColor: 'rgba(0, 0, 0, 0.4)' }
+      : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
     return (
       <>
         {this.state.show
@@ -113,7 +115,7 @@ export default class Header extends Component {
               <button className="hero__content__btn">
                 <Link to={`/details?id=${id}`}>
                   VIEW INFO
-                  </Link>
+                </Link>
               </button>
               <button className="hero__content__btn hero__content__btn_unborder">+ ADD TO WISHLIST</button>
             </div>

@@ -61,7 +61,7 @@ export default class Detailed extends React.Component {
       const { crew, cast } = this.state.creditsResp
 
       const director = crew.find(i => i.job === "Director") === undefined
-        ? ''
+        ? null
         : crew.find(i => i.job === "Director").name
 
       const poster = poster_path === null
@@ -106,34 +106,34 @@ export default class Detailed extends React.Component {
             <div className='poster' style={poster}></div>
             <div className='description'>
               <ul>
-                <li>
+                {overview && <li>
                   <strong>Plot Summary: </strong>
                   {overview}
-                </li>
-                <li>
+                </li>}
+                {runtime && <li>
                   <strong>Duration: </strong>
                   {Math.floor(runtime / 60)} hours {runtime % 60} minutes
-                </li>
-                <li>
+                </li>}
+                {release_date && <li>
                   <strong>Year: </strong>
                   {release_date.slice(0, 4)}
-                </li>
-                <li>
+                </li>}
+                {genres && <li>
                   <strong>Genres: </strong>
                   {genres.map(i => i.name).join(' ')}
-                </li>
-                <li>
+                </li>}
+                {production_companies && <li>
                   <strong>Production Co: </strong>
                   {production_companies.slice(0, 4).map(i => i.name).join(', ')}
-                </li>
-                <li>
+                </li>}
+                {production_countries && <li>
                   <strong>Production Country:</strong>
                   {production_countries.map(i => i.name).join(', ')}
-                </li>
-                <li>
+                </li>}
+                {director && <li>
                   <strong>Directed by: </strong>
                   {director}
-                </li>
+                </li>}
                 <li>
                   <strong>Cast:</strong>
                   <ul className="cast">

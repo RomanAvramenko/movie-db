@@ -20,9 +20,7 @@ export const SearchList = (props) => {
             ? { backgroundImage: `url(${placeholder})` }
             : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` };
           return (
-            <Link to={`/details?id=${id}`}
-              key={id}
-            >
+            <Link to={`/details?id=${id}`} key={id}>
               <div className="search__item">
                 <h1 className="search__title">{title}</h1>
                 <span className="search__rating">
@@ -33,18 +31,18 @@ export const SearchList = (props) => {
                 <div className="search__img" style={poster}></div>
                 <div className="search__description">
                   <ul>
-                    <li className="search__description__plot">
+                    {overview && <li className="search__description__plot">
                       <strong>Plot Summary: </strong>
                       {overview}
-                    </li>
-                    <li>
+                    </li>}
+                    {release_date && <li>
                       <strong>Year: </strong>
-                      {release_date ? release_date.slice(0, 4) : null}
-                    </li>
-                    <li>
+                      {release_date.slice(0, 4)}
+                    </li>}
+                    {genre_ids && <li>
                       <strong>Genres: </strong>
                       {genre_ids.map(i => genres[i]).join(' ')}
-                    </li>
+                    </li>}
                   </ul>
                 </div>
               </div>
