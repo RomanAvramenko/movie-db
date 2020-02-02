@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Detailed.scss'
 import { Modal } from '../Modal/Modal';
 import placeholder from '../../assets/images/placeholder.jpg'
+import { Trailer } from '../Trailer/Trailer';
 export default class Detailed extends React.Component {
 
   state = {
@@ -92,9 +93,9 @@ export default class Detailed extends React.Component {
             ? <Modal
               show={this.state.show}
               handleClose={this.hideModal}
-              props={title}
-              trailerKey={this.state.trailerResp.results[0].key}
-            ></Modal>
+            >
+              <Trailer trailerKey={this.state.trailerResp.results[0].key} />
+            </Modal>
             : null
           }
           <div className='detail__wrapper'>

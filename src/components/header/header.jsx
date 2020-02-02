@@ -5,6 +5,7 @@ import { Modal } from '../Modal/Modal'
 import { genres } from '../../genres'
 
 import "./Header.scss";
+import { Trailer } from '../Trailer/Trailer';
 
 export default class Header extends Component {
 
@@ -98,9 +99,9 @@ export default class Header extends Component {
           ? <Modal
             show={this.state.show}
             handleClose={this.hideModal}
-            props={title}
-            trailerKey={this.state.trailerRes.results[0].key}
-          ></Modal>
+          >
+            <Trailer trailerKey={this.state.trailerRes.results[0].key} />
+          </Modal>
           : null
         }
         <header className="hero__wrapper" style={bgImage} >
