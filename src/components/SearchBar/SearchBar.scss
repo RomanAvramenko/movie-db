@@ -1,4 +1,4 @@
-label {
+#searchBar__label {
     position: relative;
     display: inline-block;
     background-color: rgba(0, 0, 0, 0.5);
@@ -22,7 +22,7 @@ label {
         box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
     }
 
-    input {
+    .searchBar__input {
         transition: width 1s ease, opacity 0.5s ease 0.5s;
         opacity: 1;
         width: 180px;
@@ -61,7 +61,7 @@ label {
             pointer-events: none;
         }
 
-        input {
+        .searchBar__input {
             width: 28px;
             height: 25px;
             opacity: 0;
@@ -72,7 +72,7 @@ label {
 }
 
 @media (max-width: 769px) {
-    label {
+    #searchBar__label {
         width: 100%;
         border-radius: 0.5em;
         border: 2px solid rgba(0, 0, 0, 0);
@@ -81,7 +81,7 @@ label {
             opacity: 1;
         }
 
-        & input {
+        & .searchBar__input {
             width: 180px;
             height: 25px;
             opacity: 1;

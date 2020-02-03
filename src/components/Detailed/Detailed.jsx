@@ -4,6 +4,7 @@ import './Detailed.scss'
 import { Modal } from '../Modal/Modal';
 import placeholder from '../../assets/images/placeholder.jpg'
 import { Trailer } from '../Trailer/Trailer';
+import Loading from '../Loading/Loading';
 export default class Detailed extends React.Component {
 
   state = {
@@ -52,7 +53,11 @@ export default class Detailed extends React.Component {
 
   render() {
     if (this.state.response === null) {
-      return null
+      return (
+        <div className='detail' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}>
+          <Loading />
+        </div>
+      )
     } else {
       const { title, overview, poster_path, runtime,
         genres, production_companies, vote_average,
@@ -89,14 +94,12 @@ export default class Detailed extends React.Component {
 
       return (
         <section className='detail' style={backdrop}>
-          {this.state.show
-            ? <Modal
-              show={this.state.show}
-              handleClose={this.hideModal}
-            >
-              <Trailer trailerKey={this.state.trailerResp.results[0].key} />
-            </Modal>
-            : null
+          {this.state.show && <Modal
+            show={this.state.show}
+            handleClose={this.hideModal}
+          >
+            <Trailer trailerKey={this.state.trailerResp.results[0].key} />
+          </Modal>
           }
           <div className='detail__wrapper'>
             <h1 className='detail__wrapper__title'>{title}</h1>
@@ -128,7 +131,7 @@ export default class Detailed extends React.Component {
                   {production_companies.slice(0, 4).map(i => i.name).join(', ')}
                 </li>}
                 {production_countries && <li>
-                  <strong>Production Country:</strong>
+                  <strong>Production Country: </strong>
                   {production_countries.map(i => i.name).join(', ')}
                 </li>}
                 {director && <li>

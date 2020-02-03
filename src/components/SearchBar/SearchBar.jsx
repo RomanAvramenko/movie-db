@@ -62,11 +62,13 @@ export class SearchBar extends React.Component {
       <React.Fragment>
         <form onSubmit={this.searchHandler}>
           <label
+            id="searchBar__label"
             htmlFor="search"
             className={isOpen}
             onClick={this.onClickHandler}
             onBlur={this.onBlurHandler}>
             <input
+              className="searchBar__input"
               type="text"
               placeholder="Search"
               value={this.currentItem}
