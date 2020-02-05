@@ -94,12 +94,13 @@ export default class Detailed extends React.Component {
 
       return (
         <section className='detail' style={backdrop}>
-          {this.state.show && <Modal
-            show={this.state.show}
-            handleClose={this.hideModal}
-          >
-            <Trailer trailerKey={this.state.trailerResp.results[0].key} />
-          </Modal>
+          {this.state.show &&
+            <Modal
+              show={this.state.show}
+              handleClose={this.hideModal}
+            >
+              <Trailer trailerKey={this.state.trailerResp.results[0].key} />
+            </Modal>
           }
           <div className='detail__wrapper'>
             <h1 className='detail__wrapper__title'>{title}</h1>

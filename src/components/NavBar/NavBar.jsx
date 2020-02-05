@@ -10,8 +10,13 @@ const NavBar = () => {
   const [open, setOpen] = useState(false)
   const [openLogin, setOpenLogin] = useState(false)
 
-  const toggle = (e) => {
+  const toggleSearch = (e) => {
     e.preventDefault();
+    setOpen(!open)
+  }
+
+  const toggleModal = () => {
+    setOpenLogin(true)
     setOpen(!open)
   }
 
@@ -20,7 +25,7 @@ const NavBar = () => {
       {openLogin
         ? <Modal
           show={openLogin}
-          handleClose={()=>setOpenLogin(false)}
+          handleClose={() => setOpenLogin(false)}
         >
           <Auth />
         </Modal>
@@ -30,7 +35,7 @@ const NavBar = () => {
         <div className="menu__logo"><Link to="/">THEMOVIEBOX</Link></div>
         <div className="menu__toggle" >
           <button
-            onClick={toggle}
+            onClick={toggleSearch}
             className={open ? "menu__button checked" : "menu__button"}>
             <span></span>
             <span></span>
@@ -38,7 +43,7 @@ const NavBar = () => {
           </button>
           <ul className={open ? "nav__menu checked" : "nav__menu"}>
             <li className="nav__menu__search"><SearchBar /></li>
-            <li className="nav__menu__item nav__menu__login" onClick={() => setOpenLogin(true)}>LOG IN</li>
+            <li className="nav__menu__item nav__menu__login" onClick={toggleModal}>LOG IN</li>
             <li className="nav__menu__item nav__menu__item-color nav__menu__signin">SIGN UP</li>
           </ul>
         </div>

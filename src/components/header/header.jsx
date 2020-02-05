@@ -112,7 +112,9 @@ export default class Header extends Component {
               <button
                 className="hero__content__btn hero__content__btn_color"
                 onClick={this.showModal}
-              >WATCH TRAILER</button>
+              >
+                WATCH TRAILER
+              </button>
               <button className="hero__content__btn">
                 <Link to={`/details?id=${id}`}>
                   VIEW INFO

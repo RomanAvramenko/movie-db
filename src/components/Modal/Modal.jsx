@@ -1,5 +1,6 @@
 import React from 'react'
 import './Modal.scss'
+import { Button } from '../UI/Button/Button';
 
 export const Modal = (props) => {
   const showHideClassName = props.show ? "modal display-block" : "display-none";
@@ -7,7 +8,11 @@ export const Modal = (props) => {
     <div className={showHideClassName}>
       <section className="modal-main">
         {props.children}
-        <button onClick={props.handleClose} className='modal__btn'><i className="fas fa-times"></i></button>
+        <Button
+          onClick={props.handleClose}
+          className='modal'>
+          <i className="fas fa-times"></i>
+        </Button>
       </section>
     </div>
   )

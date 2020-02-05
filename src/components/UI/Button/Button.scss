@@ -1,0 +1,32 @@
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //border: 2px solid #ffffff;
+    color: #ffffff;
+    background-color: #ff0079;
+    border-radius: 0.3em;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: all .5s ease;
+    text-transform: uppercase;
+
+    &:hover {
+        border-color: #ffffff;
+        cursor: pointer;
+        box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &:first-child {
+        color: #ffffff;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+}
+
+@media (max-width: 769px) {
+    .button {
+        padding: 0;
+        font-size: 0.8em;
+    }
+}

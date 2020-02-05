@@ -2,7 +2,6 @@ import React from 'react'
 import './Trailer.scss'
 
 export const Trailer = (props) => {
-  console.log(props);
   return (
     <iframe
       className="video"
