@@ -3,6 +3,7 @@
     width: 30em;
     height: 20em;
     border-radius: 1em;
+    border: 2px solid #fff;
     padding: 1em;
     align-items: stretch;
     margin: auto;
@@ -11,14 +12,16 @@
         color: #fff;
         text-transform: uppercase;
         display: grid;
-        align-self: self-end;
-        height: 2em;
+        align-self: center;
+        height: 1em;
+        padding-left: 1em;
     }
 
-    &__input {}
+    //&__input {}
 
     &__button {
         margin-top: 1em;
+        height: 3em;
     }
 }
 
