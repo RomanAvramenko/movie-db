@@ -3,20 +3,27 @@ import { Link } from 'react-router-dom'
 import { SearchBar } from '../SearchBar/SearchBar';
 import "./NavBar.scss";
 import { Modal } from '../Modal/Modal';
-import { Auth } from '../Auth/Auth';
+import { LoginForm } from '../LoginForm/LoginForm';
+import { SignUpForm } from '../SignUpForm/SignUpForm';
 
 const NavBar = () => {
 
   const [open, setOpen] = useState(false)
   const [openLogin, setOpenLogin] = useState(false)
+  const [openSignUp, setOpenSignUp] = useState(false)
 
   const toggleSearch = (e) => {
     e.preventDefault();
     setOpen(!open)
   }
 
-  const toggleModal = () => {
-    setOpenLogin(true)
+  const toggleModal = (e) => {
+    if (e.target.id === 'login') {
+      setOpenLogin(true)
+    }
+    if (e.target.id === 'signup') {
+      setOpenSignUp(true)
+    }
     setOpen(!open)
   }
 
@@ -27,7 +34,16 @@ const NavBar = () => {
           show={openLogin}
           handleClose={() => setOpenLogin(false)}
         >
-          <Auth />
+          <LoginForm />
+        </Modal>
+        : null
+      }
+      {openSignUp
+        ? <Modal
+          show={openSignUp}
+          handleClose={() => setOpenSignUp(false)}
+        >
+          <SignUpForm />
         </Modal>
         : null
       }
@@ -43,8 +59,8 @@ const NavBar = () => {
           </button>
           <ul className={open ? "nav__menu checked" : "nav__menu"}>
             <li className="nav__menu__search"><SearchBar /></li>
-            <li className="nav__menu__item nav__menu__login" onClick={toggleModal}>LOG IN</li>
-            <li className="nav__menu__item nav__menu__item-color nav__menu__signin">SIGN UP</li>
+            <li className="nav__menu__item nav__menu__login" id="login" onClick={toggleModal}>LOG IN</li>
+            <li className="nav__menu__item nav__menu__item-color nav__menu__signin" id="signup" onClick={toggleModal}>SIGN UP</li>
           </ul>
         </div>
       </nav>
