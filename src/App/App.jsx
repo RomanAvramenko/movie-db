@@ -4,18 +4,22 @@ import './App.css';
 import { MainPage } from '../pages/MainPage/MainPage'
 import { InfoPage } from '../pages/InfoPage/InfoPage'
 import { SearchResultPage } from '../pages/SearchResultPage/SearchResultPage';
+import { Provider } from 'react-redux';
+import { store } from '../store/store';
 
 export const App = () => {
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/" exact component={MainPage} />
-          <Route path="/details" component={InfoPage} />
-          <Route path="/search" component={SearchResultPage} />
-          <Redirect to={'/'} />
-        </Switch>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route path="/" exact component={MainPage} />
+            <Route path="/details" component={InfoPage} />
+            <Route path="/search" component={SearchResultPage} />
+            <Redirect to={'/'} />
+          </Switch>
+        </Router>
+      </Provider>
     </div>
   );
 }

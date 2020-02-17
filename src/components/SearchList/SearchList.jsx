@@ -5,17 +5,16 @@ import placeholder from '../../assets/images/placeholder.jpg'
 import { Link } from 'react-router-dom'
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop'
 
-export const SearchList = (props) => {
+export const SearchList = ({results}) => {
   return (
     <div className="search" >
       <ScrollToTop />
       <div className="search__wrapper">
-        {props.results.map(item => {
+        {results.map(item => {
           const { title, overview, poster_path,
             genre_ids, vote_average,
             id, release_date
           } = item;
-          console.log(item)
           let poster = poster_path === null
             ? { backgroundImage: `url(${placeholder})` }
             : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` };

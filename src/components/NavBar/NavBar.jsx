@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { SearchBar } from '../SearchBar/SearchBar';
-import "./NavBar.scss";
-import { Modal } from '../Modal/Modal';
-import { LoginForm } from '../LoginForm/LoginForm';
-import { SignUpForm } from '../SignUpForm/SignUpForm';
+import { SearchBar } from '../SearchBar/SearchBar'
+import { Modal } from '../Modal/Modal'
+import { LoginForm } from '../LoginForm/LoginForm'
+import { SignUpForm } from '../SignUpForm/SignUpForm'
+import "./NavBar.scss"
 
 const NavBar = () => {
 

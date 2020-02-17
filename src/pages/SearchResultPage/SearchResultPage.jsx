@@ -5,11 +5,12 @@ import Footer from '../../components/Footer/Footer';
 import { SearchList } from '../../components/SearchList/SearchList';
 
 
-export const SearchResultPage = (props) => {
+export const SearchResultPage = ({location}) => {
+	console.log(location);
 	return (
 		<React.Fragment>
 			<NavBar />
-			<SearchList results={props.location.state.searchResponse} />
+			<SearchList results={location.state.results} />
 			<Footer />
 		</React.Fragment>
 	)
