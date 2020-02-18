@@ -6,7 +6,6 @@ import { SearchList } from '../../components/SearchList/SearchList';
 
 
 export const SearchResultPage = ({location}) => {
-	console.log(location);
 	return (
 		<React.Fragment>
 			<NavBar />
