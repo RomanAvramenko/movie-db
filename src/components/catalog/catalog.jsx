@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import Loading from '../Loading/Loading';
-import { TileItem } from '../TileItem/TileItem';
 import InfiniteScroll from 'react-infinite-scroller';
+import { Loading } from '../Loading/Loading';
+import { TileItem } from '../TileItem/TileItem';
+import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
 import './Catalog.scss';
 import '../styles/reactTabs.scss';
-import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
 
 export default class Catalog extends React.Component {
   state = {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import "./Loading.scss";
 
-const Loading = () => {
+export const Loading = () => {
     return (
         <div className="content__load">
             <div className="loadingio-spinner-pulse-ev73jk8wcgi">
@@ -20,4 +20,3 @@ const Loading = () => {
     )
 }
 
-export default Loading

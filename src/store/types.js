@@ -1,1 +1,3 @@
 export const SEARCH_RESULTS = 'SEARCH_RESULTS'
+
+export const DETAILED_INFO = 'DETAILED_INFO'
