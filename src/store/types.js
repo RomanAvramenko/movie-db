@@ -1,3 +1,5 @@
 export const SEARCH_RESULTS = 'SEARCH_RESULTS'
 
 export const DETAILED_INFO = 'DETAILED_INFO'
+
+export const CATALOG_DATA = 'CATALOG_DATA'

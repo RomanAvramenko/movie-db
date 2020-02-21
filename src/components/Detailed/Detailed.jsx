@@ -14,7 +14,10 @@ export const Detailed = () => {
   const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   const { response, creditsResp, trailerResp } = useSelector(state => state.detailedInfo)
-  useEffect(() => { getData() }, [])
+  useEffect(() => { 
+    getData() 
+    // eslint-disable-next-line
+  }, [])
 
   const getData = async () => {
     const id = location.search.slice(4)
@@ -32,7 +35,7 @@ export const Detailed = () => {
       .then(
         axios.spread((result, responseCast, resVideo) => {
           dispatch(detailedResuls({
-            response: result.data,
+            response:  result.data,
             trailer: resVideo.data,
             credits: responseCast.data
           }))
