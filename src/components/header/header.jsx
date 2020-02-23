@@ -1,130 +1,105 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Modal } from '../Modal/Modal'
 import { genres } from '../../genres'
-
-import "./Header.scss";
 import { Trailer } from '../Trailer/Trailer';
+import "./Header.scss";
+import { useDispatch, useSelector } from 'react-redux';
+import { headerData, headerTrailer } from '../../store/actions/header';
 
-export default class Header extends Component {
+export const Header = () => {
 
-  API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-  BASE_URL = 'https://api.themoviedb.org/3/movie';
+  const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
+  const BASE_URL = 'https://api.themoviedb.org/3/movie';
 
-  state = {
-    data: {},
-    currentMovieIndex: 1,
-    trailerRes: [],
-    show: false
-  }
+  const [show, setShow] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(1)
+  const dispatch = useDispatch()
+  const { data, trailerRes } = useSelector(state => state.header)
 
-  componentDidMount() {
-    this.getData()
-    this.intervalId = setInterval(this.timer, 7000);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.currentMovieIndex !== this.state.currentMovieIndex) {
-      this.getData()
+  useEffect(() => {
+    getData()
+    const intervalId = setInterval(timer, 7000);
+    if (show) {
+      clearInterval(intervalId);
     }
-    if (this.state.show === true) {
-      clearInterval(this.intervalId);
-    }
+    return () => {
+      clearInterval(intervalId);
+    };
+    // eslint-disable-next-line
+  }, [])
+
+  const timer = () => {
+    setCurrentIndex(Math.floor(Math.random() * 19))
   }
 
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
-
-  timer = () => {
-    this.setState({
-      currentMovieIndex: Math.floor(Math.random() * 19)
-    })
-  }
-
-  getData = async () => {
-    const url = `${this.BASE_URL}/popular?${this.API_KEY}&language=en-US&page=1`;
+  const getData = async () => {
+    const url = `${BASE_URL}/popular?${API_KEY}&language=en-US&page=1`;
     await axios
       .get(url)
       .then(result => {
-        this.setState({
-          data: this.transformData(result)
-        })
-        const idVideo = this.state.data.results[this.state.currentMovieIndex].id;
-        this.getVideo(idVideo);
+        dispatch(headerData({ data: result.data.results }))
+        getVideo(result.data.results[currentIndex].id)
       })
       .catch(e => { console.log(e.config) });
   }
 
-  transformData = (result) => {
-    return {
-      results: result.data.results
-    }
-  }
-
-  getVideo = async (id) => {
-    const urlVideo = `${this.BASE_URL}/${id}/videos?${this.API_KEY}`;
+  const getVideo = async (id) => {
+    const urlVideo = `${BASE_URL}/${id}/videos?${API_KEY}`;
     await axios
       .get(urlVideo)
       .then(result => {
-        this.setState({
-          trailerRes: result.data
-        })
+        dispatch(headerTrailer({ trailerRes: result.data }))
       })
       .catch(e => { console.log(e.config) })
   }
 
-  showModal = () => {
-    this.setState({ show: true });
-  };
+  const showModal = () => setShow(true);
 
-  hideModal = () => {
-    this.setState({ show: false });
-  };
+  const hideModal = () => setShow(!show);
 
-  render() {
-    if (!this.state.data.results) {
-      return null
-    }
-    const {
-      backdrop_path, title, genre_ids, id
-    } = this.state.data.results[this.state.currentMovieIndex];
-    const bgImage = backdrop_path === null
-      ? { backgroundColor: 'rgba(0, 0, 0, 0.4)' }
-      : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
-    return (
-      <>
-        {this.state.show
-          ? <Modal
-            show={this.state.show}
-            handleClose={this.hideModal}
-          >
-            <Trailer trailerKey={this.state.trailerRes.results[0].key} />
-          </Modal>
-          : null
-        }
-        <header className="hero__wrapper" style={bgImage} >
-          <div className="hero__content">
-            <h1 className="hero__content__title">{title}</h1>
-            <div className="hero__content__genres">{genre_ids.map(i => genres[i]).join(' ')}</div>
-            <div className="hero__content__btns">
-              <button
-                className="hero__content__btn hero__content__btn_color"
-                onClick={this.showModal}
-              >
-                WATCH TRAILER
-              </button>
-              <button className="hero__content__btn">
-                <Link to={`/details?id=${id}`}>
-                  VIEW INFO
-                </Link>
-              </button>
-              <button className="hero__content__btn hero__content__btn_unborder">+ ADD TO WISHLIST</button>
-            </div>
-          </div>
-        </header >
-      </>
-    )
+
+  if (!data[currentIndex]) {
+    return null
   }
+  const {
+    backdrop_path, title, genre_ids, id
+  } = data[currentIndex];
+  const bgImage = backdrop_path === null
+    ? { backgroundColor: 'rgba(0, 0, 0, 0.4)' }
+    : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
+  return (
+    <>
+      {show
+        ? <Modal
+          show={show}
+          handleClose={hideModal}
+        >
+          <Trailer trailerKey={trailerRes.results[0].key} />
+        </Modal>
+        : null
+      }
+      <header className="hero__wrapper" style={bgImage} >
+        <div className="hero__content">
+          <h1 className="hero__content__title">{title}</h1>
+          <div className="hero__content__genres">{genre_ids.map(i => genres[i]).join(' ')}</div>
+          <div className="hero__content__btns">
+            <button
+              className="hero__content__btn hero__content__btn_color"
+              onClick={showModal}
+            >
+              WATCH TRAILER
+              </button>
+            <button className="hero__content__btn">
+              <Link to={`/details?id=${id}`}>
+                VIEW INFO
+                </Link>
+            </button>
+            <button className="hero__content__btn hero__content__btn_unborder">+ ADD TO WISHLIST</button>
+          </div>
+        </div>
+      </header >
+    </>
+  )
 }

@@ -3,3 +3,6 @@ export const SEARCH_RESULTS = 'SEARCH_RESULTS'
 export const DETAILED_INFO = 'DETAILED_INFO'
 
 export const CATALOG_DATA = 'CATALOG_DATA'
+
+export const HEADER_DATA = 'HEADER_DATA'
+export const HEADER_TRAILER = 'HEADER_TRAILER'
