@@ -51,7 +51,7 @@ export const SearchBar = () => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <form onSubmit={searchHandler}>
         <label
           id="searchBar__label"
@@ -74,7 +74,7 @@ export const SearchBar = () => {
           pathname: "/search",
           state: { results }
         }} />}
-    </React.Fragment>
+    </>
   )
 
 }

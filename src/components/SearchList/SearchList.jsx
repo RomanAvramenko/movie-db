@@ -5,7 +5,7 @@ import placeholder from '../../assets/images/placeholder.jpg'
 import { Link } from 'react-router-dom'
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop'
 
-export const SearchList = ({results}) => {
+export const SearchList = ({ results }) => {
   return (
     <div className="search" >
       <ScrollToTop />
@@ -19,7 +19,7 @@ export const SearchList = ({results}) => {
             ? { backgroundImage: `url(${placeholder})` }
             : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${poster_path}` };
           return (
-            <Link to={`/details?id=${id}`} key={id}>
+            <Link to={`/details?id=${id}`} key={id} >
               <div className="search__item">
                 <h1 className="search__title">{title}</h1>
                 <span className="search__rating">

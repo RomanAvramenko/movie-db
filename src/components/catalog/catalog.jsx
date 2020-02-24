@@ -23,9 +23,10 @@ export const Catalog = () => {
   }, [])
 
   const request = async (page) => {
+    console.log(page);
     const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
     const BASE_URL = 'https://api.themoviedb.org/3/movie';
-    const url = `${BASE_URL}${tabsList}?${API_KEY}&language=en-US&page=${currentPage}`;
+    const url = `${BASE_URL}${tabsList}?${API_KEY}&language=en-US&page=${page}`;
     await axios
       .get(url)
       .then(result => {
@@ -42,7 +43,7 @@ export const Catalog = () => {
   }
 
   const changeSearchHandler = (newSearch) => {
-    window.scrollTo(0, 0)
+    window.scroll(0, 0)
     setTabsList(newSearch)
     dispatch(catalogResults({
       response: [],
@@ -58,20 +59,16 @@ export const Catalog = () => {
       <ScrollToTop />
       <Tabs>
         <TabList>
-          <Tab onClick={changeSearchHandler.bind(this, '/popular')}>Poular</Tab>
-          <Tab onClick={changeSearchHandler.bind(this, '/top_rated')}>Top Rated</Tab>
-          <Tab onClick={changeSearchHandler.bind(this, '/upcoming')}>New Arrivals</Tab>
-          <Tab onClick={changeSearchHandler.bind(this, '/now_playing')}>Now In Cinema</Tab>
+          <Tab onClick={changeSearchHandler.bind(null, '/popular')}>Poular</Tab>
+          <Tab onClick={changeSearchHandler.bind(null, '/top_rated')}>Top Rated</Tab>
+          <Tab onClick={changeSearchHandler.bind(null, '/upcoming')}>New Arrivals</Tab>
         </TabList>
         <InfiniteScroll
-          pageStart={currentPage}
+          pageStart={1}
           loadMore={request}
           hasMore={hasMore}
           loader={loader}
         >
-          <TabPanel>
-            {result}
-          </TabPanel>
           <TabPanel>
             {result}
           </TabPanel>
