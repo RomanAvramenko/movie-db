@@ -14,8 +14,8 @@ export const App = () => {
         <Router>
           <Switch>
             <Route path="/" exact component={MainPage} />
+            <Route path="/result" component={SearchResultPage} />
             <Route path="/details" component={InfoPage} />
-            <Route path="/search" component={SearchResultPage} />
             <Redirect to={'/'} />
           </Switch>
         </Router>

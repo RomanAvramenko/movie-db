@@ -60,6 +60,7 @@ export const Detailed = () => {
       </div>
     )
   } else {
+    window.scroll(0, 0)
     const { title, overview, poster_path, runtime,
       genres, production_companies, vote_average,
       backdrop_path, production_countries, release_date

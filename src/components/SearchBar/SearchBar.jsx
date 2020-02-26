@@ -1,80 +1,82 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import "./SearchBar.scss"
-import { useDispatch, useSelector } from 'react-redux';
-import { searchResults } from '../../store/actions/search';
 
+export class SearchBar extends React.Component {
 
-export const SearchBar = () => {
+  API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
+  BASE_URL = 'https://api.themoviedb.org/3/search/movie';
 
-  const dispatch = useDispatch()
-  const results = useSelector(state => state.searchRes.searchResults)
+  state = {
+    isOpen: "close",
+    searchResponse: [],
+    currentItem: null,
+  }
 
-  const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-  const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
-
-  const [open, setOpen] = useState("close")
-  const [currentValue, setCurrentValue] = useState(null)
-
-  const getData = async (name) => {
-    const url = `${BASE_URL}?${API_KEY}&language=en-US&query=${name}&page=1&include_adult=false`;
+  getData = async (name) => {
+    const url = `${this.BASE_URL}?${this.API_KEY}&language=en-US&query=${name}&page=1&include_adult=false`;
     await axios
       .get(url)
-      .then(result => { dispatch(searchResults(result.data.results)) })
+      .then(result => this.setState({ searchResponse: result.data.results }))
       .catch(e => { console.log(e.config) });
   }
 
-  const inputHandler = e => {
+  inputHandler = e => {
     const itemText = e.target.value.toLowerCase();
-    const currentValue = {
-      text: itemText
-    };
-    setCurrentValue(currentValue);
+    const currentItem = { text: itemText };
+    this.setState({ currentItem });
   }
 
-  const searchHandler = e => {
-    const { text } = currentValue
-    getData(text)
+  searchHandler = e => {
+    const { text } = this.state.currentItem
+    this.getData(text)
     e.target.reset()
     e.preventDefault()
   }
 
-  const onClickHandler = () => {
-    if (open !== "open") {
-      setOpen("open")
+  onClickHandler = () => {
+    if (this.state.isOpen !== "open") {
+      this.setState({
+        isOpen: "open"
+      })
     }
   }
 
-  const onBlurHandler = () => {
-    setOpen("close")
+  onBlurHandler = () => {
+    this.setState({
+      isOpen: "close"
+    })
   }
 
-  return (
-    <>
-      <form onSubmit={searchHandler}>
-        <label
-          id="searchBar__label"
-          htmlFor="search"
-          className={open}
-          onClick={onClickHandler}
-          onBlur={onBlurHandler}>
-          <input
-            className="searchBar__input"
-            type="text"
-            placeholder="Search"
-            //value={}
-            onChange={inputHandler}
-          />
-          <i className="fas fa-search" ></i>
-        </label>
-      </form>
-      {results.length > 0 &&
-        <Redirect to={{
-          pathname: "/search",
-          state: { results }
-        }} />}
-    </>
-  )
-
+  render() {
+    const { isOpen, searchResponse } = this.state;
+    return (
+      <>
+        <form onSubmit={this.searchHandler}>
+          <label
+            id="searchBar__label"
+            htmlFor="search"
+            className={isOpen}
+            onClick={this.onClickHandler}
+            onBlur={this.onBlurHandler}>
+            <input
+              className="searchBar__input"
+              type="text"
+              placeholder="Search"
+              value={this.currentItem}
+              onChange={this.inputHandler}
+            />
+            <i className="fas fa-search" ></i>
+          </label>
+        </form>
+        {searchResponse.length > 0 &&
+          <Redirect to={{
+            pathname: `/result`,
+            state: { searchResponse }
+          }} />
+        }
+      </>
+    )
+  }
 }

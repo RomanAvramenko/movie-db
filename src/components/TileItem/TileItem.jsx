@@ -13,9 +13,7 @@ export const TileItem = ({ results }) => {
           ? { backgroundImage: `url(${placeholder})` }
           : { backgroundImage: `url(https://image.tmdb.org/t/p/w500${poster_path}` };
         return (
-          <Link to={`/details?id=${id}`}
-            key={id}
-          >
+          <Link to={`/details?id=${id}`} key={id}>
             <div className="tile-item">
               <div className="tile-item__pic">
                 <div style={poster}></div>
