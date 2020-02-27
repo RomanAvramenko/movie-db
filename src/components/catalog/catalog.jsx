@@ -7,10 +7,11 @@ import { TileItem } from '../TileItem/TileItem';
 import InfiniteScroll from 'react-infinite-scroller';
 import './Catalog.scss';
 import '../styles/reactTabs.scss';
+import { connect } from 'react-redux';
+import { catalogResults } from '../../store/actions/catalog';
 
-export default class Catalog extends React.Component {
+class Catalog extends React.Component {
   state = {
-    response: [],
     searchVars: '/popular',
     currentPage: 0,
     totalPages: null,
@@ -27,8 +28,8 @@ export default class Catalog extends React.Component {
         if (this.state.currentPage === this.state.totalPages - 1) {
           this.setState({ hasMore: false })
         }
+        this.props.results([...this.props.response, ...result.data.results])
         this.setState({
-          response: [...this.state.response, ...result.data.results],
           currentPage: page,
           totalPages: result.data.total_pages
         })
@@ -38,16 +39,17 @@ export default class Catalog extends React.Component {
 
   changeSearchHandler = (newSearch) => {
     window.scroll(0, 0)
+    this.props.results([])
     this.setState({
-      response: [],
       searchVars: newSearch,
       currentPage: 0
     })
   }
 
   render() {
+    const {response} = this.props
     const loader = <Loading key={Math.random * 100} />
-    const result = this.state.response ? <TileItem results={this.state.response} /> : loader;
+    const result = response ? <TileItem results={response} /> : loader;
     return (
       <section className="catalog">
         <ScrollToTop />
@@ -78,3 +80,16 @@ export default class Catalog extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { response: state.catalog.response }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    results: responseData => dispatch(catalogResults(responseData))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Catalog)

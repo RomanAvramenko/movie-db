@@ -1,10 +1,8 @@
 import { CATALOG_DATA } from '../types'
 
-export const catalogResults = ({response, currentPage, totalPages}) => {
+export const catalogResults = (response) => {
     return {
         type: CATALOG_DATA,
-        response,
-        currentPage,
-        totalPages
+        payload: response
     }
 }
