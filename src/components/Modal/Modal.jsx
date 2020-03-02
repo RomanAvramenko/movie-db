@@ -1,19 +1,26 @@
 import React from 'react'
 import './Modal.scss'
 import { Button } from '../UI/Button/Button';
+import PropTypes from 'prop-types';
 
-export const Modal = (props) => {
-  const showHideClassName = props.show ? "modal display-block" : "display-none";
+export const Modal = ({show, handleClose, children}) => {
+  const showHideClassName = show ? "modal display-block" : "display-none";
   return (
     <div className={showHideClassName}>
       <section className="modal-main">
-        {props.children}
+        {children}
         <Button
-          onClick={props.handleClose}
+          onClick={handleClose}
           className='modal'>
           <i className="fas fa-times"></i>
         </Button>
       </section>
     </div>
   )
+}
+
+Modal.propTypes = {
+  show: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired
 }

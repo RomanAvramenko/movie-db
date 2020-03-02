@@ -3,6 +3,7 @@ import { genres } from '../../genres'
 import placeholder from '../../assets/images/placeholder.jpg'
 import './TileItem.scss'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 export const TileItem = ({ results }) => {
   return (
@@ -32,4 +33,8 @@ export const TileItem = ({ results }) => {
       })}
     </div>
   )
+}
+
+TileItem.propTypes = {
+  results: PropTypes.arrayOf(PropTypes.object.isRequired)
 }

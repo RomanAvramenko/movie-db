@@ -5,11 +5,9 @@ import { Modal } from '../Modal/Modal'
 import { genres } from '../../genres'
 import { Trailer } from '../Trailer/Trailer';
 import "./Header.scss";
+import { BASE_URL, API_KEY } from '../../constants';
 
 export default class Header extends Component {
-
-  API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-  BASE_URL = 'https://api.themoviedb.org/3/movie';
 
   state = {
     data: {},
@@ -43,7 +41,7 @@ export default class Header extends Component {
   }
 
   getData = async () => {
-    const url = `${this.BASE_URL}/popular?${this.API_KEY}&language=en-US&page=1`;
+    const url = `${BASE_URL}/popular?${API_KEY}&language=en-US&page=1`;
     await axios
       .get(url)
       .then(result => {
@@ -63,7 +61,7 @@ export default class Header extends Component {
   }
 
   getVideo = async (id) => {
-    const urlVideo = `${this.BASE_URL}/${id}/videos?${this.API_KEY}`;
+    const urlVideo = `${BASE_URL}/${id}/videos?${API_KEY}`;
     await axios
       .get(urlVideo)
       .then(result => {

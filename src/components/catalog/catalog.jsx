@@ -1,14 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import InfiniteScroll from 'react-infinite-scroller';
 import { Loading } from '../Loading/Loading';
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
 import { TileItem } from '../TileItem/TileItem';
-import InfiniteScroll from 'react-infinite-scroller';
-import './Catalog.scss';
-import '../styles/reactTabs.scss';
 import { connect } from 'react-redux';
 import { catalogResults } from '../../store/actions/catalog';
+import { BASE_URL, API_KEY } from '../../constants';
+import './Catalog.scss';
+import '../styles/reactTabs.scss';
+
 
 class Catalog extends React.Component {
   state = {
@@ -19,8 +21,6 @@ class Catalog extends React.Component {
   }
 
   request = (page) => {
-    const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-    const BASE_URL = 'https://api.themoviedb.org/3/movie';
     const url = `${BASE_URL}${this.state.searchVars}?${API_KEY}&language=en-US&page=${page}`;
     axios
       .get(url)

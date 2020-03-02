@@ -2,11 +2,9 @@ import React from 'react'
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import "./SearchBar.scss"
+import { API_KEY, SEARCH_URL } from '../../constants';
 
 export class SearchBar extends React.Component {
-
-  API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-  BASE_URL = 'https://api.themoviedb.org/3/search/movie';
 
   state = {
     isOpen: "close",
@@ -15,7 +13,7 @@ export class SearchBar extends React.Component {
   }
 
   getData = async (name) => {
-    const url = `${this.BASE_URL}?${this.API_KEY}&language=en-US&query=${name}&page=1&include_adult=false`;
+    const url = `${SEARCH_URL}?${API_KEY}&language=en-US&query=${name}&page=1&include_adult=false`;
     await axios
       .get(url)
       .then(result => this.setState({ searchResponse: result.data.results }))

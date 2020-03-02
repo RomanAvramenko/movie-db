@@ -8,21 +8,20 @@ import { Loading } from '../Loading/Loading';
 import placeholder from '../../assets/images/placeholder.jpg'
 import { detailedResuls } from '../../store/actions/detailInfo';
 import './Detailed.scss'
+import { API_KEY, BASE_URL } from '../../constants';
 
 export const Detailed = () => {
   const location = useLocation()
   const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   const { response, creditsResp, trailerResp } = useSelector(state => state.detailedInfo)
-  useEffect(() => { 
-    getData() 
+  useEffect(() => {
+    getData()
     // eslint-disable-next-line
   }, [])
 
   const getData = async () => {
     const id = location.search.slice(4)
-    const API_KEY = `api_key=${process.env.REACT_APP_TMDB_API_KEY}`;
-    const BASE_URL = 'https://api.themoviedb.org/3/movie';
     const url = `${BASE_URL}/${id}?${API_KEY}&language=en-US&page=1`;
     const urlVideo = `${BASE_URL}/${id}/videos?${API_KEY}`;
     const urlCredits = `${BASE_URL}/${id}/credits?${API_KEY}`;
@@ -35,7 +34,7 @@ export const Detailed = () => {
       .then(
         axios.spread((result, responseCast, resVideo) => {
           dispatch(detailedResuls({
-            response:  result.data,
+            response: result.data,
             trailer: resVideo.data,
             credits: responseCast.data
           }))

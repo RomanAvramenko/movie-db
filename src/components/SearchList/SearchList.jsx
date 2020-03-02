@@ -4,6 +4,7 @@ import './SearchList.scss'
 import placeholder from '../../assets/images/placeholder.jpg'
 import { Link } from 'react-router-dom'
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop'
+import PropTypes from 'prop-types';
 
 export const SearchList = ({results}) => {
   return (
@@ -51,4 +52,8 @@ export const SearchList = ({results}) => {
       </div>
     </div>
   )
+}
+
+SearchList.propTypes = {
+  results: PropTypes.arrayOf(PropTypes.object.isRequired)
 }
