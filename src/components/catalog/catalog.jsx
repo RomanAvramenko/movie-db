@@ -81,8 +81,8 @@ class Catalog extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { response: state.catalog.response }
+const mapStateToProps = ({catalog}) => {
+  return { response: catalog.response }
 }
 
 const mapDispatchToProps = dispatch => {

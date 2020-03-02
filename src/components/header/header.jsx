@@ -6,13 +6,14 @@ import { genres } from '../../genres'
 import { Trailer } from '../Trailer/Trailer';
 import "./Header.scss";
 import { BASE_URL, API_KEY } from '../../constants';
+import { connect } from 'react-redux';
+import { headerData, headerTrailer } from '../../store/actions/header';
+import PropTypes from 'prop-types';
 
-export default class Header extends Component {
+class Header extends Component {
 
   state = {
-    data: {},
     currentMovieIndex: 1,
-    trailerRes: [],
     show: false
   }
 
@@ -45,19 +46,11 @@ export default class Header extends Component {
     await axios
       .get(url)
       .then(result => {
-        this.setState({
-          data: this.transformData(result)
-        })
-        const idVideo = this.state.data.results[this.state.currentMovieIndex].id;
+        this.props.headerData({ data: result.data.results })
+        const idVideo = this.props.data[this.state.currentMovieIndex].id;
         this.getVideo(idVideo);
       })
       .catch(e => { console.log(e.config) });
-  }
-
-  transformData = (result) => {
-    return {
-      results: result.data.results
-    }
   }
 
   getVideo = async (id) => {
@@ -65,9 +58,7 @@ export default class Header extends Component {
     await axios
       .get(urlVideo)
       .then(result => {
-        this.setState({
-          trailerRes: result.data
-        })
+        this.props.headerTrailer({ trailerRes: result.data.results })
       })
       .catch(e => { console.log(e.config) })
   }
@@ -81,12 +72,12 @@ export default class Header extends Component {
   };
 
   render() {
-    if (!this.state.data.results) {
+    if (this.props.data.length === 0) {
       return null
     }
     const {
       backdrop_path, title, genre_ids, id
-    } = this.state.data.results[this.state.currentMovieIndex];
+    } = this.props.data[this.state.currentMovieIndex];
     const bgImage = backdrop_path === null
       ? { backgroundColor: 'rgba(0, 0, 0, 0.4)' }
       : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
@@ -97,7 +88,7 @@ export default class Header extends Component {
             show={this.state.show}
             handleClose={this.hideModal}
           >
-            <Trailer trailerKey={this.state.trailerRes.results[0].key} />
+            <Trailer trailerKey={this.props.trailerRes[0].key} />
           </Modal>
           : null
         }
@@ -124,4 +115,28 @@ export default class Header extends Component {
       </>
     )
   }
+}
+
+const mapStateToProps = ({ header }) => {
+  return {
+    data: header.data,
+    trailerRes: header.trailerRes
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    headerData: response => dispatch(headerData(response)),
+    headerTrailer: response => dispatch(headerTrailer(response))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
+
+Header.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object.isRequired),
+  trailerRes: PropTypes.arrayOf(PropTypes.object.isRequired),
+  headerData: PropTypes.func.isRequired,
+  headerTrailer: PropTypes.func.isRequired
 }
