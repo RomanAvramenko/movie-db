@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { Modal } from '../Modal/Modal'
 import { genres } from '../../genres'
-import { Trailer } from '../Trailer/Trailer';
-import "./Header.scss";
-import { BASE_URL, API_KEY } from '../../constants';
-import { connect } from 'react-redux';
-import { headerData, headerTrailer } from '../../store/actions/header';
-import PropTypes from 'prop-types';
+import { Trailer } from '../Trailer/Trailer'
+import { connect } from 'react-redux'
+import { getData, getVideo } from '../../store/actions/header'
+import "./Header.scss"
 
 class Header extends Component {
 
@@ -18,14 +16,11 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    this.getData()
+    this.props.getData(this.state.currentMovieIndex)
     this.intervalId = setInterval(this.timer, 7000);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.currentMovieIndex !== this.state.currentMovieIndex) {
-      this.getData()
-    }
+  componentDidUpdate() {
     if (this.state.show === true) {
       clearInterval(this.intervalId);
     }
@@ -41,30 +36,9 @@ class Header extends Component {
     })
   }
 
-  getData = async () => {
-    const url = `${BASE_URL}/popular?${API_KEY}&language=en-US&page=1`;
-    await axios
-      .get(url)
-      .then(result => {
-        this.props.headerData({ data: result.data.results })
-        const idVideo = this.props.data[this.state.currentMovieIndex].id;
-        this.getVideo(idVideo);
-      })
-      .catch(e => { console.log(e.config) });
-  }
-
-  getVideo = async (id) => {
-    const urlVideo = `${BASE_URL}/${id}/videos?${API_KEY}`;
-    await axios
-      .get(urlVideo)
-      .then(result => {
-        this.props.headerTrailer({ trailerRes: result.data.results })
-      })
-      .catch(e => { console.log(e.config) })
-  }
-
   showModal = () => {
     this.setState({ show: true });
+    this.props.getVideo(this.props.data[this.state.currentMovieIndex].id)
   };
 
   hideModal = () => {
@@ -120,14 +94,15 @@ class Header extends Component {
 const mapStateToProps = ({ header }) => {
   return {
     data: header.data,
-    trailerRes: header.trailerRes
+    trailerRes: header.trailerRes,
+    loading: header.loading
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    headerData: response => dispatch(headerData(response)),
-    headerTrailer: response => dispatch(headerTrailer(response))
+    getData: id => dispatch(getData(id)),
+    getVideo: id => dispatch(getVideo(id))
   }
 }
 
@@ -137,6 +112,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(Header)
 Header.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object.isRequired),
   trailerRes: PropTypes.arrayOf(PropTypes.object.isRequired),
-  headerData: PropTypes.func.isRequired,
-  headerTrailer: PropTypes.func.isRequired
+  getData: PropTypes.func.isRequired,
 }
