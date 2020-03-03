@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Modal } from '../Modal/Modal';
 import { Trailer } from '../Trailer/Trailer';
 import { Loading } from '../Loading/Loading';
 import placeholder from '../../assets/images/placeholder.jpg'
-import { detailedResuls } from '../../store/actions/detailInfo';
+import { getDetailData } from '../../store/actions/detailInfo';
 import './Detailed.scss'
-import { API_KEY, BASE_URL } from '../../constants';
 
 export const Detailed = () => {
   const location = useLocation()
@@ -16,32 +14,9 @@ export const Detailed = () => {
   const dispatch = useDispatch()
   const { response, creditsResp, trailerResp } = useSelector(state => state.detailedInfo)
   useEffect(() => {
-    getData()
+    dispatch(getDetailData(location))
     // eslint-disable-next-line
   }, [])
-
-  const getData = async () => {
-    const id = location.search.slice(4)
-    const url = `${BASE_URL}/${id}?${API_KEY}&language=en-US&page=1`;
-    const urlVideo = `${BASE_URL}/${id}/videos?${API_KEY}`;
-    const urlCredits = `${BASE_URL}/${id}/credits?${API_KEY}`;
-    await axios
-      .all([
-        axios.get(url),
-        axios.get(urlCredits),
-        axios.get(urlVideo),
-      ])
-      .then(
-        axios.spread((result, responseCast, resVideo) => {
-          dispatch(detailedResuls({
-            response: result.data,
-            trailer: resVideo.data,
-            credits: responseCast.data
-          }))
-        })
-      )
-      .catch(e => { console.log(e.config) });
-  }
 
   const showModal = () => {
     setShow(true);

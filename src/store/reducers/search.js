@@ -1,6 +1,5 @@
 import { SEARCH_RESULTS } from "../types";
 
-
 const initialState = {
     searchResults: []
 }

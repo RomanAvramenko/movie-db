@@ -1,10 +1,12 @@
 import React from 'react'
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { getSearchData } from '../../store/actions/search'
 import "./SearchBar.scss"
 import { API_KEY, SEARCH_URL } from '../../constants';
 
-export class SearchBar extends React.Component {
+class SearchBar extends React.Component {
 
   state = {
     isOpen: "close",
@@ -28,6 +30,7 @@ export class SearchBar extends React.Component {
 
   searchHandler = e => {
     const { text } = this.state.currentItem
+    this.props.searchResp(text)
     this.getData(text)
     e.target.reset()
     e.preventDefault()
@@ -78,3 +81,16 @@ export class SearchBar extends React.Component {
     )
   }
 }
+
+const mapStateToProps = ({ searchRes }) => {
+  return {
+    searchResponse: searchRes.searchResults
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return { searchResp: name => dispatch(getSearchData(name)) }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
