@@ -5,10 +5,17 @@ import { Input } from '../UI/Input/Input'
 export const SignUpForm = () => {
   return (
     <form className="auth">
-      <label htmlFor="email" className="auth__label">Username</label>
+      <label htmlFor="text" className="auth__label">Username</label>
       <Input
         type="text"
         placeholder="Enter Username"
+        name="name"
+        className="auth__input"
+      />
+      <label htmlFor="email" className="auth__label">Email</label>
+      <Input
+        type="email"
+        placeholder="user@mail.com"
         name="email"
         className="auth__input"
       />
@@ -21,15 +28,15 @@ export const SignUpForm = () => {
         className="auth__input"
       />
 
-      <label htmlFor="password-repeat" className="auth__label">Repeat Password</label>
+      <label htmlFor="password-repeat" className="auth__label">Confirm Password</label>
       <Input
-        type="text"
-        placeholder="Enter Password"
+        type="password"
+        placeholder="Confirm Password"
         name="password-repeat"
         className="auth__input"
       />
 
-      <Button className="auth__button">Login</Button>
+      <Button className="auth__button" title="Registration"/>
     </form>
   )
 }

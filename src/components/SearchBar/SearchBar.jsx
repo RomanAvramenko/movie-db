@@ -84,7 +84,7 @@ class SearchBar extends React.Component {
 
 const mapStateToProps = ({ searchRes }) => {
   return {
-    searchResponse: searchRes.searchResults
+    searchResp: searchRes.searchResults
   }
 }
 
