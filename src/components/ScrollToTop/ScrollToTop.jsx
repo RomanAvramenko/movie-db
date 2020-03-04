@@ -18,7 +18,7 @@ export const ScrollToTop = () => {
   return (
     <button
       className="scroll-to-top"
-      onClick={()=>window.scrollTo(0, 0)}>
+      onClick={() => window.scrollTo(0, 0)}>
       <i className="fas fa-angle-up"></i>
     </button>
   )

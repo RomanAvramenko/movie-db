@@ -16,7 +16,7 @@ export const Detailed = () => {
   useEffect(() => {
     dispatch(getDetailData(location))
     // eslint-disable-next-line
-  }, [])
+  }, [location])
 
   const showModal = () => {
     setShow(true);

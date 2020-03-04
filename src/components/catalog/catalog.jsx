@@ -28,7 +28,9 @@ class Catalog extends React.Component {
         if (this.state.currentPage === this.state.totalPages - 1) {
           this.setState({ hasMore: false })
         }
-        this.props.results([...this.props.response, ...result.data.results])
+        if (!this.props.response.some(i => i.id === result.data.results[0].id)) {
+          this.props.results([...this.props.response, ...result.data.results])
+        }
         this.setState({
           currentPage: page,
           totalPages: result.data.total_pages
@@ -47,7 +49,7 @@ class Catalog extends React.Component {
   }
 
   render() {
-    const {response} = this.props
+    const { response } = this.props
     const loader = <Loading key={Math.random * 100} />
     const result = response ? <TileItem results={response} /> : loader;
     return (
@@ -81,7 +83,7 @@ class Catalog extends React.Component {
   }
 }
 
-const mapStateToProps = ({catalog}) => {
+const mapStateToProps = ({ catalog }) => {
   return { response: catalog.response }
 }
 
