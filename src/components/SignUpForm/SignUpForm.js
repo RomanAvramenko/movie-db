@@ -1,42 +1,134 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Button } from '../UI/Button/Button'
 import { Input } from '../UI/Input/Input'
 
-export const SignUpForm = () => {
-  return (
-    <form className="auth">
-      <label htmlFor="text" className="auth__label">Username</label>
-      <Input
-        type="text"
-        placeholder="Enter Username"
-        name="name"
-        className="auth__input"
-      />
-      <label htmlFor="email" className="auth__label">Email</label>
-      <Input
-        type="email"
-        placeholder="user@mail.com"
-        name="email"
-        className="auth__input"
-      />
+function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+export class SignUpForm extends Component {
 
-      <label htmlFor="password" className="auth__label">Password</label>
-      <Input
-        type="password"
-        placeholder="Enter Password"
-        name="password"
-        className="auth__input"
-      />
+  state = {
+    isFormValue: false,
+    formControls: {
+      userName: {
+        value: '',
+        type: 'text',
+        label: 'User Name',
+        errorMessage: 'This Username Already Exists',
+        placeholder: "Enter Username",
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          email: true
+        }
+      },
+      email: {
+        value: '',
+        type: 'email',
+        label: 'Email',
+        errorMessage: 'Enter the correct email',
+        placeholder: "user@mail.com",
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          email: true
+        }
+      },
+      password: {
+        value: '',
+        type: 'password',
+        label: 'Password',
+        errorMessage: 'Enter the correct password',
+        placeholder: "Enter Password",
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          minLength: 6
+        }
+      },
+      passConf: {
+        value: '',
+        type: 'password',
+        label: 'Confirm Password',
+        errorMessage: 'Confirm the password',
+        placeholder: "Confirm Password",
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          minLength: 6
+        }
+      }
+    }
+  }
 
-      <label htmlFor="password-repeat" className="auth__label">Confirm Password</label>
-      <Input
-        type="password"
-        placeholder="Confirm Password"
-        name="password-repeat"
-        className="auth__input"
-      />
+  submitHandler = (e) => {
+    e.preventDefault()
+  }
 
-      <Button className="auth__button" title="Registration"/>
-    </form>
-  )
+  validateControl(value, validation) {
+    if (!validation) {
+      return true
+    }
+    let isValid = true
+    if (validation.required) {
+      isValid = value.trim() !== '' && isValid
+    }
+    if (validation.email) {
+      isValid = validateEmail(value) && isValid
+    }
+    if (validation.minLength) {
+      isValid = value.length >= validation.minLength && isValid
+    }
+    return isValid
+  }
+
+  onChangeHandler = (event, controlName) => {
+    const formControls = { ...this.state.formControls }
+    const control = { ...formControls[controlName] }
+    control.value = event.target.value
+    control.touched = true
+    control.valid = this.validateControl(control.value, control.validation)
+    formControls[controlName] = control
+    let isFormValid = true
+    Object.keys(formControls).forEach(name => {
+      isFormValid = formControls[name].valid && isFormValid
+    })
+    this.setState({
+      formControls, isFormValid
+    })
+  }
+
+  renderInputs() {
+    return Object.keys(this.state.formControls).map((controlName, index) => {
+      const control = this.state.formControls[controlName]
+      return (
+        <Input
+          key={controlName + index}
+          type={control.type}
+          value={control.value}
+          valid={control.valid}
+          touched={control.touched}
+          label={control.label}
+          placeholder={control.placeholder}
+          shouldValidate={!!control.validation}
+          errorMessage={control.errorMessage}
+          onChange={(event) => this.onChangeHandler(event, controlName)}
+        />
+      )
+    })
+  }
+
+  render() {
+    return (
+      <form className="auth" >
+        {this.renderInputs()}
+        < Button className="auth__button" title="Registration" />
+      </form>
+    )
+  }
 }

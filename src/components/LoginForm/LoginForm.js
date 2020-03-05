@@ -1,29 +1,68 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './LoginForm.scss'
 import { Button } from '../UI/Button/Button'
 import { Input } from '../UI/Input/Input'
 
-export const LoginForm = () => {
+export class LoginForm extends Component {
 
-  return (
-    <form className="auth">
-      <label htmlFor="username" className="auth__label">Username</label>
-      <Input
-        type="text"
-        placeholder="Enter Username"
-        name="username"
-        className="auth__input"
-      />
+  state = {
+    isFormValue: false,
+    formControls: {
+      userName: {
+        value: '',
+        type: 'text',
+        label: 'User Name',
+        errorMessage: 'This Username Already Exists',
+        placeholder: "Enter Username",
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          email: true
+        }
+      },
+      password: {
+        value: '',
+        type: 'password',
+        label: 'Password',
+        errorMessage: 'Enter the correct password',
+        placeholder: "Enter Password",
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          minLength: 6
+        }
+      },
+    }
+  }
 
-      <label htmlFor="password" className="auth__label">Password</label>
-      <Input
-        type="password"
-        placeholder="Enter Password"
-        name="password"
-        className="auth__input"
-      />
+  renderInputs() {
+    return Object.keys(this.state.formControls).map((controlName, index) => {
+      const control = this.state.formControls[controlName]
+      return (
+        <Input
+          key={controlName + index}
+          type={control.type}
+          value={control.value}
+          valid={control.valid}
+          touched={control.touched}
+          label={control.label}
+          placeholder={control.placeholder}
+          shouldValidate={!!control.validation}
+          errorMessage={control.errorMessage}
+          onChange={(event) => this.onChangeHandler(event, controlName)}
+        />
+      )
+    })
+  }
 
-      <Button className="auth__button">Login</Button>
-    </form>
-  )
+  render() {
+    return (
+      <form className="auth" >
+        {this.renderInputs()}
+        <Button className="auth__button">Login</Button>
+      </form>
+    )
+  }
 }
