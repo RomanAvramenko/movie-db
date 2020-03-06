@@ -1,25 +1,14 @@
 import React from 'react'
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { getSearchData } from '../../store/actions/search'
 import "./SearchBar.scss"
-import { API_KEY, SEARCH_URL } from '../../constants';
 
 class SearchBar extends React.Component {
 
   state = {
     isOpen: "close",
-    searchResponse: [],
     currentItem: null,
-  }
-
-  getData = async (name) => {
-    const url = `${SEARCH_URL}?${API_KEY}&language=en-US&query=${name}&page=1&include_adult=false`;
-    await axios
-      .get(url)
-      .then(result => this.setState({ searchResponse: result.data.results }))
-      .catch(e => { console.log(e.config) });
   }
 
   inputHandler = e => {
@@ -31,7 +20,6 @@ class SearchBar extends React.Component {
   searchHandler = e => {
     const { text } = this.state.currentItem
     this.props.searchResp(text)
-    this.getData(text)
     e.target.reset()
     e.preventDefault()
   }
@@ -51,7 +39,9 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    const { isOpen, searchResponse } = this.state;
+    const { isOpen } = this.state;
+    const { searchResult, loading } = this.props
+    console.log(searchResult);
     return (
       <>
         <form onSubmit={this.searchHandler}>
@@ -71,11 +61,8 @@ class SearchBar extends React.Component {
             <i className="fas fa-search" ></i>
           </label>
         </form>
-        {searchResponse.length > 0 &&
-          <Redirect to={{
-            pathname: `/result`,
-            state: { searchResponse }
-          }} />
+        {loading &&
+          <Redirect to='/result' />
         }
       </>
     )
@@ -84,7 +71,8 @@ class SearchBar extends React.Component {
 
 const mapStateToProps = ({ searchRes }) => {
   return {
-    searchResp: searchRes.searchResults
+    searchResult: searchRes.searchResults,
+    loading: searchRes.loading
   }
 }
 

@@ -2,16 +2,17 @@ import React from 'react'
 import { genres } from '../../genres'
 import './SearchList.scss'
 import placeholder from '../../assets/images/placeholder.jpg'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop'
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux'
 
-export const SearchList = ({results}) => {
+export const SearchList = withRouter(() => {
+  const res = useSelector(state => state.searchRes.searchResults)
   return (
     <div className="search" >
       <ScrollToTop />
       <div className="search__wrapper">
-        {results.map(item => {
+        {res.map(item => {
           const { title, overview, poster_path,
             genre_ids, vote_average,
             id, release_date
@@ -52,8 +53,4 @@ export const SearchList = ({results}) => {
       </div>
     </div>
   )
-}
-
-SearchList.propTypes = {
-  results: PropTypes.arrayOf(PropTypes.object.isRequired)
-}
+})

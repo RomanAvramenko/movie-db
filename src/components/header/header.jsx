@@ -52,6 +52,7 @@ class Header extends Component {
     const {
       backdrop_path, title, genre_ids, id
     } = this.props.data[this.state.currentMovieIndex];
+    const trailer = Math.floor(Math.random() * (this.props.trailerRes.length - 1))
     const bgImage = backdrop_path === null
       ? { backgroundColor: 'rgba(0, 0, 0, 0.4)' }
       : { backgroundImage: `url(https://image.tmdb.org/t/p/w1280${backdrop_path}` }
@@ -62,7 +63,7 @@ class Header extends Component {
             show={this.state.show}
             handleClose={this.hideModal}
           >
-            <Trailer trailerKey={this.props.trailerRes[0].key} />
+            <Trailer trailerKey={this.props.trailerRes[trailer].key} />
           </Modal>
           : null
         }

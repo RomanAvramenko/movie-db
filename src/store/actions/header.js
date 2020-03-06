@@ -13,7 +13,7 @@ export const getData = (id) => {
         const idVideo = result.data.results[id].id;
         dispatch(getVideo(idVideo))
       })
-      .catch(e => { console.log(e.config) });
+      .catch(e => { dispatch(headerDataFailure(e.config)) });
   }
 }
 

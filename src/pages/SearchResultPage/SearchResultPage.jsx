@@ -4,11 +4,11 @@ import Footer from '../../components/Footer/Footer';
 import { SearchList } from '../../components/SearchList/SearchList';
 
 
-export const SearchResultPage = ({ location }) => {
+export const SearchResultPage = () => {
 	return (
 		<React.Fragment>
 			<NavBar />
-			<SearchList results={location.state.searchResponse} />
+			<SearchList />
 			<Footer />
 		</React.Fragment>
 	)

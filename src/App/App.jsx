@@ -5,20 +5,23 @@ import { MainPage } from '../pages/MainPage/MainPage'
 import { InfoPage } from '../pages/InfoPage/InfoPage'
 import { SearchResultPage } from '../pages/SearchResultPage/SearchResultPage';
 import { Provider } from 'react-redux';
-import { store } from '../store/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from '../store/store';
 
 export const App = () => {
   return (
     <div className="App">
       <Provider store={store}>
-        <Router>
-          <Switch>
-            <Route path="/" exact component={MainPage} />
-            <Route path="/result" component={SearchResultPage} />
-            <Route path="/details" component={InfoPage} />
-            <Redirect to={'/'} />
-          </Switch>
-        </Router>
+        <PersistGate loading={null} persistor={persistor}>
+          <Router>
+            <Switch>
+              <Route path="/" exact component={MainPage} />
+              <Route path="/result" component={SearchResultPage} />
+              <Route path="/details" component={InfoPage} />
+              <Redirect to={'/'} />
+            </Switch>
+          </Router>
+        </PersistGate>
       </Provider>
     </div>
   );

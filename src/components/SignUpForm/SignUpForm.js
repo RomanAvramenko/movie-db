@@ -127,7 +127,7 @@ export class SignUpForm extends Component {
     return (
       <form className="auth" >
         {this.renderInputs()}
-        < Button className="auth__button" title="Registration" />
+        <Button className="auth__button" title="Registration" />
       </form>
     )
   }
