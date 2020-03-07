@@ -3,12 +3,13 @@ import { genres } from '../../genres'
 import placeholder from '../../assets/images/placeholder.jpg'
 import './TileItem.scss'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux'
 
-export const TileItem = ({ results }) => {
+export const TileItem = () => {
+  const {response} = useSelector(state => state.catalog)
   return (
     <div className="tile">
-      {results.map(item => {
+      {response.map(item => {
         const { id, poster_path, title, genre_ids, vote_average, release_date } = item;
         let poster = poster_path === null
           ? { backgroundImage: `url(${placeholder})` }
@@ -33,8 +34,4 @@ export const TileItem = ({ results }) => {
       })}
     </div>
   )
-}
-
-TileItem.propTypes = {
-  results: PropTypes.arrayOf(PropTypes.object.isRequired)
 }

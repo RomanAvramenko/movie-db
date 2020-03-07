@@ -51,7 +51,7 @@ class Catalog extends React.Component {
   render() {
     const { response } = this.props
     const loader = <Loading key={Math.random * 100} />
-    const result = response ? <TileItem results={response} /> : loader;
+    const result = response ? <TileItem/> : loader;
     return (
       <section className="catalog">
         <ScrollToTop />
