@@ -1,84 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getSearchData } from '../../store/actions/search'
 import "./SearchBar.scss"
 
-class SearchBar extends React.Component {
+export const SearchBar = () => {
 
-  state = {
-    isOpen: "close",
-    currentItem: null,
-  }
+  const dispatch = useDispatch()
+  const loading = useSelector(state => state.searchRes.loading)
+  const [open, setOpen] = useState("close")
+  const [current, setCurrent] = useState(null)
 
-  inputHandler = e => {
+  const inputHandler = e => {
     const itemText = e.target.value.toLowerCase();
-    const currentItem = { text: itemText };
-    this.setState({ currentItem });
+    setCurrent(itemText);
   }
 
-  searchHandler = e => {
-    const { text } = this.state.currentItem
-    this.props.searchResp(text)
+  const searchHandler = e => {
+    dispatch(getSearchData(current))
     e.target.reset()
     e.preventDefault()
   }
 
-  onClickHandler = () => {
-    if (this.state.isOpen !== "open") {
-      this.setState({
-        isOpen: "open"
-      })
-    }
-  }
+  const onClickHandler = () => open !== "open" && setOpen("open")
 
-  onBlurHandler = () => {
-    this.setState({
-      isOpen: "close"
-    })
-  }
+  const onBlurHandler = () => setOpen("close")
 
-  render() {
-    const { isOpen } = this.state;
-    const { searchResult, loading } = this.props
-    console.log(searchResult);
-    return (
-      <>
-        <form onSubmit={this.searchHandler}>
-          <label
-            id="searchBar__label"
-            htmlFor="search"
-            className={isOpen}
-            onClick={this.onClickHandler}
-            onBlur={this.onBlurHandler}>
-            <input
-              className="searchBar__input"
-              type="text"
-              placeholder="Search"
-              value={this.currentItem}
-              onChange={this.inputHandler}
-            />
-            <i className="fas fa-search" ></i>
-          </label>
-        </form>
-        {loading &&
-          <Redirect to='/result' />
-        }
-      </>
-    )
-  }
+  return (
+    <>
+      <form onSubmit={searchHandler}>
+        <label
+          id="searchBar__label"
+          htmlFor="search"
+          className={open}
+          onClick={onClickHandler}
+          onBlur={onBlurHandler}>
+          <input
+            className="searchBar__input"
+            type="text"
+            placeholder="Search"
+            onChange={inputHandler}
+          />
+          <i className="fas fa-search" ></i>
+        </label>
+      </form>
+      {loading &&
+        <Redirect to='/result' />
+      }
+    </>
+  )
 }
-
-const mapStateToProps = ({ searchRes }) => {
-  return {
-    searchResult: searchRes.searchResults,
-    loading: searchRes.loading
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return { searchResp: name => dispatch(getSearchData(name)) }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
