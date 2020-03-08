@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import './LoginForm.scss'
+import { reduxForm } from 'redux-form'
 import { Button } from '../UI/Button/Button'
 import { Input } from '../UI/Input/Input'
-
-export class LoginForm extends Component {
+import './LoginForm.scss'
+class LoginForm extends Component {
 
   state = {
     isFormValue: false,
@@ -31,10 +31,40 @@ export class LoginForm extends Component {
         touched: false,
         validation: {
           required: true,
-          minLength: 6
+          minLength: 8
         }
       },
     }
+  }
+
+  onChangeHandler = (event, controlName) => {
+    const formControls = { ...this.state.formControls }
+    const control = { ...formControls[controlName] }
+    control.value = event.target.value
+    control.touched = true
+    control.valid = this.validateControl(control.value, control.validation)
+    formControls[controlName] = control
+    let isFormValid = true
+    Object.keys(formControls).forEach(name => {
+      isFormValid = formControls[name].valid && isFormValid
+    })
+    this.setState({
+      formControls, isFormValid
+    })
+  }
+
+  validateControl(value, validation) {
+    if (!validation) {
+      return true
+    }
+    let isValid = true
+    if (validation.required) {
+      isValid = value.trim() !== '' && isValid
+    }
+    if (validation.minLength) {
+      isValid = value.length >= validation.minLength && isValid
+    }
+    return isValid
   }
 
   renderInputs() {
@@ -66,3 +96,10 @@ export class LoginForm extends Component {
     )
   }
 }
+
+LoginForm = reduxForm({
+  form: 'login'
+})(LoginForm)
+
+
+export default LoginForm

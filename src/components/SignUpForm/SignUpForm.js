@@ -47,7 +47,7 @@ export class SignUpForm extends Component {
         touched: false,
         validation: {
           required: true,
-          minLength: 6
+          minLength: 8
         }
       },
       passConf: {
