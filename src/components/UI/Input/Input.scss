@@ -6,4 +6,9 @@
     height: 2.5em;
     font-size: 1.2em;
     padding-left: 1em;
+    width: 100%;
+
+    &.error {
+        border: 2px solid #ff0079;
+    }
 }
