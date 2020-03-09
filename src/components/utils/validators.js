@@ -1,10 +1,23 @@
 export const required = value => {
-    if (value) return undefined
-
-    return "Field is Required!"
+  return value
+    ? undefined
+    : "Field is Required!"
 }
 
 export const minLength = value => {
-    if (value.length < 8) return "Min length is 8 symbols"
-    return undefined
+  return value && value.length < 8
+    ? `Must be 8 characters or more`
+    : undefined
+}
+
+export const email = value => {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return value && !re.test(String(value).toLowerCase())
+    ? 'Invalid email address'
+    : undefined
+}
+export const confirmPass = (values, allValues) => {
+  if (allValues.password !== allValues.confirm) {
+    return 'Password mismatched';
+  }
 }

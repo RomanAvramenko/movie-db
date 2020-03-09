@@ -3,7 +3,7 @@ import './Input.scss'
 
 export const Input = ({ input, label, type, meta: { touched, error } }) => {
   const hasError = (touched && error)
-  const inputClass = hasError ? ("input" + " error") : "input"
+  const inputClass = hasError ? ("input error") : "input"
   return (
     <>
       <label className="auth__label">{label}</label>

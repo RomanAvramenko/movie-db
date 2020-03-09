@@ -2,7 +2,7 @@ import React from 'react'
 import { reduxForm, Field, Form } from 'redux-form'
 import './LoginForm.scss'
 import submit from './submit'
-import {required} from '../utils/validators'
+import { required } from '../utils/validators'
 import { Input } from '../UI/Input/Input'
 
 const LoginForm = props => {
