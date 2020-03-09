@@ -1,24 +1,30 @@
 import { SubmissionError } from 'redux-form'
+import axios from 'axios'
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-function submit(values) {
-  return sleep(1000).then(() => {
-    // simulate server latency
-    if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
-      throw new SubmissionError({
-        username: 'User does not exist',
-        _error: 'Login failed!'
-      })
-    } else if (values.password !== '12345678') {
-      throw new SubmissionError({
-        password: 'Wrong password',
-        _error: 'Login failed!'
-      })
-    } else {
-      window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
-    }
-  })
+export const signUp = async (values) => {
+  const signUpData = {
+    email: values.email,
+    password: values.password,
+    returnSecureToken: true
+  }
+  try {
+    const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDbcN_rzgVmqLsfTCC-BxxqQudubKDGTSo', signUpData)
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export default submit
+export const signIn = async (values) => {
+  const signInData = {
+    email: values.username,
+    password: values.password,
+    returnSecureToken: true
+  }
+  try {
+    const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDbcN_rzgVmqLsfTCC-BxxqQudubKDGTSo', signInData)
+    console.log(response);
+  } catch (e) {
+    console.log(e);
+  }
+}

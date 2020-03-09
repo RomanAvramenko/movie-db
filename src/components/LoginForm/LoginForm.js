@@ -1,14 +1,14 @@
 import React from 'react'
 import { reduxForm, Field, Form } from 'redux-form'
 import './LoginForm.scss'
-import submit from './submit'
-import { required } from '../utils/validators'
+import { signIn } from './submit'
+import { required, minLength } from '../utils/validators'
 import { Input } from '../UI/Input/Input'
 
 const LoginForm = props => {
   const { error, handleSubmit, submitting } = props
   return (
-    <Form onSubmit={handleSubmit(submit)} className="auth">
+    <Form onSubmit={handleSubmit(signIn)} className="auth">
       <Field
         name="username"
         type="text"
@@ -21,7 +21,7 @@ const LoginForm = props => {
         type="password"
         component={Input}
         label="Password"
-        validate={[required]}
+        validate={[required, minLength]}
       />
       {/* <Field
         name="Remember Me"

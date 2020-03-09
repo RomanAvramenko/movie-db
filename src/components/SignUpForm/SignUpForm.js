@@ -2,11 +2,12 @@ import React from 'react'
 import { Input } from '../UI/Input/Input'
 import { reduxForm, Form, Field } from 'redux-form'
 import { required, email, minLength, confirmPass } from '../utils/validators'
+import { signUp } from '../LoginForm/submit'
 
 const SignUpForm = props => {
-  const { error, submitting } = props
+  const { error, submitting, handleSubmit } = props
   return (
-    <Form onSubmit={() => { }} className="auth" >
+    <Form className="auth" onSubmit={handleSubmit(signUp)} >
       <Field
         name="username"
         type="text"
