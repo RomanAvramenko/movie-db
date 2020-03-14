@@ -1,15 +1,14 @@
 import React from 'react'
-
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from '../../components/Footer/Footer';
-import { Detailed } from '../../components/Detailed/Detailed';
+import { UserProfile } from '../../components/UserProfile/UserProfile';
 
-export const InfoPage = () => {
+export const UserPage = () => {
   return (
-    <React.Fragment>
+    <>
       <NavBar />
-      <Detailed />
+      <UserProfile />
       <Footer />
-    </React.Fragment>
+    </>
   )
 }

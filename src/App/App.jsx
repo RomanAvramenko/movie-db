@@ -6,6 +6,7 @@ import { InfoPage } from '../pages/InfoPage/InfoPage'
 import { SearchResultPage } from '../pages/SearchResultPage/SearchResultPage';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { UserPage } from '../pages/UserPage/UserPage';
 import { store, persistor } from '../store/store';
 
 export const App = () => {
@@ -18,6 +19,7 @@ export const App = () => {
               <Route path="/" exact component={MainPage} />
               <Route path="/result" component={SearchResultPage} />
               <Route path="/details" component={InfoPage} />
+              <Route path="/profile" component={UserPage} />
               <Redirect to={'/'} />
             </Switch>
           </Router>
