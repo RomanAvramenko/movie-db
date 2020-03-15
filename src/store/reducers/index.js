@@ -4,11 +4,13 @@ import { detailedReducer } from './detailInfo'
 import { catalogReducer } from './catalog'
 import { headerDataReducer } from './header'
 import { reducer as formReducer } from 'redux-form'
+import { loginReducer } from './login'
 
 export default combineReducers({
     searchRes: searchReducer,
     detailedInfo: detailedReducer,
     catalog: catalogReducer,
     header: headerDataReducer,
-    form: formReducer
+    form: formReducer,
+    login: loginReducer
 })

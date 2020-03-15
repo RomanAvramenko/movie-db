@@ -1,8 +1,6 @@
 import { SubmissionError } from 'redux-form'
 import axios from 'axios'
-
-const API_KEY = 'AIzaSyDbcN_rzgVmqLsfTCC-BxxqQudubKDGTSo'
-const URL_MAIN = 'https://identitytoolkit.googleapis.com/v1/accounts'
+import { FIREBASE_URL, FIREBASE_API_KEY } from '../../constants'
 
 export const signUp = async (values) => {
   const signUpData = {
@@ -12,7 +10,7 @@ export const signUp = async (values) => {
   }
   try {
     const response = await axios
-      .post(`${URL_MAIN}:signUp?key=${API_KEY}`, signUpData)
+      .post(`${FIREBASE_URL}:signUp?key=${FIREBASE_API_KEY}`, signUpData)
     console.log(response);
   } catch (e) {
     if (e.response.data.error.message === "EMAIL_EXISTS") {
@@ -22,32 +20,3 @@ export const signUp = async (values) => {
     }
   }
 }
-
-export const signIn = async (values) => {
-  const signInData = {
-    email: values.username,
-    password: values.password,
-    returnSecureToken: true
-  }
-  try {
-    const response = await axios
-      .post(`${URL_MAIN}:signInWithPassword?key=${API_KEY}`, signInData)
-    console.log(response);
-  } catch (e) {
-    if (e.response.data.error.message === "INVALID_EMAIL") {
-      throw new SubmissionError({
-        username: 'User does not exist',
-        _error: 'Login failed!'
-      })
-    }
-    if (e.response.data.error.message === "INVALID_PASSWORD") {
-      throw new SubmissionError({
-        password: 'Wrong password',
-        _error: 'Login failed!'
-      })
-    }
-    console.log(e.response.data.error)
-  }
-}
-
-

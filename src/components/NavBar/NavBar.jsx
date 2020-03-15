@@ -5,11 +5,15 @@ import { Modal } from '../Modal/Modal'
 import LoginForm from '../LoginForm/LoginForm'
 import SignUpForm from '../SignUpForm/SignUpForm'
 import "./NavBar.scss"
+import { useDispatch, useSelector } from 'react-redux'
+import { setLogin } from '../../store/actions/login'
 
 const NavBar = () => {
 
+  const dispatch = useDispatch()
+  const openLogin = useSelector(state=> state.login.open)
+
   const [open, setOpen] = useState(false)
-  const [openLogin, setOpenLogin] = useState(false)
   const [openSignUp, setOpenSignUp] = useState(false)
 
   const toggleSearch = (e) => {
@@ -19,7 +23,7 @@ const NavBar = () => {
 
   const toggleModal = (e) => {
     if (e.target.id === 'login') {
-      setOpenLogin(true)
+      dispatch(setLogin(true))
     }
     if (e.target.id === 'signup') {
       setOpenSignUp(true)
@@ -32,7 +36,7 @@ const NavBar = () => {
       {openLogin
         ? <Modal
           show={openLogin}
-          handleClose={() => setOpenLogin(false)}
+          handleClose={() => dispatch(setLogin(false))}
         >
           <LoginForm />
         </Modal>
