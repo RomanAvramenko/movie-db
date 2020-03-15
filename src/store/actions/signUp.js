@@ -1,5 +1,6 @@
 import { SubmissionError } from 'redux-form'
 import axios from 'axios'
+import { SIGNUP_FORM_OPEN } from "../types"
 import { FIREBASE_URL, FIREBASE_API_KEY } from '../../constants'
 
 export const signUp = async (values) => {
@@ -18,5 +19,12 @@ export const signUp = async (values) => {
         username: 'This email address already exists'
       })
     }
+  }
+}
+
+export const setSignUp = (value) => {
+  return {
+    type: SIGNUP_FORM_OPEN,
+    payload: value
   }
 }

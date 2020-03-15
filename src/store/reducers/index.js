@@ -5,6 +5,7 @@ import { catalogReducer } from './catalog'
 import { headerDataReducer } from './header'
 import { reducer as formReducer } from 'redux-form'
 import { loginReducer } from './login'
+import { signUpReducer } from './signUp'
 
 export default combineReducers({
     searchRes: searchReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     catalog: catalogReducer,
     header: headerDataReducer,
     form: formReducer,
-    login: loginReducer
+    login: loginReducer,
+    signUp: signUpReducer
 })
