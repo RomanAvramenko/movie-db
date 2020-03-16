@@ -2,7 +2,7 @@ import React from 'react'
 import { Input } from '../UI/Input/Input'
 import { reduxForm, Form, Field } from 'redux-form'
 import { required, email, minLength, confirmPass } from '../utils/validators'
-import { signUp } from '../../store/actions/signUp'
+import { signUp } from '../../store/actions/auth'
 
 const SignUpForm = props => {
   const { error, submitting, handleSubmit } = props

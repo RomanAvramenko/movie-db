@@ -2,7 +2,7 @@ import React from 'react'
 import { reduxForm, Field, Form } from 'redux-form'
 import { required, minLength } from '../utils/validators'
 import { Input } from '../UI/Input/Input'
-import { signIn } from '../../store/actions/login'
+import { signIn } from '../../store/actions/auth'
 import './LoginForm.scss'
 
 const LoginForm = props => {
@@ -23,12 +23,6 @@ const LoginForm = props => {
         label="Password"
         validate={[required, minLength]}
       />
-      {/* <Field
-        name="Remember Me"
-        type="checkbox"
-        component={Input}
-        label="Remember Me"
-      /> */}
       {error && <strong className="text">{error}</strong>}
       <div>
         <button type="submit" disabled={submitting} className="button">

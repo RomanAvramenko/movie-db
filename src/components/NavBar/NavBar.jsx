@@ -5,14 +5,13 @@ import { Modal } from '../Modal/Modal'
 import LoginForm from '../LoginForm/LoginForm'
 import SignUpForm from '../SignUpForm/SignUpForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLogin } from '../../store/actions/login'
-import { setSignUp } from '../../store/actions/signUp'
+import { setLogin, setSignUp } from '../../store/actions/auth'
 import "./NavBar.scss"
 
 const NavBar = () => {
 
   const dispatch = useDispatch()
-  const { login: { open: openLogin }, signUp: { open: openSignUp } } = useSelector(state => state)
+  const { logIn, signUp} = useSelector(state => state.auth)
 
   const [open, setOpen] = useState(false)
 
@@ -22,35 +21,29 @@ const NavBar = () => {
   }
 
   const toggleModal = (e) => {
-    if (e.target.id === 'login') {
-      dispatch(setLogin(true))
-    }
-    if (e.target.id === 'signup') {
-      dispatch(setSignUp(true))
-    }
+    const auth = e.target.id === 'login' ? setLogin : setSignUp
+    dispatch(auth(true))
     setOpen(!open)
+  }
+
+  const modalRender = () => {
+    const trigger = logIn || signUp
+    const auth = trigger === logIn ? setLogin : setSignUp
+    const form = trigger === logIn ? <LoginForm /> : <SignUpForm />
+    return (
+      trigger
+        ? <Modal
+          show={trigger}
+          handleClose={() => dispatch(auth(false))}
+        >
+          {form}
+        </Modal>
+        : null)
   }
 
   return (
     <>
-      {openLogin
-        ? <Modal
-          show={openLogin}
-          handleClose={() => dispatch(setLogin(false))}
-        >
-          <LoginForm />
-        </Modal>
-        : null
-      }
-      {openSignUp
-        ? <Modal
-          show={openSignUp}
-          handleClose={() => dispatch(setSignUp(false))}
-        >
-          <SignUpForm />
-        </Modal>
-        : null
-      }
+      {modalRender()}
       <nav className="menu__wrapper">
         <div className="menu__logo"><Link to="/">THEMOVIEBOX</Link></div>
         <div className="menu__toggle" >
@@ -63,8 +56,15 @@ const NavBar = () => {
           </button>
           <ul className={open ? "nav__menu checked" : "nav__menu"}>
             <li className="nav__menu__search"><SearchBar /></li>
-            <li className="nav__menu__item nav__menu__login" id="login" onClick={toggleModal}>LOG IN</li>
-            <li className="nav__menu__item nav__menu__item-color nav__menu__signin" id="signup" onClick={toggleModal}>SIGN UP</li>
+            <li
+              className="nav__menu__item nav__menu__login"
+              id="login"
+              onClick={toggleModal}
+            >LOG IN</li>
+            <li className="nav__menu__item nav__menu__item-color nav__menu__signin"
+              id="signup"
+              onClick={toggleModal}
+            >SIGN UP</li>
           </ul>
         </div>
       </nav>
