@@ -3,7 +3,7 @@ import { genres } from '../../genres'
 import './SearchList.scss'
 import placeholder from '../../assets/images/placeholder.jpg'
 import { Link, withRouter } from 'react-router-dom'
-import { ScrollToTop } from '../ScrollToTop/ScrollToTop'
+import { ScrollToTop } from '../UI/ScrollToTop/ScrollToTop'
 import { useSelector } from 'react-redux'
 
 export const SearchList = withRouter(() => {

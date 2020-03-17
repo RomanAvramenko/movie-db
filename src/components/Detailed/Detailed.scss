@@ -70,23 +70,28 @@
         display: grid;
         grid-template-rows: 1fr 4em;
 
-        &__btn {
-          display: grid;
-          justify-self: flex-end;
-          align-self: flex-end;
-          background-color: #ff0079;
-          padding: 0.6em;
-          color: #ffffff;
-          border-radius: 0.3em;
-          border: 2px solid rgba(0, 0, 0, 0);
-          transition: all .5s ease;
-          text-transform: uppercase;
+        &__btngroup {
+          display: flex;
+          justify-content: flex-end;
 
-          &:hover {
-            border: 2px solid #ffffff;
-            cursor: pointer;
-            box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
-            background-color: rgba(0, 0, 0, 0.5);
+          &__btn {
+            justify-self: flex-end;
+            align-self: flex-end;
+            background-color: #ff0079;
+            color: #ffffff;
+            padding: 0.6em;
+            border-radius: 0.3em;
+            border: 2px solid rgba(0, 0, 0, 0);
+            transition: all .5s ease;
+            text-transform: uppercase;
+            margin-left: 1em;
+
+            &:hover {
+              border: 2px solid #ffffff;
+              cursor: pointer;
+              box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
+              background-color: rgba(0, 0, 0, 0.5);
+            }
           }
         }
 
@@ -233,7 +238,7 @@
   }
 }
 
-@media (max-width: 769px)  {
+@media (max-width: 769px) {
   .detail {
     background-size: cover;
     position: relative;

@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 export const TileItem = () => {
-  const {response} = useSelector(state => state.catalog)
+  const { response } = useSelector(state => state.catalog)
+  const { token } = useSelector(state => state.auth)
+
   return (
     <div className="tile">
       {response.map(item => {
@@ -28,6 +30,7 @@ export const TileItem = () => {
               </div>
               <div className="tile-item__ratio"><i className="fas fa-star"></i>&nbsp;{vote_average}</div>
               <div className="tile-item__year">{release_date.slice(0, 4)}</div>
+              {token && <div className="tile-item__wish-list">+ wishlist</div>}
             </div>
           </Link>
         )

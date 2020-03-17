@@ -13,6 +13,7 @@ export const Header = () => {
   const [movieIndex, setMovieIndex] = useState(1)
   const dispatch = useDispatch()
   const { data, trailerRes } = useSelector(state => state.header)
+  const { token } = useSelector(state => state.auth)
 
   useEffect(() => {
     dispatch(getData(movieIndex))
@@ -73,7 +74,7 @@ export const Header = () => {
                 VIEW INFO
                 </Link>
             </button>
-            <button className="hero__content__btn hero__content__btn_unborder">+ ADD TO WISHLIST</button>
+            {token && <button className="hero__content__btn hero__content__btn_unborder">+ ADD TO WISHLIST</button>}
           </div>
         </div>
       </header >

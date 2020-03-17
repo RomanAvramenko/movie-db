@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Modal } from '../Modal/Modal';
 import { Trailer } from '../Trailer/Trailer';
-import { Loading } from '../Loading/Loading';
+import { Loading } from '../UI/Loading/Loading';
 import placeholder from '../../assets/images/placeholder.jpg'
 import { getDetailData } from '../../store/actions/detailInfo';
 import './Detailed.scss'
@@ -13,6 +13,8 @@ export const Detailed = () => {
   const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   const { response, creditsResp, trailerResp } = useSelector(state => state.detailedInfo)
+  const { token } = useSelector(state => state.auth)
+
   useEffect(() => {
     dispatch(getDetailData(location))
     // eslint-disable-next-line
@@ -123,11 +125,14 @@ export const Detailed = () => {
                 </ul>
               </li>
             </ul>
-            {
-              trailerResp.results.length === 0
-                ? null
-                : <div className='description__btn' onClick={showModal}>Watch Trailer</div>
-            }
+            <div className="description__btngroup">
+              {token && <div className='description__btngroup__btn'>+ wishlist</div>}
+              {
+                trailerResp.results.length === 0
+                  ? null
+                  : <div className='description__btngroup__btn' onClick={showModal}>Watch Trailer</div>
+              }
+            </div>
           </div>
         </div>
       </section>
