@@ -5,7 +5,7 @@ import { genres } from '../../genres'
 import { Trailer } from '../Trailer/Trailer'
 import { useDispatch, useSelector } from 'react-redux'
 import { getData, getVideo } from '../../store/actions/header'
-import { addToWishList, readWishList } from '../../store/actions/userPage'
+import { addToWishList} from '../../store/actions/userPage'
 import "./Header.scss"
 
 export const Header = () => {
@@ -76,7 +76,7 @@ export const Header = () => {
             </button>
             {token && <button
               className="hero__content__btn hero__content__btn_unborder"
-              onClick={() => { /* dispatch(addToWishList(userId, data[movieIndex].id)) */ dispatch(readWishList(userId)) }}>
+              onClick={() => { dispatch(addToWishList(userId, data[movieIndex].id)) }}>
               + ADD TO WISHLIST
             </button>}
           </div>

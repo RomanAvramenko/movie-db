@@ -3,11 +3,13 @@ import { genres } from '../../genres'
 import placeholder from '../../assets/images/placeholder.jpg'
 import './TileItem.scss'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { addToWishList } from '../../store/actions/userPage'
 
 export const TileItem = () => {
+  const dispatch = useDispatch()
   const { response } = useSelector(state => state.catalog)
-  const { token } = useSelector(state => state.auth)
+  const { token, userId } = useSelector(state => state.auth)
 
   return (
     <div className="tile">
@@ -30,7 +32,12 @@ export const TileItem = () => {
               </div>
               <div className="tile-item__ratio"><i className="fas fa-star"></i>&nbsp;{vote_average}</div>
               <div className="tile-item__year">{release_date.slice(0, 4)}</div>
-              {token && <div className="tile-item__wish-list">+ wishlist</div>}
+              {token &&
+                <div
+                  className="tile-item__wish-list"
+                  onClick={() => { dispatch(addToWishList(userId, id)) }}
+                >+ wishlist</div>
+              }
             </div>
           </Link>
         )

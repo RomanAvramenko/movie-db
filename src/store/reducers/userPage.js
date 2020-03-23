@@ -4,7 +4,7 @@ const initialState = {
   list: null
 }
 
-export const userPage = (state = initialState, action) => {
+export const userPageReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_PAGE_POST:
       return {

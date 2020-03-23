@@ -57,8 +57,11 @@ const NavBar = () => {
     )
     const logedIn = (
       <>
+        <li className="nav__user">
+          <div className="nav__user__img"></div>
+        </li>
         <li className="nav__menu__item nav__menu__item-color nav__menu__signin"
-          onClick={()=>dispatch(logout())}
+          onClick={() => dispatch(logout())}
         >Log Out</li>
       </>
     )

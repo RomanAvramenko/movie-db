@@ -7,13 +7,14 @@ import { Loading } from '../UI/Loading/Loading';
 import placeholder from '../../assets/images/placeholder.jpg'
 import { getDetailData } from '../../store/actions/detailInfo';
 import './Detailed.scss'
+import { addToWishList } from '../../store/actions/userPage';
 
 export const Detailed = () => {
   const location = useLocation()
   const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   const { response, creditsResp, trailerResp } = useSelector(state => state.detailedInfo)
-  const { token } = useSelector(state => state.auth)
+  const { token, userId } = useSelector(state => state.auth)
 
   useEffect(() => {
     dispatch(getDetailData(location))
@@ -37,7 +38,7 @@ export const Detailed = () => {
     )
   } else {
     window.scroll(0, 0)
-    const { title, overview, poster_path, runtime,
+    const {id, title, overview, poster_path, runtime,
       genres, production_companies, vote_average,
       backdrop_path, production_countries, release_date
     } = response;
@@ -126,7 +127,11 @@ export const Detailed = () => {
               </li>
             </ul>
             <div className="description__btngroup">
-              {token && <div className='description__btngroup__btn'>+ wishlist</div>}
+              {token &&
+                <div
+                  className='description__btngroup__btn'
+                  onClick={() => { dispatch(addToWishList(userId, id)) }}
+                >+ wishlist</div>}
               {
                 trailerResp.results.length === 0
                   ? null
