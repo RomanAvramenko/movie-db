@@ -11,6 +11,7 @@ export const autoLogout = (time) => {
 export const autoLogin = () => {
   return dispatch => {
     const token = localStorage.getItem('token')
+    const userId = localStorage.getItem('userId')
     if (!token) {
       dispatch(logout())
     } else {
@@ -18,7 +19,7 @@ export const autoLogin = () => {
       if (expirationDate <= new Date()) {
         dispatch(logout())
       } else {
-        dispatch(authSuccess(token))
+        dispatch(authSuccess(token, userId))
         dispatch(autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000))
       }
     }
@@ -34,10 +35,11 @@ export const logout = () => {
   }
 }
 
-export const authSuccess = (token) => {
+export const authSuccess = (token, userId) => {
   return {
     type: AUTH_SUCCESS,
-    token
+    token,
+    userId
   }
 }
 

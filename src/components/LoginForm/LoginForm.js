@@ -28,7 +28,7 @@ const LoginForm = props => {
       localStorage.setItem('userId', data.localId)
       localStorage.setItem('expirationDate', expirationDate)
 
-      dispatch(authSuccess(data.idToken))
+      dispatch(authSuccess(data.idToken, data.localId))
       dispatch(autoLogout(data.expiresIn))
       dispatch(setLogin(false))
 

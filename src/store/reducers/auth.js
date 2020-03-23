@@ -3,7 +3,8 @@ import { AUTH_LOGINFORM_OPEN, AUTH_SIGNUPFORM_OPEN, AUTH_SUCCESS, AUTH_LOGOUT } 
 const initialState = {
     logIn: false,
     signUp: false,
-    token: null
+    token: null,
+    userId: null
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -21,7 +22,8 @@ export const authReducer = (state = initialState, action) => {
         case AUTH_SUCCESS:
             return {
                 ...state,
-                token: action.token
+                token: action.token,
+                userId: action.userId
             }
         case AUTH_LOGOUT:
             return {

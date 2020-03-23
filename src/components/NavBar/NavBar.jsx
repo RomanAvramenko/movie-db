@@ -60,7 +60,6 @@ const NavBar = () => {
         <li className="nav__menu__item nav__menu__item-color nav__menu__signin"
           onClick={()=>dispatch(logout())}
         >Log Out</li>
-
       </>
     )
     return (

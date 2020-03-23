@@ -5,6 +5,7 @@ import { genres } from '../../genres'
 import { Trailer } from '../Trailer/Trailer'
 import { useDispatch, useSelector } from 'react-redux'
 import { getData, getVideo } from '../../store/actions/header'
+import { addToWishList, readWishList } from '../../store/actions/userPage'
 import "./Header.scss"
 
 export const Header = () => {
@@ -13,7 +14,7 @@ export const Header = () => {
   const [movieIndex, setMovieIndex] = useState(1)
   const dispatch = useDispatch()
   const { data, trailerRes } = useSelector(state => state.header)
-  const { token } = useSelector(state => state.auth)
+  const { token, userId } = useSelector(state => state.auth)
 
   useEffect(() => {
     dispatch(getData(movieIndex))
@@ -35,7 +36,6 @@ export const Header = () => {
   }
 
   const hideModal = () => setShow(false)
-
 
   if (data.length === 0) {
     return null
@@ -74,7 +74,11 @@ export const Header = () => {
                 VIEW INFO
                 </Link>
             </button>
-            {token && <button className="hero__content__btn hero__content__btn_unborder">+ ADD TO WISHLIST</button>}
+            {token && <button
+              className="hero__content__btn hero__content__btn_unborder"
+              onClick={() => { /* dispatch(addToWishList(userId, data[movieIndex].id)) */ dispatch(readWishList(userId)) }}>
+              + ADD TO WISHLIST
+            </button>}
           </div>
         </div>
       </header >
