@@ -17,13 +17,6 @@ export const UserProfile = () => {
           <p className="profile__container_title">Watch list</p>
           <ul className="profile__container__list">
             <li className="profile__container__list_item">lorem</li>
-            <li>lorem</li>
-            <li>lorem</li>
-            <li>lorem</li>
-            <li>lorem</li>
-            <li>lorem</li>
-            <li>lorem</li>
-            <li>lorem</li>
           </ul>
         </div>
       </div>

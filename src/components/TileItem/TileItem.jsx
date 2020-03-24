@@ -35,7 +35,7 @@ export const TileItem = () => {
               {token &&
                 <div
                   className="tile-item__wish-list"
-                  onClick={() => { dispatch(addToWishList(userId, id)) }}
+                  onClick={(e) => { dispatch(addToWishList(userId, id, e)) }}
                 >+ wishlist</div>
               }
             </div>

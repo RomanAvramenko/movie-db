@@ -130,7 +130,7 @@ export const Detailed = () => {
               {token &&
                 <div
                   className='description__btngroup__btn'
-                  onClick={() => { dispatch(addToWishList(userId, id)) }}
+                  onClick={(e) => { dispatch(addToWishList(userId, id, e)) }}
                 >+ wishlist</div>}
               {
                 trailerResp.results.length === 0

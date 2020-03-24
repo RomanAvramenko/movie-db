@@ -76,7 +76,7 @@ export const Header = () => {
             </button>
             {token && <button
               className="hero__content__btn hero__content__btn_unborder"
-              onClick={() => { dispatch(addToWishList(userId, data[movieIndex].id)) }}>
+              onClick={(e) => { dispatch(addToWishList(userId, data[movieIndex].id, e)) }}>
               + ADD TO WISHLIST
             </button>}
           </div>
