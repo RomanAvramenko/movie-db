@@ -18,3 +18,4 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 
 export const USER_PAGE_POST = 'USER_PAGE_POST'
 export const USER_PAGE_GET = 'USER_PAGE_GET'
+export const USER_PAGE_FETCH = 'USER_PAGE_FETCH'

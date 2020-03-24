@@ -1,7 +1,16 @@
-import React from 'react'
-import './UserProfile.scss'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "./UserProfile.scss";
+import { fetchWishList } from "../../store/actions/userPage";
 
 export const UserProfile = () => {
+  const dispatch = useDispatch();
+  const { list, responseList } = useSelector(state => state.userPage);
+
+  useEffect(() => {
+    dispatch(fetchWishList(list));
+  }, []);
+
   return (
     <div className="profile">
       <div className="profile__wrapper">
@@ -16,10 +25,11 @@ export const UserProfile = () => {
         <div className="profile__container">
           <p className="profile__container_title">Watch list</p>
           <ul className="profile__container__list">
+            {responseList.map(item=> console.log(item))}
             <li className="profile__container__list_item">lorem</li>
           </ul>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

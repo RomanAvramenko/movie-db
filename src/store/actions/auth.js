@@ -1,4 +1,5 @@
 import { AUTH_LOGINFORM_OPEN, AUTH_SIGNUPFORM_OPEN, AUTH_LOGOUT, AUTH_SUCCESS } from "../types"
+import { readWishList } from "./userPage"
 
 export const autoLogout = (time) => {
   return dispatch => {
@@ -20,6 +21,7 @@ export const autoLogin = () => {
         dispatch(logout())
       } else {
         dispatch(authSuccess(token, userId))
+        dispatch(readWishList(userId))
         dispatch(autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000))
       }
     }
