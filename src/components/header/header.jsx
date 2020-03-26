@@ -5,7 +5,7 @@ import { genres } from '../../genres'
 import { Trailer } from '../Trailer/Trailer'
 import { useDispatch, useSelector } from 'react-redux'
 import { getData, getVideo } from '../../store/actions/header'
-import { addToWishList} from '../../store/actions/userPage'
+import { addToWishList} from '../../store/actions/auth'
 import "./Header.scss"
 
 export const Header = () => {

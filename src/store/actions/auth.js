@@ -3,9 +3,15 @@ import {
   AUTH_SIGNUPFORM_OPEN,
   AUTH_LOGOUT,
   AUTH_SUCCESS,
-  AUTH_GET_PAGE, 
+  AUTH_GET_PAGE,
+  AUTH_USER_PAGE_POST,
+  AUTH_USER_PAGE_FETCH
 } from "../types";
 import axios from "axios";
+import { store } from "../store";
+import { BASE_URL, API_KEY } from "../../constants";
+
+const URL = "https://the-movie-box-d0ca7.firebaseio.com/users";
 
 export const autoLogout = time => {
   return dispatch => {
@@ -27,7 +33,6 @@ export const autoLogin = () => {
         dispatch(logout());
       } else {
         dispatch(authSuccess(token, userId));
-        dispatch(readWishList(userId));
         dispatch(
           autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000)
         );
@@ -53,16 +58,67 @@ export const authSuccess = (token, userId) => {
   };
 };
 
+export const addToWishList = (userId, movieId, event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  return async dispatch => {
+    await dispatch(readWishList(userId));
+    if (
+      store.getState().auth.list.length > 0 &&
+      !store.getState().auth.list.some(item => item === movieId)
+    ) {
+      await axios.post(`${URL}/${userId}.json`, movieId);
+      dispatch({
+        type: AUTH_USER_PAGE_POST
+      });
+    } else if (store.getState().auth.list.length === 0) {
+      await axios.post(`${URL}/${userId}.json`, movieId);
+      dispatch({
+        type: AUTH_USER_PAGE_POST
+      });
+    }
+  };
+};
+
 export const readWishList = id => {
   return async dispatch => {
-    await axios
-      .get(`https://the-movie-box-d0ca7.firebaseio.com/users/${id}.json`)
-      .then(response => {
+    await axios.get(`${URL}/${id}.json`).then(response => {
+      if (response.data) {
         dispatch({
           type: AUTH_GET_PAGE,
-          payload: response.data
+          payload: Object.values(response.data)
         });
+      }
+    });
+  };
+};
+
+export const fetchWishList = itemList => {
+  return dispatch => {
+    if (itemList) {
+      itemList.map(async item => {
+        return await axios
+          .get(`${BASE_URL}/${item}?${API_KEY}&language=en-US`)
+          .then(response => {
+            if (
+              !store
+                .getState()
+                .auth.responseList.some(
+                  item => item.id === response.data.id
+                )
+            ) {
+              return dispatch(loadWishListData(response.data));
+            }
+          });
       });
+    }
+  };
+};
+
+const loadWishListData = data => {
+  return {
+    type: AUTH_USER_PAGE_FETCH,
+    payload: data
   };
 };
 

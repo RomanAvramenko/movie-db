@@ -58,7 +58,13 @@ const NavBar = () => {
     const logedIn = (
       <>
         <li className="nav__user">
-          <Link to="/profile" className="nav__user__img" style={{backgroundImage:`url(https://avatars0.githubusercontent.com/u/38329169?s=460&u=edcdad44948e21f363c9e2aa7e895f3d4607368e&v=4)`}} />
+          <Link
+            to="/profile"
+            className="nav__user__img"
+            style={{
+              backgroundImage: `url(https://avatars0.githubusercontent.com/u/38329169?s=460&u=edcdad44948e21f363c9e2aa7e895f3d4607368e&v=4)`
+            }}
+          />
         </li>
         <li
           className="nav__menu__item nav__menu__item-color nav__menu__signin"

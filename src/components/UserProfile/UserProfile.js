@@ -1,19 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchWishList } from "../../store/actions/userPage";
-import "./UserProfile.scss";
 import placeholder from "../../assets/images/placeholder.jpg";
+import { readWishList, fetchWishList } from "../../store/actions/auth";
+import "./UserProfile.scss";
 
 export const UserProfile = () => {
   const dispatch = useDispatch();
-  const {
-    auth: { list },
-    userPage: { responseList }
-  } = useSelector(state => state);
+  const { list, userId, responseList } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    dispatch(readWishList(userId));
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     dispatch(fetchWishList(list));
+    // eslint-disable-next-line
   }, [list]);
 
   return (

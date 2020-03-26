@@ -4,10 +4,10 @@ import { useLocation } from 'react-router-dom';
 import { Modal } from '../Modal/Modal';
 import { Trailer } from '../Trailer/Trailer';
 import { Loading } from '../UI/Loading/Loading';
-import placeholder from '../../assets/images/placeholder.jpg'
 import { getDetailData } from '../../store/actions/detailInfo';
+import { addToWishList } from '../../store/actions/auth';
 import './Detailed.scss'
-import { addToWishList } from '../../store/actions/userPage';
+import placeholder from '../../assets/images/placeholder.jpg'
 
 export const Detailed = () => {
   const location = useLocation()

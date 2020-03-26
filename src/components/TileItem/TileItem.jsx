@@ -4,7 +4,7 @@ import placeholder from '../../assets/images/placeholder.jpg'
 import './TileItem.scss'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { addToWishList } from '../../store/actions/userPage'
+import { addToWishList } from '../../store/actions/auth'
 
 export const TileItem = () => {
   const dispatch = useDispatch()

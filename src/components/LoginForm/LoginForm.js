@@ -7,7 +7,7 @@ import { FIREBASE_URL, FIREBASE_API_KEY } from '../../constants'
 import axios from 'axios'
 import './LoginForm.scss'
 import { useDispatch } from 'react-redux'
-import { setLogin, authSuccess, autoLogout, readWishList } from '../../store/actions/auth'
+import { setLogin, authSuccess, autoLogout } from '../../store/actions/auth'
 
 const LoginForm = props => {
 
@@ -29,7 +29,6 @@ const LoginForm = props => {
       localStorage.setItem('expirationDate', expirationDate)
 
       dispatch(authSuccess(data.idToken, data.localId))
-      dispatch(readWishList(data.localId))
       dispatch(autoLogout(data.expiresIn))
       dispatch(setLogin(false))
 
