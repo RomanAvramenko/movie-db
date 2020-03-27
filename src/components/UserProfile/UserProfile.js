@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import placeholder from "../../assets/images/placeholder.jpg";
-import { readWishList, fetchWishList } from "../../store/actions/auth";
+import {
+  readWishList,
+  fetchWishList,
+  removeFromWishList
+} from "../../store/actions/auth";
 import "./UserProfile.scss";
 
 export const UserProfile = () => {
@@ -85,6 +89,11 @@ export const UserProfile = () => {
                       </ul>
                     </div>
                   </div>
+                  <button
+                    onClick={e => dispatch(removeFromWishList(userId, id, e))}
+                  >
+                    -
+                  </button>
                 </Link>
               );
               /* return <li className="profile__container__list_item">lorem</li>; */

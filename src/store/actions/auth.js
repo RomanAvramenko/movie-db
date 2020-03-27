@@ -5,7 +5,8 @@ import {
   AUTH_SUCCESS,
   AUTH_GET_PAGE,
   AUTH_USER_PAGE_POST,
-  AUTH_USER_PAGE_FETCH
+  AUTH_USER_PAGE_FETCH,
+  AUTH_USER_REMOVE_ITEM
 } from "../types";
 import axios from "axios";
 import { store } from "../store";
@@ -64,14 +65,14 @@ export const addToWishList = (userId, movieId, event) => {
   return async dispatch => {
     await dispatch(readWishList(userId));
     if (
-      store.getState().auth.list.length > 0 &&
-      !store.getState().auth.list.some(item => item === movieId)
+      Object.keys(store.getState().auth.list).length > 0 &&
+      !Object.values(store.getState().auth.list).some(item => item === movieId)
     ) {
       await axios.post(`${URL}/${userId}.json`, movieId);
       dispatch({
         type: AUTH_USER_PAGE_POST
       });
-    } else if (store.getState().auth.list.length === 0) {
+    } else if (Object.keys(store.getState().auth.list).length === 0) {
       await axios.post(`${URL}/${userId}.json`, movieId);
       dispatch({
         type: AUTH_USER_PAGE_POST
@@ -86,7 +87,7 @@ export const readWishList = id => {
       if (response.data) {
         dispatch({
           type: AUTH_GET_PAGE,
-          payload: Object.values(response.data)
+          payload: response.data
         });
       }
     });
@@ -96,22 +97,44 @@ export const readWishList = id => {
 export const fetchWishList = itemList => {
   return dispatch => {
     if (itemList) {
-      itemList.map(async item => {
+      Object.values(itemList).map(async item => {
         return await axios
           .get(`${BASE_URL}/${item}?${API_KEY}&language=en-US`)
           .then(response => {
             if (
               !store
                 .getState()
-                .auth.responseList.some(
-                  item => item.id === response.data.id
-                )
+                .auth.responseList.some(item => item.id === response.data.id)
             ) {
               return dispatch(loadWishListData(response.data));
             }
           });
       });
     }
+  };
+};
+
+export const removeFromWishList = (userId, itemId, event) => {
+  return dispatch => {
+    event.preventDefault();
+    event.stopPropagation();
+    for (let [key, value] of Object.entries(store.getState().auth.list)) {
+      console.log(key, value);
+
+      if (value === itemId) {
+        console.log(key, value);
+        axios.delete(`${URL}/${userId}/${key}.json`);
+      }
+    }
+    dispatch({
+      type: AUTH_USER_REMOVE_ITEM,
+      response: store
+        .getState()
+        .auth.responseList.filter(item => item.id !== itemId),
+      payload: Object.values(store.getState().auth.list).filter(
+        item => item !== itemId
+      )
+    });
   };
 };
 

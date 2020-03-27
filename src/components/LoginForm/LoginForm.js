@@ -10,7 +10,6 @@ import { useDispatch } from 'react-redux'
 import { setLogin, authSuccess, autoLogout } from '../../store/actions/auth'
 
 const LoginForm = props => {
-
   const { error, handleSubmit, submitting } = props
   const dispatch = useDispatch()
   const signIn = async (values) => {
