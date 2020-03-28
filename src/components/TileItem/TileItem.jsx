@@ -22,7 +22,7 @@ export const TileItem = () => {
           <Link to={`/details?id=${id}`} key={id}>
             <div className="tile-item">
               <div className="tile-item__pic">
-                <div style={poster}></div>
+                <div style={poster}/>
               </div>
               <div className="tile-item__discription">
                 <div className="tile-item__desc">

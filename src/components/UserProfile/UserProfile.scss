@@ -1,38 +1,106 @@
 .profile {
-    position: relative;
-    margin: 0 auto;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  background: rgba(50, 50, 50, 0.2);
+  display: flex;
+  &__wrapper {
+    max-width: 1200px;
+    left: 0;
+    right: 0;
     width: 100%;
-    background: rgba(50, 50, 50, .2);
+    margin: 0 auto;
+    margin-top: 6em;
     display: flex;
-
-    &__wrapper {
-        max-width: 1200px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        margin: 0 auto;
-        margin-top: 6em;
-        display: flex;
+  }
+  &__avatar {
+    margin-right: 3em;
+    &_img {
+      height: 15em;
     }
-
-    &__avatar {
-        margin-right: 3em;
-
-        &_img {
-            height: 15em;
-        }
-
-        &_name {
-            text-transform: uppercase;
-            font-size: 1.5em;
-        }
+    &_name {
+      text-transform: uppercase;
+      font-size: 1.5em;
     }
+  }
+  &__container {
+    &__item {
+      margin-top: 1em;
+      display: grid;
+      grid-template-columns: 12em 3fr 7em;
+      grid-template-rows: 3em 12em 3em;
+      grid-column-gap: 1em;
+      grid-template-areas:
+        "img title rating"
+        "img description ."
+        "img description button";
+    }
+    &__title {
+      grid-area: title;
+      font-size: 1.5em;
+      margin: 0.5rem;
+      color: #494c62;
+    }
+    &__rating {
+      grid-area: rating;
+      place-self: center;
+      color: #494c62;
+      &-big {
+        font-size: 1.5em;
+      }
+    }
+    &__img {
+      grid-area: img;
+      margin: 1em;
+      height: 15em;
+      width: 10em;
+      background-size: cover;
+      border-radius: 0.3em;
+    }
+    &__description {
+      grid-area: description;
+      margin: 0.5rem;
+      color: #494c62;
+      line-height: 1.5;
+    }
+    &__btn.button {
+      grid-area: button;
+      margin-top: 0;
+    }
+    .fa-star {
+      color: #ff0079;
+    }
+  }
+}
 
+@media (max-width: 769px) {
+  .profile {
     &__container {
-        &_title {
-            text-transform: uppercase;
-            font-size: 1.5em;
-
+      &__img {
+        height: 12em;
+        width: 8em;
+      }
+      &__item {
+        grid-column-gap: 0;
+      }
+      &__title {
+        font-size: 1.2em;
+      }
+      &__description {
+        line-height: 1.1;
+        &__plot {
+          display: -webkit-box;
+          -webkit-line-clamp: 6;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
+      }
+      &__rating {
+        font-size: 1em;
+        &-big {
+          font-size: 1em;
+        }
+      }
     }
+  }
 }

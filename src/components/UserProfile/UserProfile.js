@@ -8,6 +8,7 @@ import {
   removeFromWishList
 } from "../../store/actions/auth";
 import "./UserProfile.scss";
+import { ScrollToTop } from "../UI/ScrollToTop/ScrollToTop";
 
 export const UserProfile = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export const UserProfile = () => {
 
   return (
     <div className="profile">
+      <ScrollToTop />
       <div className="profile__wrapper">
         <div className="profile__avatar">
           <img
@@ -55,9 +57,9 @@ export const UserProfile = () => {
                     };
               return (
                 <Link to={`/details?id=${id}`} key={id}>
-                  <div className="search__item">
-                    <h1 className="search__title">{title}</h1>
-                    <span className="search__rating">
+                  <div className="profile__container__item">
+                    <h1 className="profile__container__title">{title}</h1>
+                    <span className="profile__container__rating">
                       <i className="fas fa-star search__rating-big"></i>
                       &nbsp;
                       <strong className="search__rating-big">
@@ -65,8 +67,11 @@ export const UserProfile = () => {
                       </strong>{" "}
                       / 10
                     </span>
-                    <div className="search__img" style={poster}></div>
-                    <div className="search__description">
+                    <div
+                      className="profile__container__img"
+                      style={poster}
+                    ></div>
+                    <div className="profile__container__description">
                       <ul>
                         {overview && (
                           <li className="search__description__plot">
@@ -88,12 +93,13 @@ export const UserProfile = () => {
                         )}
                       </ul>
                     </div>
+                    <button
+                      className="profile__container__btn button"
+                      onClick={e => dispatch(removeFromWishList(userId, id, e))}
+                    >
+                      Remove
+                    </button>
                   </div>
-                  <button
-                    onClick={e => dispatch(removeFromWishList(userId, id, e))}
-                  >
-                    -
-                  </button>
                 </Link>
               );
               /* return <li className="profile__container__list_item">lorem</li>; */

@@ -118,21 +118,21 @@ export const removeFromWishList = (userId, itemId, event) => {
   return dispatch => {
     event.preventDefault();
     event.stopPropagation();
-    for (let [key, value] of Object.entries(store.getState().auth.list)) {
+    Object.entries(store.getState().auth.list).forEach(([key, value]) => {
       console.log(key, value);
-
       if (value === itemId) {
-        console.log(key, value);
         axios.delete(`${URL}/${userId}/${key}.json`);
       }
-    }
+    });
     dispatch({
       type: AUTH_USER_REMOVE_ITEM,
       response: store
         .getState()
         .auth.responseList.filter(item => item.id !== itemId),
-      payload: Object.values(store.getState().auth.list).filter(
-        item => item !== itemId
+      payload: Object.fromEntries(
+        Object.entries(store.getState().auth.list).filter(
+          ([key, value]) => value !== itemId
+        )
       )
     });
   };
