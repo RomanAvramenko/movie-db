@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import placeholder from "../../assets/images/placeholder.jpg";
 import {
   readWishList,
@@ -12,7 +12,9 @@ import { ScrollToTop } from "../UI/ScrollToTop/ScrollToTop";
 
 export const UserProfile = () => {
   const dispatch = useDispatch();
-  const { list, userId, responseList } = useSelector(state => state.auth);
+  const { list, userId, responseList, token } = useSelector(
+    state => state.auth
+  );
 
   useEffect(() => {
     dispatch(readWishList(userId));
@@ -24,7 +26,7 @@ export const UserProfile = () => {
     // eslint-disable-next-line
   }, [list]);
 
-  return (
+  const renderProfile = (
     <div className="profile">
       <ScrollToTop />
       <div className="profile__wrapper">
@@ -102,11 +104,12 @@ export const UserProfile = () => {
                   </div>
                 </Link>
               );
-              /* return <li className="profile__container__list_item">lorem</li>; */
             })}
           </ul>
         </div>
       </div>
     </div>
   );
+
+  return !token ? <Redirect to="/" /> : renderProfile;
 };
