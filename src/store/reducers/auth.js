@@ -6,7 +6,7 @@ import {
   AUTH_GET_PAGE,
   AUTH_USER_PAGE_FETCH,
   AUTH_USER_PAGE_POST,
-  AUTH_USER_REMOVE_ITEM
+  AUTH_USER_REMOVE_ITEM,
 } from "../types";
 
 const initialState = {
@@ -15,7 +15,8 @@ const initialState = {
   token: null,
   userId: null,
   list: {},
-  responseList: []
+  userData: {},
+  responseList: [],
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -23,38 +24,39 @@ export const authReducer = (state = initialState, action) => {
     case AUTH_LOGINFORM_OPEN:
       return {
         ...state,
-        logIn: action.payload
+        logIn: action.payload,
       };
     case AUTH_SIGNUPFORM_OPEN:
       return {
         ...state,
-        signUp: action.payload
+        signUp: action.payload,
       };
     case AUTH_SUCCESS:
       return {
         ...state,
         token: action.token,
-        userId: action.userId
+        userId: action.userId,
       };
     case AUTH_USER_PAGE_POST:
       return {
-        ...state
+        ...state,
       };
     case AUTH_GET_PAGE:
       return {
         ...state,
-        list: action.payload
+        list: action.payload,
+        userData: action.userData,
       };
     case AUTH_USER_PAGE_FETCH:
       return {
         ...state,
-        responseList: [...state.responseList, action.payload]
+        responseList: [...state.responseList, action.payload],
       };
     case AUTH_USER_REMOVE_ITEM:
       return {
         ...state,
         responseList: action.response,
-        list: action.payload
+        list: action.payload,
       };
     case AUTH_LOGOUT:
       return {
@@ -62,7 +64,7 @@ export const authReducer = (state = initialState, action) => {
         token: null,
         userId: null,
         list: [],
-        responseList: []
+        responseList: [],
       };
     default:
       return state;

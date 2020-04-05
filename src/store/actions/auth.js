@@ -92,11 +92,12 @@ export const addToWishList = (userId, movieId, event) => {
 
 export const readWishList = (id) => {
   return async (dispatch) => {
-    await axios.get(`${URL}/${id}/watchList.json`).then((response) => {
+    await axios.get(`${URL}/${id}.json`).then((response) => {
       if (response.data) {
         dispatch({
           type: AUTH_GET_PAGE,
-          payload: response.data,
+          payload: response.data.watchList,
+          userData: response.data.userData
         });
       }
     });

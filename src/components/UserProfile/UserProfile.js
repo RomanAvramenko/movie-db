@@ -12,7 +12,7 @@ import { ScrollToTop } from "../UI/ScrollToTop/ScrollToTop";
 
 export const UserProfile = () => {
   const dispatch = useDispatch();
-  const { list, userId, responseList, token } = useSelector(
+  const { list, userId, responseList, token, userData } = useSelector(
     state => state.auth
   );
 
@@ -36,7 +36,7 @@ export const UserProfile = () => {
             alt=""
             className="profile__avatar_img"
           />
-          <p className="profile__avatar_name">Roman Avramenko</p>
+          <p className="profile__avatar_name">{Object.values(userData)}</p>
         </div>
         <div className="profile__container">
           <p className="profile__container__title">Watch list</p>

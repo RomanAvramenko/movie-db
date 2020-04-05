@@ -36,12 +36,11 @@ const SignUpForm = (props) => {
       )
       .then(dispatch(setSignUp(false)))
       .catch((e) => {
-        console.log(e.response);
-        /* if (e.response.data.error.message === "EMAIL_EXISTS") {
+        if (e.response.data.error.message === "EMAIL_EXISTS") {
           throw new SubmissionError({
             username: "This email address already exists",
           });
-        } */
+        }
       });
   };
   return (
