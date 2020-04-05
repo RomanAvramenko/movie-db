@@ -7,34 +7,42 @@ import {
   required,
   email,
   minLength,
-  confirmPass
+  confirmPass,
 } from "../../utils/validators";
 import { FIREBASE_URL, FIREBASE_API_KEY } from "../../constants";
 import { useDispatch } from "react-redux";
-import { setSignUp } from "../../store/actions/auth";
+import { setSignUp, userData } from "../../store/actions/auth";
 
-const SignUpForm = props => {
+const SignUpForm = (props) => {
   const { error, submitting, handleSubmit } = props;
   const dispatch = useDispatch();
-  const signUp = async values => {
+  const signUp = async (values) => {
     const signUpData = {
       email: values.email,
       password: values.password,
-      returnSecureToken: true
+      returnSecureToken: true,
     };
-    try {
-      await axios.post(
-        `${FIREBASE_URL}:signUp?key=${FIREBASE_API_KEY}`,
-        signUpData
-      );
-      dispatch(setSignUp(false));
-    } catch (e) {
-      if (e.response.data.error.message === "EMAIL_EXISTS") {
-        throw new SubmissionError({
-          username: "This email address already exists"
-        });
-      }
-    }
+    await axios
+      .post(`${FIREBASE_URL}:signUp?key=${FIREBASE_API_KEY}`, signUpData)
+      .then(
+        async (response) =>
+          await dispatch(
+            userData(
+              response.data.localId,
+              values.username,
+              response.data.idToken
+            )
+          )
+      )
+      .then(dispatch(setSignUp(false)))
+      .catch((e) => {
+        console.log(e.response);
+        /* if (e.response.data.error.message === "EMAIL_EXISTS") {
+          throw new SubmissionError({
+            username: "This email address already exists",
+          });
+        } */
+      });
   };
   return (
     <Form className="auth" onSubmit={handleSubmit(signUp)}>

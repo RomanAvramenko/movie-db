@@ -39,7 +39,7 @@ export const UserProfile = () => {
           <p className="profile__avatar_name">Roman Avramenko</p>
         </div>
         <div className="profile__container">
-          <p className="profile__container_title">Watch list</p>
+          <p className="profile__container__title">Watch list</p>
           <ul className="profile__container__list">
             {responseList.map(item => {
               const {

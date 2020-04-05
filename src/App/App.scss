@@ -1,0 +1,14 @@
+@media screen and (max-width: 575px) {
+  .nav__btn {
+    padding: 0 5px;
+  }
+  .header-content {
+    top: 40%;
+  }
+  .header-content__widget {
+    display: none;
+  }
+  .content__desc_genre {
+    word-spacing: 0.5em;
+  }
+}
