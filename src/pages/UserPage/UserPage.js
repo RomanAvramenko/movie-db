@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
 import NavBar from "../../components/NavBar/NavBar";
-import Footer from '../../components/Footer/Footer';
-import { UserProfile } from '../../components/UserProfile/UserProfile';
+import Footer from "../../components/Footer/Footer";
+import { UserProfileContainer } from "../../components/UserProfile/UserProfileContainer";
 
 export const UserPage = () => {
   return (
     <>
       <NavBar />
-      <UserProfile />
+      <UserProfileContainer />
       <Footer />
     </>
-  )
-}
+  );
+};

@@ -130,7 +130,7 @@ export const removeFromWishList = (userId, itemId, event) => {
     event.stopPropagation();
     Object.entries(store.getState().auth.list).forEach(([key, value]) => {
       if (value === itemId) {
-        axios.delete(`${URL}/${userId}/${key}/watchList.json`);
+        axios.delete(`${URL}/${userId}/${key}/watchList.json`)
       }
     });
     dispatch({

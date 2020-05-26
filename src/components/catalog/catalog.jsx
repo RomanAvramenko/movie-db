@@ -1,97 +1,107 @@
-import React from 'react';
-import axios from 'axios';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import InfiniteScroll from 'react-infinite-scroller';
-import { Loading } from '../UI/Loading/Loading';
-import { ScrollToTop } from '../UI/ScrollToTop/ScrollToTop';
-import { TileItem } from '../TileItem/TileItem';
-import { connect } from 'react-redux';
-import { catalogResults } from '../../store/actions/catalog';
-import { BASE_URL, API_KEY } from '../../constants';
-import './Catalog.scss';
-import '../styles/reactTabs.scss';
+import React from "react";
+import axios from "axios";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Loading } from "../UI/Loading/Loading";
+import { ScrollToTop } from "../UI/ScrollToTop/ScrollToTop";
+import { TileItem } from "../TileItem/TileItem";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  catalogResults,
+  setSearchSelector,
+  setCurrentPage,
+  setDataLength,
+  setTotalPages,
+  setHasMore,
+} from "../../store/actions/catalog";
+import { BASE_URL, API_KEY } from "../../constants";
+import { addToWishList } from "../../store/actions/auth";
+import InfiniteScroll from "react-infinite-scroll-component";
+import "./Catalog.scss";
+import "../styles/reactTabs.scss";
+import { useEffect } from "react";
 
+export const Catalog = () => {
+  const dispatch = useDispatch();
+  const {
+    catalog: {
+      response,
+      searchSelector,
+      currentPage,
+      dataLength,
+      totalPages,
+      hasMore,
+    },
+    auth: { userId, token },
+  } = useSelector((state) => state);
 
-class Catalog extends React.Component {
-  state = {
-    searchVars: '/popular',
-    currentPage: 0,
-    totalPages: null,
-    hasMore: true
-  }
+  const url = `${BASE_URL}${searchSelector}?${API_KEY}&language=en-US&page=${currentPage}`;
 
-  request = (page) => {
-    const url = `${BASE_URL}${this.state.searchVars}?${API_KEY}&language=en-US&page=${page}`;
+  useEffect(() => {
+    request();
+  }, [searchSelector]);
+
+  const request = () => {
     axios
       .get(url)
-      .then(result => {
-        if (this.state.currentPage === this.state.totalPages - 1) {
-          this.setState({ hasMore: false })
+      .then((result) => {
+        if (currentPage === totalPages - 1) {
+          dispatch(setHasMore(false));
         }
-        if (!this.props.response.some(i => i.id === result.data.results[0].id)) {
-          this.props.results([...this.props.response, ...result.data.results])
+        if (!response.some((i) => i.id === result.data.results[0].id)) {
+          dispatch(catalogResults([...response, ...result.data.results]));
         }
-        this.setState({
-          currentPage: page,
-          totalPages: result.data.total_pages
-        })
+        dispatch(setDataLength(result.data.results.length * currentPage));
+        dispatch(setCurrentPage(currentPage + 1));
+        dispatch(setTotalPages(result.data.total_pages));
       })
-      .catch(e => { console.log(e.config); });
-  }
+      .catch((e) => {
+        console.log(e.config);
+      });
+  };
 
-  changeSearchHandler = (newSearch) => {
-    window.scroll(0, 0)
-    this.props.results([])
-    this.setState({
-      searchVars: newSearch,
-      currentPage: 0
-    })
-  }
+  const changeSearchHandler = (newSearch) => {
+    window.scroll(0, 0);
+    dispatch(catalogResults([]));
+    dispatch(setSearchSelector(newSearch));
+    dispatch(setCurrentPage(1));
+  };
 
-  render() {
-    const { response } = this.props
-    const loader = <Loading key={Math.random * 100} />
-    const result = response ? <TileItem/> : loader;
-    return (
-      <section className="catalog">
-        <ScrollToTop />
-        <Tabs>
-          <TabList>
-            <Tab onClick={this.changeSearchHandler.bind(this, '/popular')}>Poular</Tab>
-            <Tab onClick={this.changeSearchHandler.bind(this, '/top_rated')}>Top Rated</Tab>
-            <Tab onClick={this.changeSearchHandler.bind(this, '/upcoming')}>New Arrivals</Tab>
-          </TabList>
-          <InfiniteScroll
-            pageStart={this.state.currentPage}
-            loadMore={this.request}
-            hasMore={this.state.hasMore}
-            loader={loader}
-          >
-            <TabPanel>
-              {result}
-            </TabPanel>
-            <TabPanel>
-              {result}
-            </TabPanel>
-            <TabPanel>
-              {result}
-            </TabPanel>
-          </InfiniteScroll>
-        </Tabs>
-      </section>
-    );
-  }
-}
+  const handleAddButton = (e, id) => {
+    dispatch(addToWishList(userId, id, e));
+  };
 
-const mapStateToProps = ({ catalog }) => {
-  return { response: catalog.response }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    results: responseData => dispatch(catalogResults(responseData))
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
+  const loader = <Loading key={Math.random * 100} />;
+  const result = response ? (
+    <TileItem
+      token={token}
+      response={response}
+      handleAddButton={handleAddButton}
+    />
+  ) : (
+    loader
+  );
+  return (
+    <section className="catalog">
+      <ScrollToTop />
+      <Tabs>
+        <TabList>
+          <Tab onClick={() => changeSearchHandler("/popular")}>Poular</Tab>
+          <Tab onClick={() => changeSearchHandler("/top_rated")}>Top Rated</Tab>
+          <Tab onClick={() => changeSearchHandler("/upcoming")}>
+            New Arrivals
+          </Tab>
+        </TabList>
+        <InfiniteScroll
+          dataLength={dataLength}
+          next={request}
+          hasMore={hasMore}
+          loader={loader}
+        >
+          <TabPanel>{result}</TabPanel>
+          <TabPanel>{result}</TabPanel>
+          <TabPanel>{result}</TabPanel>
+        </InfiniteScroll>
+      </Tabs>
+    </section>
+  );
+};
