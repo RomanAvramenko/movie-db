@@ -152,44 +152,49 @@
 }
 
 @media (max-width: 769px) {
-  .nav__menu {
-    position: absolute;
-    top: 2em;
-    right: 2em;
-    display: block;
-    height: 11em;
-    width: 15em;
-    border-radius: 0.5em;
-    list-style-type: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-
-    &.checked {
-      background-color: rgba(0, 0, 0, 0.5);
-      opacity: 1;
-      visibility: visible;
+  .nav {
+    &__user{
+      height: 3em;
     }
+    &__menu {
+      position: absolute;
+      top: 2em;
+      right: 2em;
+      display: block;
+      height: 11em;
+      width: 15em;
+      border-radius: 0.5em;
+      list-style-type: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 
-    &__item {
-      padding: 10px 0;
-      font-size: 1em;
-      margin: 0.5em;
-    }
+      &.checked {
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 1;
+        visibility: visible;
+      }
 
-    &__search {
-      margin: 0.5em;
-      text-align: center;
-    }
+      &__item {
+        padding: 10px 0;
+        font-size: 1em;
+        margin: 0.5em;
+      }
 
-    &__login {
-      text-align: center;
-      padding-left: 4.5em;
-    }
+      &__search {
+        margin: 0.5em;
+        text-align: center;
+      }
 
-    &__signin {
-      text-align: center;
-      padding-left: 4em;
+      &__login {
+        text-align: center;
+        padding-left: 4.5em;
+      }
+
+      &__signin {
+        text-align: center;
+        padding-left: 4em;
+      }
     }
   }
 }
