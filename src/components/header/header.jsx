@@ -4,8 +4,8 @@ import { Modal } from "../Modal/Modal";
 import { genres } from "../../genres";
 import { Trailer } from "../Trailer/Trailer";
 import { useDispatch, useSelector } from "react-redux";
-import { getData, getVideo } from "../../store/actions/header";
 import { addToWishList } from "../../store/actions/auth";
+import { headerDataStarted, headerTrailer } from "../../store/actions/header";
 import "./Header.scss";
 
 export const Header = () => {
@@ -18,7 +18,7 @@ export const Header = () => {
   } = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(getData(movieIndex));
+    dispatch(headerDataStarted(movieIndex));
     const intervalId = setInterval(timer, 7000);
     if (show === true) {
       clearInterval(intervalId);
@@ -33,10 +33,8 @@ export const Header = () => {
 
   const showModal = () => {
     setShow(true);
-    dispatch(getVideo(data[movieIndex].id));
+    dispatch(headerTrailer(data[movieIndex].id));
   };
-
-  const hideModal = () => setShow(false);
 
   if (data.length === 0) {
     return null;
@@ -52,7 +50,7 @@ export const Header = () => {
   return (
     <>
       {show ? (
-        <Modal show={show} handleClose={hideModal}>
+        <Modal show={show} handleClose={() => setShow(false)}>
           <Trailer trailerKey={trailerRes[trailer].key} />
         </Modal>
       ) : null}
