@@ -38,6 +38,7 @@ export const Catalog = () => {
 
   useEffect(() => {
     request();
+    // eslint-disable-next-line
   }, [searchSelector]);
 
   const request = () => {

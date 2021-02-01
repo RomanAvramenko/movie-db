@@ -25,8 +25,7 @@
       grid-template-rows: 0.5fr 3fr;
       grid-template-areas:
         "title title rating"
-        "poster description description"
-      ;
+        "poster description description";
 
       &__title {
         grid-area: title;
@@ -82,14 +81,14 @@
             padding: 0.6em;
             border-radius: 0.3em;
             border: 2px solid rgba(0, 0, 0, 0);
-            transition: all .5s ease;
+            transition: all 0.5s ease;
             text-transform: uppercase;
             margin-left: 1em;
 
             &:hover {
               border: 2px solid #ffffff;
               cursor: pointer;
-              box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
+              box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: 0.8);
               background-color: rgba(0, 0, 0, 0.5);
             }
           }
@@ -112,12 +111,12 @@
           }
 
           &__description {
-            font-size: .8em;
+            font-size: 0.8em;
           }
         }
       }
 
-      & .description>ul>li {
+      & .description > ul > li {
         margin-bottom: 1em;
       }
     }
@@ -147,8 +146,7 @@
       grid-template-rows: 4.5em 1fr;
       grid-template-areas:
         "title title rating"
-        "poster description description"
-      ;
+        "poster description description";
 
       &__title {
         grid-area: title;
@@ -190,29 +188,32 @@
         font-size: 0.9em;
         display: grid;
         grid-template-rows: 1fr 4em;
+        &__btngroup {
+          display: flex;
+          justify-content: flex-end;
 
-        &__btn {
-          display: grid;
-          justify-self: self-end;
-          align-self: self-end;
-          margin-right: 1em;
-          margin-bottom: 1em;
-          background-color: #ff0079;
-          padding: 0.6em;
-          color: #ffffff;
-          border-radius: 0.3em;
-          border: 2px solid rgba(0, 0, 0, 0);
-          transition: all .5s ease;
-          text-transform: uppercase;
+          &__btn {
+            display: grid;
+            justify-self: self-end;
+            align-self: self-end;
+            margin-right: 1em;
+            margin-bottom: 1em;
+            background-color: #ff0079;
+            padding: 0.6em;
+            color: #ffffff;
+            border-radius: 0.3em;
+            border: 2px solid rgba(0, 0, 0, 0);
+            transition: all 0.5s ease;
+            text-transform: uppercase;
 
-          &:hover {
-            border: 2px solid #ffffff;
-            cursor: pointer;
-            box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
-            background-color: rgba(0, 0, 0, 0.5);
+            &:hover {
+              border: 2px solid #ffffff;
+              cursor: pointer;
+              box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: 0.8);
+              background-color: rgba(0, 0, 0, 0.5);
+            }
           }
         }
-
         .cast {
           display: flex;
           justify-content: flex-start;
@@ -230,7 +231,7 @@
           }
 
           &__description {
-            font-size: .6em;
+            font-size: 0.6em;
           }
         }
       }
@@ -262,8 +263,7 @@
       grid-template-areas:
         "title rating"
         "poster poster"
-        "description description"
-      ;
+        "description description";
 
       &__title {
         grid-area: title;
@@ -311,26 +311,30 @@
         margin: 0 1em;
         line-height: 1.2;
         word-spacing: 2px;
+        &__btngroup {
+          display: flex;
+          justify-content: flex-end;
 
-        &__btn {
-          display: grid;
-          justify-self: self-end;
-          align-self: self-end;
-          margin-right: 1em;
-          margin-bottom: 1em;
-          background-color: #ff0079;
-          padding: 0.6em;
-          color: #ffffff;
-          border-radius: 0.3em;
-          border: 2px solid rgba(0, 0, 0, 0);
-          transition: all .5s ease;
-          text-transform: uppercase;
+          &__btn {
+            display: grid;
+            justify-self: self-end;
+            align-self: self-end;
+            margin-right: 1em;
+            margin-bottom: 1em;
+            background-color: #ff0079;
+            padding: 0.6em;
+            color: #ffffff;
+            border-radius: 0.3em;
+            border: 2px solid rgba(0, 0, 0, 0);
+            transition: all 0.5s ease;
+            text-transform: uppercase;
 
-          &:hover {
-            border: 2px solid #ffffff;
-            cursor: pointer;
-            box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: .8);
-            background-color: rgba(0, 0, 0, 0.5);
+            &:hover {
+              border: 2px solid #ffffff;
+              cursor: pointer;
+              box-shadow: 0 6px 8px -6px rgba($color: #ffffff, $alpha: 0.8);
+              background-color: rgba(0, 0, 0, 0.5);
+            }
           }
         }
 
@@ -342,7 +346,7 @@
 
           &__figure {
             margin: 0;
-            margin-right: .7em;
+            margin-right: 0.7em;
             width: 2.5em;
           }
 
@@ -353,17 +357,16 @@
           }
 
           &__description {
-            font-size: .7em;
+            font-size: 0.7em;
           }
 
-          & .cast>li {
+          & .cast > li {
             width: 3em;
           }
         }
       }
     }
   }
-
 }
 
 @media (max-width: 769px) and (orientation: landscape) {
