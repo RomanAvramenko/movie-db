@@ -42,7 +42,7 @@ export const setTotalPages = (number)=> {
   }
 }
 
-export const setHasMore = (number)=> {
+export const setHasMore = ()=> {
   return {
     type: CATALOG_HAS_MORE,
   }

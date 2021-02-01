@@ -28,7 +28,7 @@ export const Detailed = () => {
   };
 
   const hideModal = () => {
-    setShow(!show);
+    setShow(false);
   };
 
   if (loading) {
