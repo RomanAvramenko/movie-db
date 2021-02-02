@@ -32,16 +32,15 @@ export const Header = () => {
 
   const showModal = () => {
     setShow(true);
-    dispatch(getVideo(data[movieIndex].id));
+    dispatch(getVideo(data.data[movieIndex].id));
   };
 
   const hideModal = () => setShow(false);
 
-  if (data.length === 0) {
+  if (data.data.length === 0) {
     return null;
   }
-  console.log(data);
-  const { backdrop_path, title, genre_ids, id } = data[movieIndex];
+  const { backdrop_path, title, genre_ids, id } = data.data[movieIndex];
   const trailer = Math.floor(Math.random() * (trailerRes.length - 1));
   const bgImage =
     backdrop_path === null

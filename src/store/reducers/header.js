@@ -10,13 +10,11 @@ const initialState = {
 export const headerDataReducer = (state = initialState, action) => {
     switch (action.type) {
         case HEADER_DATA_START:
-          console.log('start')
             return {
                 ...state,
                 loading: true
             };
         case HEADER_DATA_SUCCESS:
-          console.log('success')
             return {
                 ...state,
                 data: action.payload,
@@ -26,7 +24,7 @@ export const headerDataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: action.payload.error
+                error: action.payload
             };
         case HEADER_TRAILER:
             return {
