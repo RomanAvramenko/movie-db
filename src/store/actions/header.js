@@ -7,7 +7,7 @@ import {
 } from "../types";
 import { BASE_URL, API_KEY } from "../../constants";
 
-export const getData = (id) => {
+export const getData = () => {
   return async (dispatch) => {
     dispatch(headerDataStarted());
     const url = `${BASE_URL}/popular?${API_KEY}&language=en-US&page=1`;
@@ -15,8 +15,8 @@ export const getData = (id) => {
       .get(url)
       .then((result) => {
         dispatch(headerData({ data: result.data.results }));
-        const idVideo = result.data.results[id].id;
-        dispatch(getVideo(idVideo));
+        /* const idVideo = result.data.results[id].id;
+        dispatch(getVideo(idVideo)); */
       })
       .catch((e) => {
         dispatch(headerDataFailure(e.config));
