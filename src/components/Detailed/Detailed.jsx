@@ -17,7 +17,6 @@ export const Detailed = () => {
     (state) => state.detailedInfo
   );
   const { token, userId } = useSelector((state) => state.auth);
-
   useEffect(() => {
     dispatch(getDetailData(location));
     // eslint-disable-next-line
@@ -37,7 +36,8 @@ export const Detailed = () => {
         <Loading />
       </div>
     );
-  } else {
+  }
+  if (response) {
     window.scroll(0, 0);
     const {
       id,
@@ -99,18 +99,18 @@ export const Detailed = () => {
           </Modal>
         )}
         <div className="detail__wrapper">
-          <h1 className="detail__wrapper__title">{title}</h1>
+          {/* <h1 className="detail__wrapper__title">{title}</h1> */}
           <span className="detail__wrapper__rating">
             <i className="fas fa-star detail__wrapper__rating-big"></i>&nbsp;
             <strong className="detail__wrapper__rating-big">
-              {vote_average}
+              {/* {vote_average} */}
             </strong>{" "}
             / 10
           </span>
           <div className="poster" style={poster}></div>
           <div className="description">
             <ul>
-              {overview && (
+              {/* {overview && (
                 <li>
                   <strong>Plot Summary: </strong>
                   {overview}
@@ -148,20 +148,20 @@ export const Detailed = () => {
                   <strong>Production Country: </strong>
                   {production_countries.map((i) => i.name).join(", ")}
                 </li>
-              )}
-              {director && (
+              )} */}
+              {/* {director && (
                 <li>
                   <strong>Directed by: </strong>
                   {director}
                 </li>
-              )}
+              )} */}
               <li>
                 <strong>Cast:</strong>
                 <ul className="cast">{actors}</ul>
               </li>
             </ul>
             <div className="description__btngroup">
-              {token && (
+              {/* {token && (
                 <button
                   className="description__btngroup__btn"
                   onClick={(e) => {
@@ -170,15 +170,15 @@ export const Detailed = () => {
                 >
                   + wishlist
                 </button>
-              )}
-              {trailerResp.results.length === 0 ? null : (
+              )} */}
+              {/* {trailerResp.results.length === 0 ? null : (
                 <button
                   className="description__btngroup__btn"
                   onClick={showModal}
                 >
                   Watch Trailer
                 </button>
-              )}
+              )} */}
             </div>
           </div>
         </div>

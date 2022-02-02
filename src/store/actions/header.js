@@ -14,7 +14,7 @@ export const getData = () => {
     await axios
       .get(url)
       .then((result) => {
-        dispatch(headerData({ data: result.data.results }));
+        dispatch(headerData(result.data.results));
         /* const idVideo = result.data.results[id].id;
         dispatch(getVideo(idVideo)); */
       })

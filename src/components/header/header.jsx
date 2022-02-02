@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,7 +12,7 @@ import {
 import { Modal } from "../Modal/Modal";
 import { genres } from "../../genres";
 import { Trailer } from "../Trailer/Trailer";
-import { getVideo } from "../../store/actions/header";
+import { getData, getVideo } from "../../store/actions/header";
 import { addToWishList } from "../../store/actions/auth";
 import "./Header.scss";
 import "pure-react-carousel/dist/react-carousel.es.css";
@@ -22,6 +22,11 @@ export const Header = () => {
   const dispatch = useDispatch();
   const { data, trailerRes } = useSelector((state) => state.header);
   const { token, userId } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(getData());
+    // eslint-disable-next-line
+  }, []);
 
   const showModal = (id) => {
     setShow(true);
@@ -35,7 +40,7 @@ export const Header = () => {
     }
   };
 
-  const render = data.data.map((i, idx) => (
+  const render = data.map((i, idx) => (
     <Slide index={idx} key={i.id}>
       <Image src={`https://image.tmdb.org/t/p/w1280${i.backdrop_path}`} />
       <div className="hero__content">
@@ -78,7 +83,7 @@ export const Header = () => {
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={60}
-        totalSlides={data.data.length}
+        totalSlides={data.length}
         visibleSlides={1}
       >
         <Slider>{render}</Slider>
