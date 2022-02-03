@@ -1,42 +1,55 @@
-.carousel__image {
-  height: 70vh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 0;
+.carousel {
   position: relative;
-}
-
-.buttonBack {
-  position: absolute;
-  top: 40%;
-  left: 0;
-  transform: translateY(-50%);
-  border: none;
-  background-color: initial;
-  color: #ff0079;
-  font-size: 3em;
-  outline: none;
-  &:disabled {
-    color: #ffffff;
+  max-height: 100vh;
+  height: 100%;
+  &__slider {
+    max-height: 100vh;
+    height: 100%;
   }
-}
-
-.buttonNext {
-  position: absolute;
-  top: 40%;
-  right: 0;
-  transform: translateY(-50%);
-  border: none;
-  background-color: initial;
-  color: #ff0079;
-  font-size: 3em;
-  outline: none;
-  &:disabled {
-    color: #ffffff;
+  &__image {
+    max-height: 100vh;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    position: relative;
+  }
+  &__inner-slide {
+    max-height: 100vh;
+    height: 100%;
+  }
+  .buttonBack {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    transform: translateY(-50%);
+    border: none;
+    background-color: initial;
+    color: #ff0079;
+    font-size: 3em;
+    outline: none;
+    &:disabled {
+      color: #ffffff;
+    }
+  }
+  .buttonNext {
+    position: absolute;
+    top: 40%;
+    right: 0;
+    transform: translateY(-50%);
+    border: none;
+    background-color: initial;
+    color: #ff0079;
+    font-size: 3em;
+    outline: none;
+    &:disabled {
+      color: #ffffff;
+    }
   }
 }
 
 .hero {
+  position: relative;
   &__wrapper {
     //position: relative;
     background-size: cover;
@@ -59,9 +72,11 @@
       "title title buttons buttons";
     height: 100;
     max-width: 1200px;
-    margin: 0 auto;
     width: 100%;
-    bottom: -1em;
+    margin: 0 auto;
+    bottom: 2em;
+    left: 0;
+    right: 0;
 
     &__title {
       grid-area: title;
@@ -130,15 +145,17 @@
 
   .hero__content {
     display: grid;
-    height: 15em;
+    height: 10em;
+    bottom: 0;
     grid-template-columns: 1fr;
-    grid-template-rows: 8em 2em 4em;
+    grid-template-rows: 4em 2em 4em;
     grid-template-areas:
       "title"
       "genres"
       "buttons";
 
     &__title {
+      font-size: 2em;
       grid-area: title;
       padding: 0;
     }
@@ -166,5 +183,12 @@
         padding: 0.5em;
       }
     }
+  }
+
+  .buttonBack {
+    display: none;
+  }
+  .buttonNext {
+    display: none;
   }
 }
