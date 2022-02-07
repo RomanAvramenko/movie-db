@@ -9,8 +9,8 @@ export const MainPage = () => {
     <>
       <NavBar />
       <Header />
-      <Catalog />
-      <Footer />
+      {/* <Catalog /> */}
+      {/* <Footer /> */}
     </>
   );
 };

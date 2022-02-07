@@ -1,5 +1,5 @@
-import React from 'react'
-import './Trailer.scss'
+import React from "react";
+import "./Trailer.scss";
 
 export const Trailer = (props) => {
   return (
@@ -10,7 +10,7 @@ export const Trailer = (props) => {
       height="315"
       src={`//www.youtube.com/embed/${props.trailerKey}?autoplay=1`}
       frameBorder="0"
-      allowFullScreen>
-    </iframe>
-  )
-}
+      allowFullScreen
+    ></iframe>
+  );
+};

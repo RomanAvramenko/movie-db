@@ -12,10 +12,10 @@ import {
 import { Modal } from "../Modal/Modal";
 import { genres } from "../../genres";
 import { Trailer } from "../Trailer/Trailer";
-import { getData, getVideo } from "../../store/actions/header";
 import { addToWishList } from "../../store/actions/auth";
 import "./Header.scss";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { HEADER_DATA_START, HEADER_TRAILER_START } from "../../store/types";
 
 export const Header = () => {
   const [show, setShow] = useState(false);
@@ -24,13 +24,13 @@ export const Header = () => {
   const { token, userId } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getData());
+    dispatch({ type: HEADER_DATA_START });
     // eslint-disable-next-line
   }, []);
 
   const showModal = (id) => {
     setShow(true);
-    dispatch(getVideo(id));
+    dispatch({ type: HEADER_TRAILER_START, payload: id });
   };
 
   const hideModal = () => {
@@ -77,7 +77,7 @@ export const Header = () => {
     <>
       {show ? (
         <Modal show={show} handleClose={hideModal}>
-          <Trailer trailerKey={trailerRes.trailerRes[0].key} />
+          <Trailer trailerKey={trailerRes[0].key} />
         </Modal>
       ) : null}
       <CarouselProvider
@@ -97,85 +97,3 @@ export const Header = () => {
     </>
   );
 };
-
-/* const bgImage =
-        i.backdrop_path === null
-          ? { backgroundColor: "rgba(0, 0, 0, 0.4)" }
-          : {
-              backgroundImage: `url(https://image.tmdb.org/t/p/w1280${i.backdrop_path}`,
-            }; */
-
-//first template
-
-/* {show ? (
-        <Modal show={show} handleClose={hideModal}>
-          <Trailer trailerKey={trailerRes.trailerRes[trailer].key} />
-        </Modal>
-      ) : null} 
-       <header className="hero__wrapper" style={bgImage}>
-        <div key={id}>
-          <div className="hero__content">
-            <h1 className="hero__content__title">{title}</h1>
-            <div className="hero__content__genres">
-              {genre_ids.map((i) => genres[i]).join(" ")}
-            </div>
-            <div className="hero__content__btns">
-              <button
-                className="hero__content__btn hero__content__btn_color"
-                onClick={showModal}
-              >
-                WATCH TRAILER
-              </button>
-              <button className="hero__content__btn">
-                <Link to={`/details?id=${id}`}>VIEW INFO</Link>
-              </button>
-              {token && (
-                <button
-                  className="hero__content__btn hero__content__btn_unborder"
-                  onClick={(e) => {
-                    dispatch(
-                      addToWishList(userId, data.data[movieIndex].id, e)
-                    );
-                  }}
-                >
-                  + ADD TO WISHLIST
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </header> */
-
-//second template
-
-/* <header className="hero__wrapper" style={bgImage}>
-            <div>
-              <div className="hero__content">
-                <h1 className="hero__content__title">{i.title}</h1>
-                <div className="hero__content__genres">
-                  {i.genre_ids.map((i) => genres[i]).join(" ")}
-                </div>
-                <div className="hero__content__btns">
-                  <button
-                    className="hero__content__btn hero__content__btn_color"
-                    onClick={showModal}
-                  >
-                    WATCH TRAILER
-                  </button>
-                  <button className="hero__content__btn">
-                    <Link to={`/details?id=${i.id}`}>VIEW INFO</Link>
-                  </button>
-                  {token && (
-                    <button
-                      className="hero__content__btn hero__content__btn_unborder"
-                      onClick={(e) => {
-                        dispatch(addToWishList(userId, data.data[i].id, e));
-                      }}
-                    >
-                      + ADD TO WISHLIST
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          </header> */
